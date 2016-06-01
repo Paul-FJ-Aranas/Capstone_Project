@@ -1,7 +1,6 @@
 package paularanas.com.capstone_project;
 
 import android.content.Context;
-import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,11 +14,10 @@ import android.widget.TextView;
 
 public class GardenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context context;
-    private Cursor mCursor;
+
     View view;
 
-    public GardenAdapter(Cursor cursor, Context ctx) {
-        mCursor = cursor;
+    public GardenAdapter(Context ctx) {
         context = ctx;
     }
 
@@ -47,7 +45,7 @@ public class GardenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @Override
     public int getItemCount() {
-        return mCursor.getCount();
+        return 0;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
