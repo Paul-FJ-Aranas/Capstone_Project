@@ -42,7 +42,6 @@ public class GardenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
 
-
     @Override
     public int getItemCount() {
         return 0;
@@ -60,4 +59,5 @@ public class GardenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         }
 
 
-    }}
+    }
+}
