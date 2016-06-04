@@ -1,4 +1,4 @@
-package paularanas.com.capstone_project;
+package paularanas.com.capstone_project.data;
 
 import android.content.ContentResolver;
 import android.net.Uri;
@@ -24,10 +24,7 @@ public class GardenContract {
             + "/vnd." + AUTHORITY + GardenTable.TABLE_NAME;
     private static final String COMMA = ",";
     private static final String TEXT = " TEXT";
-    private static final String REAL = " REAL";
     private static final String INTEGER = " INTEGER";
-    private static final String NOT_NULL = " NOT NULL";
-
 
     public static abstract class GardenTable implements BaseColumns {
         public static final String TABLE_NAME = "gardens";

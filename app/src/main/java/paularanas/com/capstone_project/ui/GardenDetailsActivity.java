@@ -1,4 +1,4 @@
-package paularanas.com.capstone_project;
+package paularanas.com.capstone_project.ui;
 
 import android.database.Cursor;
 import android.os.Bundle;
@@ -13,13 +13,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.ViewGroup;
 
+import paularanas.com.capstone_project.R;
+
 /**
  * Created by Paul Aranas on 5/31/2016.
  */
 public class GardenDetailsActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
     private GardenPagerAdapter mPagerAdapter;
     private ViewPager mPager;
-    private GardenDetailsFragment mGardenDetailsFragment;
+    private paularanas.com.capstone_project.ui.GardenDetailsFragment mGardenDetailsFragment;
     private Cursor mCursor;
     private int mStartPosition;
 
@@ -67,7 +69,7 @@ public class GardenDetailsActivity extends AppCompatActivity implements LoaderMa
         @Override
         public Fragment getItem(int position) {
             mCursor.moveToPosition(position);
-            return GardenDetailsFragment.newInstance(mCursor.getLong(GardenLoader.Query._ID), mStartPosition);
+            return null;
         }
 
         @Override

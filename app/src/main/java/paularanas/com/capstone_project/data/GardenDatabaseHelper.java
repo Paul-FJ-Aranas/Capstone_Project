@@ -1,4 +1,4 @@
-package paularanas.com.capstone_project;
+package paularanas.com.capstone_project.data;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

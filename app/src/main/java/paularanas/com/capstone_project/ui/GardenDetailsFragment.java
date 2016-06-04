@@ -1,4 +1,4 @@
-package paularanas.com.capstone_project;
+package paularanas.com.capstone_project.ui;
 
 import android.app.Fragment;
 import android.database.Cursor;

@@ -1,4 +1,4 @@
-package paularanas.com.capstone_project;
+package paularanas.com.capstone_project.data;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -8,11 +8,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import paularanas.com.capstone_project.R;
+
 /**
  * Created by Paul on 5/31/2016.
  */
 
-public class GardenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class GardenAdapter extends RecyclerView.Adapter<GardenAdapter.ViewHolder> {
     private Context context;
 
     View view;
@@ -37,9 +39,10 @@ public class GardenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, int position) {
 
     }
+
 
 
     @Override
