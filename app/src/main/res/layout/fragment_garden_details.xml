@@ -54,7 +54,7 @@
                     android:lineSpacingMultiplier="0.9"
                     android:textColor="#FFFFFF"
                     android:paddingBottom="@dimen/detail_metabar_title_bottom_padding"
-                    android:textSize="@dimen/detail_article_title_text_size" />
+                    android:textSize="@dimen/detail_garden_title_text_size" />
 
                 <TextView
                     android:id="@+id/garden_created_by"
@@ -97,6 +97,6 @@
         android:layout_marginRight="@dimen/fab_margin"
         android:contentDescription="@string/action_share"
         android:elevation="@dimen/fab_elevation"
-        android:src="@drawable/ic_share" />
+        android:src="@drawable/ic_share_black_24dp" />
 
 </android.support.design.widget.CoordinatorLayout>
