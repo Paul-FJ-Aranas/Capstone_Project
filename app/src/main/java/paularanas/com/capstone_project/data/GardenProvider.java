@@ -2,6 +2,7 @@ package paularanas.com.capstone_project.data;
 
 import android.content.ContentProvider;
 import android.content.ContentValues;
+import android.content.UriMatcher;
 import android.database.Cursor;
 import android.net.Uri;
 import android.support.annotation.Nullable;
@@ -11,6 +12,14 @@ import android.support.annotation.Nullable;
  */
 public class GardenProvider extends ContentProvider {
     private paularanas.com.capstone_project.data.GardenDatabaseHelper helper;
+    private static final int GARDENS =1;
+    private static final UriMatcher sUriMatcher;
+
+    static{
+        sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
+        sUriMatcher.addURI(GardenContract.AUTHORITY, GardenContract.GardenTable.TABLE_NAME, GARDENS);
+    }
+
     @Override
     public boolean onCreate() {
         helper = new paularanas.com.capstone_project.data.GardenDatabaseHelper(getContext());
