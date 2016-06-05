@@ -20,7 +20,7 @@ public class GardenContract {
             .authority(AUTHORITY).build();
     public static final Uri URI_GARDENS = URI_BASE.buildUpon()
             .appendPath(GardenTable.TABLE_NAME).build();
-    public static final String TYPE_FAVS = ContentResolver.CURSOR_DIR_BASE_TYPE
+    public static final String TYPE_GARDENS = ContentResolver.CURSOR_DIR_BASE_TYPE
             + "/vnd." + AUTHORITY + GardenTable.TABLE_NAME;
     private static final String COMMA = ",";
     private static final String TEXT = " TEXT";
