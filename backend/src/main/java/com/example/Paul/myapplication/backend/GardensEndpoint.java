@@ -17,7 +17,7 @@ import javax.inject.Named;
  * An endpoint class we are exposing
  */
 @Api(
-        name = "myApi",
+        name = "gardensApi",
         version = "v1",
         namespace = @ApiNamespace(
                 ownerDomain = "backend.myapplication.Paul.example.com",
@@ -27,9 +27,6 @@ import javax.inject.Named;
 )
 public class GardensEndpoint {
 
-    /**
-     * A simple endpoint method that takes a name and says Hi back
-     */
     @ApiMethod(name = "showGardens")
     public Gardens showGardens() {
         Gardens gardens = new Gardens();
