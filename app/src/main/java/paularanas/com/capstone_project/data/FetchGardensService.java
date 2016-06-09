@@ -2,6 +2,7 @@ package paularanas.com.capstone_project.data;
 
 import android.app.IntentService;
 import android.content.Intent;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import com.example.paul.myapplication.backend.gardensApi.GardensApi;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 // Created by Paul Aranas on 6/5/2016.
 
 public class FetchGardensService extends IntentService {
+    private final static String ACTION_GARDEN_DATA = "paularanas.com.capstone_project.data.ACTION_GARDEN_DATA";
 
     public FetchGardensService(String name) {
         super(name);
@@ -39,15 +41,22 @@ public class FetchGardensService extends IntentService {
 
 
         GardensApi myApiService = builder.build();
-        //Todo: send data result to MainGridFragment
+
         try {
             ArrayList<GardenData> result = (ArrayList<GardenData>) myApiService.showGardens().execute().getData();
+            Intent gardenDataIntent = new Intent(ACTION_GARDEN_DATA);
+            intent.putExtra("gardenArrayList", result);
+            sendLocalGardenBroadcast(gardenDataIntent);
         } catch (IOException e)
 
         {
             Log.e("tag", e.getMessage());
         }
 
+    }
+    public void sendLocalGardenBroadcast(Intent intent){
+        LocalBroadcastManager manager = LocalBroadcastManager.getInstance(this);
+        manager.sendBroadcast(intent);
     }
 }
 
