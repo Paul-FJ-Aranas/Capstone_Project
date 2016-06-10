@@ -1,16 +1,25 @@
 package paularanas.com.capstone_project.ui;
 
 import android.app.Fragment;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.GardenData;
+
+import java.util.ArrayList;
 
 import paularanas.com.capstone_project.R;
 import paularanas.com.capstone_project.data.GardenAdapter;
@@ -21,12 +30,16 @@ import paularanas.com.capstone_project.data.GardenAdapter;
 public class MainGridFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private RecyclerView mRecyclerView;
+    private final static String ACTION_GARDEN_DATA = "paularanas.com.capstone_project.data.ACTION_GARDEN_DATA";
+    private BroadcastReceiver mLocalReceiver;
+    private ArrayList<String> mGardenData = new ArrayList();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
     }
+
 
     @Nullable
     @Override

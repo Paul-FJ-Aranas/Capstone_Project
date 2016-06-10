@@ -6,10 +6,14 @@
 
 package com.example.Paul.myapplication.backend;
 
+import com.example.GardenData;
 import com.example.OregonGardenLibrary;
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiNamespace;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Named;
 
@@ -27,11 +31,23 @@ import javax.inject.Named;
 )
 public class GardensEndpoint {
 
-    @ApiMethod(name = "showGardens")
-    public Gardens showGardens() {
-        Gardens gardens = new Gardens();
-        gardens.setData(new OregonGardenLibrary().getGardenDataList());
+    @ApiMethod(name = "getGardens")
+    public List<Gardens> getGardens() {
 
+        OregonGardenLibrary libraryData = new OregonGardenLibrary();
+        ArrayList<GardenData> gardenObjects = libraryData.getGardenDataList();
+        ArrayList<Gardens> gardens = new ArrayList<>();
+
+        for (GardenData data : gardenObjects) {
+
+            Gardens garden = new Gardens();
+            garden.setTitle(data.getTitle());
+            garden.setPhoto(data.getPhoto());
+            garden.setThumbnail(data.getThumbnail());
+            garden.setCreator(data.getCreator());
+            garden.setTextBody(data.getTextBody());
+            gardens.add(garden);
+        }
         return gardens;
     }
 
