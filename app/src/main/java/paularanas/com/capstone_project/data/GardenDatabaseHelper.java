@@ -15,11 +15,14 @@ public class GardenDatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        db.execSQL(GardenContract.GardenTable.CREATE_TABLE);
 
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL(GardenContract.GardenTable.DELETE_TABLE);
+        onCreate(db);
 
     }
 }
