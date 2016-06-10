@@ -37,7 +37,6 @@ public class MainGridFragment extends Fragment implements LoaderManager.LoaderCa
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
 
@@ -48,9 +47,7 @@ public class MainGridFragment extends Fragment implements LoaderManager.LoaderCa
         //connect the RecyclerView and instantiate the GardenAdapter, set the LayoutManager
         //on the RecyclerView
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
-        GardenAdapter adapter = new GardenAdapter(getActivity());
-        mRecyclerView.setAdapter(adapter);
-        mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+
 
         return view;
     }
@@ -63,7 +60,9 @@ public class MainGridFragment extends Fragment implements LoaderManager.LoaderCa
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-
+        GardenAdapter adapter = new GardenAdapter(getActivity(), data);
+        mRecyclerView.setAdapter(adapter);
+        mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
     }
 
     @Override
