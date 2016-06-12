@@ -1,31 +1,36 @@
 package com.example;
 
 import java.util.ArrayList;
+
 /**
  * Created by Paul Aranas on 6/4/2016.
  */
 public class OregonGardenLibrary {
 
     private ArrayList<GardenData> gardenInfo;
-    private String[] gardenArray = new String[23];
+    private String[] gardenTitlesArray = new String[23];
+    private String[] gardenPhotosArray = new String[23];
+    private String[] gardenThumbnailsArray = new String[23];
+    private String[] gardenCreatorsArray = new String[23];
+    private String[] gardenTextBodiesArray = new String[23];
 
     //Todo: Add Garden Data
     public OregonGardenLibrary() {
         //garden titles
-        gardenArray[0] = "array";
+        gardenTitlesArray[0] = "Sample Garden One";
         //garden photos
-        gardenArray[1] = "array";
+        gardenPhotosArray[0] = "https://storage.googleapis.com/capstoneproject_images/Oregon.jpg";
         //garden thumbnails
-        gardenArray[2] = "array";
+        gardenThumbnailsArray[0] = "https://storage.googleapis.com/capstoneproject_images/Oregon.jpg";
         //garden creators
-        gardenArray[3] = "array";
+        gardenCreatorsArray[0] = "Sample Garden Creator";
         //garden text bodies
-        gardenArray[4] = "array";
+        gardenTextBodiesArray[0] = "This is sample text for a garden body field.";
 
 
         gardenInfo = new ArrayList();
-        for (int i = 0; i < gardenArray.length; i++) {
-            GardenData data = new GardenData(gardenArray[0], gardenArray[1], gardenArray[2], gardenArray[3], gardenArray[4]);
+        for (int i = 0; i < gardenTitlesArray.length; i++) {
+            GardenData data = new GardenData(gardenTitlesArray[i], gardenPhotosArray[i], gardenThumbnailsArray[i], gardenCreatorsArray[i], gardenTextBodiesArray[i]);
             gardenInfo.add(data);
         }
 

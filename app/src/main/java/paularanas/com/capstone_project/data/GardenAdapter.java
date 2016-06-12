@@ -29,7 +29,7 @@ public class GardenAdapter extends RecyclerView.Adapter<GardenAdapter.GardenView
 
     @Override
     public long getItemId(int position) {
-        return position;
+        return position;it
     }
 
     @Override
