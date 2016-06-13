@@ -8,11 +8,11 @@ import java.util.ArrayList;
 public class OregonGardenLibrary {
 
     private ArrayList<GardenData> gardenInfo;
-    private String[] gardenTitlesArray = new String[23];
-    private String[] gardenPhotosArray = new String[23];
-    private String[] gardenThumbnailsArray = new String[23];
-    private String[] gardenCreatorsArray = new String[23];
-    private String[] gardenTextBodiesArray = new String[23];
+    private String[] gardenTitlesArray = new String[1];
+    private String[] gardenPhotosArray = new String[1];
+    private String[] gardenThumbnailsArray = new String[1];
+    private String[] gardenCreatorsArray = new String[1];
+    private String[] gardenTextBodiesArray = new String[1];
 
     //Todo: Add Garden Data
     public OregonGardenLibrary() {

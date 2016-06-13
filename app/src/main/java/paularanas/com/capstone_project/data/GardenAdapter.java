@@ -19,8 +19,8 @@ public class GardenAdapter extends RecyclerView.Adapter<GardenAdapter.GardenView
     private Context mContext;
     private Cursor mCursor;
     int mCurrentPosition;
-
     View view;
+
 
     public GardenAdapter(Context context, Cursor cursor) {
         mContext = context;
@@ -29,7 +29,7 @@ public class GardenAdapter extends RecyclerView.Adapter<GardenAdapter.GardenView
 
     @Override
     public long getItemId(int position) {
-        return position;it
+        return position;
     }
 
     @Override

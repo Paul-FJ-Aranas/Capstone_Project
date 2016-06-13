@@ -1,9 +1,5 @@
 package com.example.Paul.myapplication.backend;
 
-import com.example.GardenData;
-
-import java.util.ArrayList;
-
 /** The object model for the data we are sending through endpoints */
 public class Gardens {
 

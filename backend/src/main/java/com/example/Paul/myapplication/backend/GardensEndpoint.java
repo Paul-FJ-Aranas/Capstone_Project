@@ -15,8 +15,6 @@ import com.google.api.server.spi.config.ApiNamespace;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Named;
-
 /**
  * An endpoint class we are exposing
  */

@@ -1,9 +1,12 @@
 package paularanas.com.capstone_project.data;
 
 import android.app.IntentService;
+import android.content.ContentProviderOperation;
 import android.content.ContentValues;
 import android.content.Intent;
-import android.support.v4.content.LocalBroadcastManager;
+import android.content.OperationApplicationException;
+import android.net.Uri;
+import android.os.RemoteException;
 import android.util.Log;
 
 import com.example.paul.myapplication.backend.gardensApi.GardensApi;
@@ -22,14 +25,15 @@ import java.util.List;
 
 public class FetchGardensService extends IntentService {
 
-    public FetchGardensService(String name) {
-        super(name);
+    public FetchGardensService() {
+        super("FetchGardenService");
+
     }
 
 
     @Override
     protected void onHandleIntent(Intent intent) {
-
+        Log.d("TAG", "In onHandleIntent");
         //set up app engine
         GardensApi.Builder builder = new GardensApi.Builder(AndroidHttp.newCompatibleTransport(),
                 new AndroidJsonFactory(), null).setRootUrl("http://10.0.2.2:8080/_ah/api")
@@ -44,26 +48,42 @@ public class FetchGardensService extends IntentService {
         GardensApi myApiService = builder.build();
 
         try {
-            List<Gardens> gardenDataResult =  myApiService.getGardens().execute().getItems();
+            List<Gardens> gardenDataResult = myApiService.getGardens().execute().getItems();
 
+            ArrayList<ContentProviderOperation> gardencpbo = new ArrayList<ContentProviderOperation>();
+            Uri dirUri = GardenContract.URI_GARDENS;
+            gardencpbo.add(ContentProviderOperation.newDelete(dirUri).build());
 
             if (gardenDataResult != null) {
                 ContentValues contentValues = new ContentValues();
                 for (Gardens data : gardenDataResult) {
 
-                    contentValues.put(GardenContract.GardenTable.TITLE, data.getTitle());
-                    contentValues.put(GardenContract.GardenTable.PHOTO, data.getPhoto());
-                    contentValues.put(GardenContract.GardenTable.THUMBNAIL_PATH, data.getThumbnail());
-                    contentValues.put(GardenContract.GardenTable.CREATOR, data.getCreator());
-                    contentValues.put(GardenContract.GardenTable.BODY, data.getTextBody());
+                    String title = (String) data.get("title");
+                    String photo = (String) data.get("photo");
+                    String thumbnail = (String) data.get("thumbnail");
+                    String creator = (String) data.get("creator");
+                    String textBody = (String) data.get("textBody");
+
+
+                    contentValues.put(GardenContract.GardenTable.TITLE, title);
+                    contentValues.put(GardenContract.GardenTable.PHOTO, photo);
+                    contentValues.put(GardenContract.GardenTable.THUMBNAIL_PATH, thumbnail);
+                    contentValues.put(GardenContract.GardenTable.CREATOR, creator);
+                    contentValues.put(GardenContract.GardenTable.BODY, textBody);
+                    gardencpbo.add(ContentProviderOperation.newInsert(dirUri).withValues(contentValues).build());
                 }
-                this.getContentResolver().insert(GardenContract.URI_GARDENS,contentValues);
+                getContentResolver().applyBatch(GardenContract.AUTHORITY, gardencpbo);
+
             }
 
         } catch (IOException e)
 
         {
             Log.e("tag", e.getMessage());
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        } catch (OperationApplicationException e) {
+            e.printStackTrace();
         }
 
     }

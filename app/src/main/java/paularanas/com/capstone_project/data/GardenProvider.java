@@ -1,14 +1,13 @@
 package paularanas.com.capstone_project.data;
 
 import android.content.ContentProvider;
-import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
-import android.support.annotation.Nullable;
+import android.util.Log;
 
 /**
  * Created by Paul on 6/3/2016.
@@ -19,6 +18,7 @@ public class GardenProvider extends ContentProvider {
     private static final UriMatcher sUriMatcher;
 
     static {
+        Log.d("Tag", "CPStaticCalled");
         sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
         sUriMatcher.addURI(GardenContract.AUTHORITY, GardenContract.GardenTable.TABLE_NAME, GARDENS);
     }
@@ -26,10 +26,9 @@ public class GardenProvider extends ContentProvider {
     @Override
     public boolean onCreate() {
         helper = new paularanas.com.capstone_project.data.GardenDatabaseHelper(getContext());
-        return null != helper;
+        return true;
     }
 
-    @Nullable
     @Override
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
 
@@ -44,12 +43,17 @@ public class GardenProvider extends ContentProvider {
         }
         SQLiteDatabase database = helper.getReadableDatabase();
         Cursor cursor = builder.query(database, GardenContract.GardenTable.PROJECTION_ALL, null, null, null, null, null);
-        cursor.setNotificationUri(getContext().getContentResolver(), uri);
-
+        if(getContext()!=null) {
+            cursor.setNotificationUri(getContext().getContentResolver(), uri);
+        }
+        if (cursor != null) {
+            Log.d("TAG","NOt Null" );
+        }
         return cursor;
     }
 
-    @Nullable
+
+
     @Override
     public String getType(Uri uri) {
         switch (sUriMatcher.match(uri)) {
@@ -60,23 +64,24 @@ public class GardenProvider extends ContentProvider {
         }
     }
 
-    @Nullable
     @Override
     public Uri insert(Uri uri, ContentValues values) {
         SQLiteDatabase database = helper.getWritableDatabase();
-        int rowsDeleted = 0;
-        long id = 0;
+        final long id;
         switch (sUriMatcher.match(uri)) {
             case GARDENS:
-                database.insertWithOnConflict(GardenContract.GardenTable.TABLE_NAME, null, values, SQLiteDatabase.CONFLICT_REPLACE);
+             id = database.insertWithOnConflict(GardenContract.GardenTable.TABLE_NAME, null, values, SQLiteDatabase.CONFLICT_REPLACE);
                 break;
             default:
                 throw new UnsupportedOperationException("Unrecognized Uri" + uri);
         }
-        Uri ur = ContentUris.withAppendedId(uri, id);
-        getContext().getContentResolver().notifyChange(uri, null);
+
+        if(getContext()!=null) {
+            getContext().getContentResolver().notifyChange(uri, null);
+        }
         database.close();
-        return ur;
+        return GardenContract.GardenTable.buildGardensIdUri(id);
+
 
     }
 

@@ -17,6 +17,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <provider android:name=".data.GardenProvider"
+            android:authorities="com.paularanas.capstone_project.gardenprovider"/>
+
+        <service android:name=".data.FetchGardensService"
+            android:exported="false"/>
         <activity
             android:name=".ui.GPSMapActivity"
             android:label="@string/title_activity_gpsmap"
