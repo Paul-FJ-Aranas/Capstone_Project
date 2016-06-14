@@ -35,6 +35,9 @@ public class FetchGardensService extends IntentService {
     protected void onHandleIntent(Intent intent) {
         Log.d("TAG", "In onHandleIntent");
         //set up app engine
+
+
+
         GardensApi.Builder builder = new GardensApi.Builder(AndroidHttp.newCompatibleTransport(),
                 new AndroidJsonFactory(), null).setRootUrl("http://10.0.2.2:8080/_ah/api")
                 .setGoogleClientRequestInitializer(new GoogleClientRequestInitializer() {
@@ -50,9 +53,9 @@ public class FetchGardensService extends IntentService {
         try {
             List<Gardens> gardenDataResult = myApiService.getGardens().execute().getItems();
 
-            ArrayList<ContentProviderOperation> gardencpbo = new ArrayList<ContentProviderOperation>();
-            Uri dirUri = GardenContract.URI_GARDENS;
-            gardencpbo.add(ContentProviderOperation.newDelete(dirUri).build());
+            //   ArrayList<ContentProviderOperation> gardencpbo = new ArrayList<ContentProviderOperation>();
+            //  Uri dirUri = GardenContract.URI_GARDENS;
+            //  gardencpbo.add(ContentProviderOperation.newDelete(dirUri).build());
 
             if (gardenDataResult != null) {
                 ContentValues contentValues = new ContentValues();
@@ -70,23 +73,17 @@ public class FetchGardensService extends IntentService {
                     contentValues.put(GardenContract.GardenTable.THUMBNAIL_PATH, thumbnail);
                     contentValues.put(GardenContract.GardenTable.CREATOR, creator);
                     contentValues.put(GardenContract.GardenTable.BODY, textBody);
-                    gardencpbo.add(ContentProviderOperation.newInsert(dirUri).withValues(contentValues).build());
+                    //  gardencpbo.add(ContentProviderOperation.newInsert(dirUri).withValues(contentValues).build());
                 }
-                getContentResolver().applyBatch(GardenContract.AUTHORITY, gardencpbo);
+                getContentResolver().insert(GardenContract.URI_GARDENS, contentValues);
 
             }
 
-        } catch (IOException e)
 
-        {
-            Log.e("tag", e.getMessage());
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        } catch (OperationApplicationException e) {
+
+
+        } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
-
 }
-

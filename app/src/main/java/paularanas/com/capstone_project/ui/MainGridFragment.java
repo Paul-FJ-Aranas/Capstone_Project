@@ -4,17 +4,22 @@ import android.app.Fragment;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.appindexing.Action;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -30,10 +35,10 @@ public class MainGridFragment extends Fragment implements android.app.LoaderMana
 
     private RecyclerView mRecyclerView;
     private final static String ACTION_GARDEN_DATA = "paularanas.com.capstone_project.data.ACTION_GARDEN_DATA";
-    private BroadcastReceiver mLocalReceiver;
     private ArrayList<String> mGardenData = new ArrayList();
     private final static int CURSOR_LOADER = 1;
     GardenAdapter mAdapter;
+    SwipeRefreshLayout mSwipeRefreshLayout;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -54,7 +59,12 @@ public class MainGridFragment extends Fragment implements android.app.LoaderMana
         //connect the RecyclerView and instantiate the GardenAdapter, set the LayoutManager
         //on the RecyclerView
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
-
+        mAdapter = new GardenAdapter(getActivity());
+        int columnCount = getResources().getInteger(R.integer.list_column_count);
+        GridLayoutManager glm = new GridLayoutManager(getActivity(), columnCount, StaggeredGridLayoutManager.VERTICAL, false);
+        mRecyclerView.setLayoutManager(glm);
+        mRecyclerView.setAdapter(mAdapter);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
 
         return view;
     }
@@ -77,9 +87,7 @@ public class MainGridFragment extends Fragment implements android.app.LoaderMana
 
         mAdapter = new GardenAdapter(getActivity(), data);
         mAdapter.setHasStableIds(true);
-        mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         mRecyclerView.setAdapter(mAdapter);
-
     }
 
     @Override
@@ -87,11 +95,7 @@ public class MainGridFragment extends Fragment implements android.app.LoaderMana
         mRecyclerView.setAdapter(null);
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
 
-    }
 }
 
 class GardenAdapter extends RecyclerView.Adapter<GardenAdapter.GardenViewHolder> {
@@ -100,6 +104,9 @@ class GardenAdapter extends RecyclerView.Adapter<GardenAdapter.GardenViewHolder>
     int mCurrentPosition;
     View view;
 
+    public GardenAdapter(Context mContext) {
+        this.mContext = mContext;
+    }
 
     public GardenAdapter(Context context, Cursor cursor) {
         mContext = context;
@@ -113,13 +120,11 @@ class GardenAdapter extends RecyclerView.Adapter<GardenAdapter.GardenViewHolder>
 
     @Override
     public GardenViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(mContext.LAYOUT_INFLATER_SERVICE);
-        view = inflater.inflate(R.layout.grid_item_garden, parent, false);
+        view = LayoutInflater.from(parent.getContext()).inflate(R.layout.grid_item_garden, parent, false);
         final GardenViewHolder vh = new GardenViewHolder(view);
         view.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
-
 
                                     }
                                 }
@@ -135,7 +140,7 @@ class GardenAdapter extends RecyclerView.Adapter<GardenAdapter.GardenViewHolder>
 
         holder.titleView.setText(mCursor.getString(mCursor.getColumnIndex(GardenContract.GardenTable.TITLE)));
         Picasso.with(mContext)
-                .load(mCursor.getString(mCursor.getColumnIndex(GardenContract.GardenTable.THUMBNAIL_PATH))).placeholder(R.color.theme_primary)
+                .load(mCursor.getString(mCursor.getColumnIndex(GardenContract.GardenTable.THUMBNAIL_PATH))).placeholder(R.color.theme_primary).resize(185, 275).centerCrop()
                 .into(holder.thumbnailView);
 
     }

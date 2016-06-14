@@ -14,21 +14,26 @@ import android.support.v7.widget.Toolbar;
 import android.view.ViewGroup;
 
 import paularanas.com.capstone_project.R;
+import paularanas.com.capstone_project.data.GardenContract;
 
 /**
  * Created by Paul Aranas on 5/31/2016.
  */
-public class GardenDetailsActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
+public class GardenDetailsActivity extends AppCompatActivity implements android.app.LoaderManager.LoaderCallbacks<Cursor> {
     private GardenPagerAdapter mPagerAdapter;
     private ViewPager mPager;
     private paularanas.com.capstone_project.ui.GardenDetailsFragment mGardenDetailsFragment;
     private Cursor mCursor;
+    private final static int CURSOR_LOADER = 1;
     private int mStartPosition;
+    private long mSelectedItemId;
+    private long mStartId;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_garden_details);
+        getLoaderManager().initLoader(CURSOR_LOADER, null, this);
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -46,19 +51,45 @@ public class GardenDetailsActivity extends AppCompatActivity implements LoaderMa
     }
 
     @Override
-    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        return null;
+    public android.content.Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        switch (id) {
+            case CURSOR_LOADER:
+                return new android.content.CursorLoader(this, GardenContract.URI_GARDENS, GardenContract.GardenTable.PROJECTION_ALL,
+                        null, null, null);
+            default:
+                return null;
+
+        }
+
     }
 
     @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+    public void onLoadFinished(android.content.Loader<Cursor> loader, Cursor data) {
+        mCursor = data;
+        mPagerAdapter.notifyDataSetChanged();
 
+        // Select the start ID
+        if (mStartId > 0) {
+            mCursor.moveToFirst();
+
+            while (!mCursor.isAfterLast()) {
+                if (mCursor.getLong(mCursor.getColumnIndex(GardenContract.GardenTable._ID)) == mStartId) {
+                    final int position = mCursor.getPosition();
+                    mPager.setCurrentItem(position, false);
+                    break;
+                }
+                mCursor.moveToNext();
+            }
+            mStartId = 0;
+        }
     }
 
     @Override
-    public void onLoaderReset(Loader<Cursor> loader) {
-
+    public void onLoaderReset(android.content.Loader<Cursor> loader) {
+        mCursor = null;
+        mPagerAdapter.notifyDataSetChanged();
     }
+
 
     private class GardenPagerAdapter extends FragmentStatePagerAdapter {
         public GardenPagerAdapter(FragmentManager fm) {
