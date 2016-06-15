@@ -13,7 +13,7 @@ public class GardenContract {
     }
 
     public static final String DATABASE_NAME = "garden_database";
-    public static final int DATABASE_VERSION = 1;
+    public static final int DATABASE_VERSION = 2;
     public static final String AUTHORITY = "com.paularanas.capstone_project.gardenprovider";
     public static final Uri URI_BASE = new Uri.Builder()
             .scheme(ContentResolver.SCHEME_CONTENT)

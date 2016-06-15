@@ -79,7 +79,6 @@ public class GardenProvider extends ContentProvider {
         if(getContext()!=null) {
             getContext().getContentResolver().notifyChange(uri, null);
         }
-        database.close();
         return GardenContract.GardenTable.buildGardensIdUri(id);
 
 
