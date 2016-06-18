@@ -2,7 +2,7 @@
 <resources>
     <color name="photo_placeholder">#009688</color>
     <color name="translucent">#80000000</color>
-    <color name="theme_primary">#3F51B5</color>
-    <color name="theme_primaryDark">#303F9F</color>
-    <color name="theme_accent">#FF4081</color>
+    <color name="theme_primary">#9DBF79</color>
+    <color name="theme_primaryDark">#218C61</color>
+    <color name="theme_accent">#B0D290</color>
 </resources>

@@ -40,8 +40,13 @@ public class GardenDetailsActivity extends AppCompatActivity implements android.
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         initializePagerAdapter();
+        if (savedInstanceState == null) {
+            if (getIntent() != null && getIntent().getData() != null) {
+                mStartId = GardenContract.GardenTable.getGardenId(getIntent().getData());
+                mSelectedItemId = mStartId;
+            }
+        }
     }
-
     private void initializePagerAdapter() {
         mPagerAdapter = new GardenPagerAdapter(getSupportFragmentManager());
         mPager = (ViewPager) findViewById(R.id.pager);
@@ -100,7 +105,7 @@ public class GardenDetailsActivity extends AppCompatActivity implements android.
         @Override
         public Fragment getItem(int position) {
             mCursor.moveToPosition(position);
-            return null;
+            return GardenDetailsFragment.newInstance(mCursor.getLong(0), mStartPosition);
         }
 
         @Override

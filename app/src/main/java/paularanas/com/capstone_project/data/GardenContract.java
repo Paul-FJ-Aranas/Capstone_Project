@@ -13,7 +13,7 @@ public class GardenContract {
     }
 
     public static final String DATABASE_NAME = "garden_database";
-    public static final int DATABASE_VERSION = 2;
+    public static final int DATABASE_VERSION = 1;
     public static final String AUTHORITY = "com.paularanas.capstone_project.gardenprovider";
     public static final Uri URI_BASE = new Uri.Builder()
             .scheme(ContentResolver.SCHEME_CONTENT)
@@ -22,7 +22,9 @@ public class GardenContract {
             .appendPath(GardenTable.TABLE_NAME).build();
 
     public static final String TYPE_GARDENS = ContentResolver.CURSOR_DIR_BASE_TYPE
-            + "/vnd." + AUTHORITY + GardenTable.TABLE_NAME;
+            + "/vnd." + AUTHORITY + "." + GardenTable.TABLE_NAME;
+    public static final String TYPE_SINGLE_GARDEN = ContentResolver.CURSOR_ITEM_BASE_TYPE
+            + "/vnd." + AUTHORITY + "." + GardenTable.TABLE_NAME;
     private static final String COMMA = ",";
     private static final String TEXT = " TEXT";
     private static final String INTEGER = " INTEGER";
@@ -39,7 +41,9 @@ public class GardenContract {
         public static Uri buildGardensIdUri(long id) {
             return URI_GARDENS.buildUpon().appendPath(Long.toString(id)).build();
         }
-
+        public static long getGardenId(Uri uri) {
+            return Long.parseLong(uri.getPathSegments().get(1));
+        }
         public static final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS " +
                 TABLE_NAME + "(" + _ID + INTEGER + " PRIMARY KEY AUTOINCREMENT " + COMMA +
                 PHOTO + TEXT + " UNIQUE " + COMMA +

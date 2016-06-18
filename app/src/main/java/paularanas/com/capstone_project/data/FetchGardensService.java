@@ -53,9 +53,9 @@ public class FetchGardensService extends IntentService {
         try {
             List<Gardens> gardenDataResult = myApiService.getGardens().execute().getItems();
 
-            //   ArrayList<ContentProviderOperation> gardencpbo = new ArrayList<ContentProviderOperation>();
-            //  Uri dirUri = GardenContract.URI_GARDENS;
-            //  gardencpbo.add(ContentProviderOperation.newDelete(dirUri).build());
+               ArrayList<ContentProviderOperation> gardencpbo = new ArrayList<ContentProviderOperation>();
+             Uri dirUri = GardenContract.URI_GARDENS;
+             gardencpbo.add(ContentProviderOperation.newDelete(dirUri).build());
 
             if (gardenDataResult != null) {
                 ContentValues contentValues = new ContentValues();
@@ -73,9 +73,15 @@ public class FetchGardensService extends IntentService {
                     contentValues.put(GardenContract.GardenTable.THUMBNAIL_PATH, thumbnail);
                     contentValues.put(GardenContract.GardenTable.CREATOR, creator);
                     contentValues.put(GardenContract.GardenTable.BODY, textBody);
-                    //  gardencpbo.add(ContentProviderOperation.newInsert(dirUri).withValues(contentValues).build());
+                    gardencpbo.add(ContentProviderOperation.newInsert(dirUri).withValues(contentValues).build());
                 }
-                getContentResolver().insert(GardenContract.URI_GARDENS, contentValues);
+                try {
+                    getContentResolver().applyBatch(GardenContract.AUTHORITY, gardencpbo);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                } catch (OperationApplicationException e) {
+                    e.printStackTrace();
+                }
 
             }
 

@@ -1,28 +1,21 @@
 package paularanas.com.capstone_project.ui;
 
 import android.app.Fragment;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.database.Cursor;
-import android.net.Uri;
+import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.android.gms.appindexing.Action;
 import com.squareup.picasso.Picasso;
-
-import java.util.ArrayList;
 
 import paularanas.com.capstone_project.R;
 import paularanas.com.capstone_project.data.FetchGardensService;
@@ -35,14 +28,13 @@ public class MainGridFragment extends Fragment implements android.app.LoaderMana
 
     private RecyclerView mRecyclerView;
     private final static String ACTION_GARDEN_DATA = "paularanas.com.capstone_project.data.ACTION_GARDEN_DATA";
-    private ArrayList<String> mGardenData = new ArrayList();
     private final static int CURSOR_LOADER = 1;
     GardenAdapter mAdapter;
-    SwipeRefreshLayout mSwipeRefreshLayout;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setRetainInstance(true);
         getLoaderManager().initLoader(CURSOR_LOADER, null, this);
 
@@ -59,12 +51,10 @@ public class MainGridFragment extends Fragment implements android.app.LoaderMana
         //connect the RecyclerView and instantiate the GardenAdapter, set the LayoutManager
         //on the RecyclerView
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
-        mAdapter = new GardenAdapter(getActivity());
-        int columnCount = getResources().getInteger(R.integer.list_column_count);
-        GridLayoutManager glm = new GridLayoutManager(getActivity(), columnCount, StaggeredGridLayoutManager.VERTICAL, false);
-        mRecyclerView.setLayoutManager(glm);
-        mRecyclerView.setAdapter(mAdapter);
-        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
+        //  mAdapter = new GardenAdapter(getActivity());
+
+
+        // mRecyclerView.setAdapter(mAdapter);
 
         return view;
     }
@@ -84,15 +74,18 @@ public class MainGridFragment extends Fragment implements android.app.LoaderMana
 
     @Override
     public void onLoadFinished(android.content.Loader<Cursor> loader, Cursor data) {
-
+        int columnCount = getResources().getInteger(R.integer.list_column_count);
+        GridLayoutManager glm = new GridLayoutManager(getActivity(), columnCount, GridLayoutManager.VERTICAL, false);
+        mRecyclerView.setLayoutManager(glm);
         mAdapter = new GardenAdapter(getActivity(), data);
-        mAdapter.setHasStableIds(true);
         mRecyclerView.setAdapter(mAdapter);
+
     }
 
     @Override
     public void onLoaderReset(android.content.Loader<Cursor> loader) {
-        mRecyclerView.setAdapter(null);
+          mRecyclerView.setAdapter(null);
+
     }
 
 
@@ -111,24 +104,29 @@ class GardenAdapter extends RecyclerView.Adapter<GardenAdapter.GardenViewHolder>
     public GardenAdapter(Context context, Cursor cursor) {
         mContext = context;
         mCursor = cursor;
+
     }
 
     @Override
     public long getItemId(int position) {
-        return position;
+        mCursor.moveToPosition(position);
+      return 0;
     }
+
 
     @Override
     public GardenViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         view = LayoutInflater.from(parent.getContext()).inflate(R.layout.grid_item_garden, parent, false);
         final GardenViewHolder vh = new GardenViewHolder(view);
         view.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View view) {
+            @Override
+            public void onClick(View view) {
 
-                                    }
-                                }
-        );
+                Intent intentToGardenDetailActivity = new Intent(Intent.ACTION_VIEW,
+                        GardenContract.GardenTable.buildGardensIdUri(getItemId(vh.getAdapterPosition())));
+                mContext.startActivity(intentToGardenDetailActivity);
+            }
+        });
 
         return vh;
     }
@@ -140,20 +138,22 @@ class GardenAdapter extends RecyclerView.Adapter<GardenAdapter.GardenViewHolder>
 
         holder.titleView.setText(mCursor.getString(mCursor.getColumnIndex(GardenContract.GardenTable.TITLE)));
         Picasso.with(mContext)
-                .load(mCursor.getString(mCursor.getColumnIndex(GardenContract.GardenTable.THUMBNAIL_PATH))).placeholder(R.color.theme_primary).resize(185, 275).centerCrop()
+                .load(mCursor.getString(mCursor.getColumnIndex(GardenContract.GardenTable.THUMBNAIL_PATH))).placeholder(R.color.theme_primary)
                 .into(holder.thumbnailView);
 
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        return super.getItemViewType(position);
+    }
 
     @Override
     public int getItemCount() {
-        if (mCursor != null) {
-            return mCursor.getCount();
-        } else {
-            return 0;
-        }
+
+        return mCursor.getCount();
     }
+
 
     public static class GardenViewHolder extends RecyclerView.ViewHolder {
         public ImageView thumbnailView;

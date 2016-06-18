@@ -23,7 +23,7 @@
                 <!--suppress AndroidLintContentDescription -->
 
                 <ImageView
-                    android:id="@+id/photo"
+                    android:id="@+id/garden_image"
                     android:layout_width="match_parent"
                     android:background="@color/theme_primary"
                     android:layout_height="275dp"
@@ -44,7 +44,7 @@
                 android:paddingTop="@dimen/detail_metabar_vert_padding">
 
                 <TextView
-                    android:id="@+id/article_title"
+                    android:id="@+id/garden_name"
                     style="?android:attr/textAppearanceLarge"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
