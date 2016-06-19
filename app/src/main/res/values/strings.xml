@@ -2,8 +2,4 @@
     <string name="app_name">Oregon Garden Adventure</string>
     <string name="action_share">Share</string>
     <string name="title_activity_gpsmap">GPSMapActivity</string>
-    <string name="tab_home">Home</string>
-    <string name="tab_info">Info</string>
-    <string name="tab_gps_map">GPS Map</string>
-    <string name="tab_space_view">Space View</string>
 </resources>

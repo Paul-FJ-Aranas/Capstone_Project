@@ -12,41 +12,20 @@
 
         <include layout="@layout/toolbar" />
 
-        <android.support.design.widget.TabLayout
-            android:id="@+id/tabs"
-            app:tabMode="scrollable"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-        <android.support.design.widget.TabItem
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:text="@string/tab_info"/>
-        <android.support.design.widget.TabItem
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:text="@string/tab_gps_map"/>
-        <android.support.design.widget.TabItem
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:text="@string/tab_space_view"/>
-
-        </android.support.design.widget.TabLayout>
 
     </android.support.design.widget.AppBarLayout>
 
 
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clipToPadding="false"
-            android:paddingBottom="@dimen/recycler_padding_bottom"
-            android:paddingLeft="@dimen/list_side_margin"
-            android:paddingRight="@dimen/list_side_margin"
-            android:paddingTop="@dimen/recycler_padding_top"
-            android:scrollbarStyle="outsideOverlay" />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingBottom="@dimen/recycler_padding_bottom"
+        android:paddingLeft="@dimen/list_side_margin"
+        android:paddingRight="@dimen/list_side_margin"
+        android:paddingTop="@dimen/recycler_padding_top"
+        android:scrollbarStyle="outsideOverlay" />
 
 
 </android.support.design.widget.CoordinatorLayout>

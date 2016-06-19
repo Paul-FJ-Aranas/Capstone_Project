@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="tabTitles">
+        <item>Gardens</item>
+         <item>Info</item>
+         <item>GPS Map</item>
+         <item>Space View</item>
+    </string-array>
+
+
+</resources>

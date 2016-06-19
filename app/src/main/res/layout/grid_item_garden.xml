@@ -28,6 +28,7 @@
             android:gravity="center"
             android:maxLines="1"
             android:textColor="#FFFFFF"
+            android:textSize="@dimen/grid_item_text_size"
              />
 </RelativeLayout>
 

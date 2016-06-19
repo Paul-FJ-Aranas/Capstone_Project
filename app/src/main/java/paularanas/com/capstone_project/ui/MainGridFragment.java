@@ -14,6 +14,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
+import android.support.v4.widget.CursorAdapter;
 
 import com.squareup.picasso.Picasso;
 
@@ -24,18 +28,23 @@ import paularanas.com.capstone_project.data.GardenContract;
 /**
  * Created by Paul Aranas on 5/30/2016.
  */
-public class MainGridFragment extends Fragment implements android.app.LoaderManager.LoaderCallbacks<Cursor> {
+public class MainGridFragment extends android.support.v4.app.Fragment implements LoaderManager.LoaderCallbacks {
 
     private RecyclerView mRecyclerView;
     private final static String ACTION_GARDEN_DATA = "paularanas.com.capstone_project.data.ACTION_GARDEN_DATA";
     private final static int CURSOR_LOADER = 1;
     GardenAdapter mAdapter;
+    private GardenSelectedListener mGardenListener;
+
+    public interface GardenSelectedListener {
+
+        public void onGardenSelected(Long id);
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setRetainInstance(true);
         getLoaderManager().initLoader(CURSOR_LOADER, null, this);
 
         if (savedInstanceState == null) {
@@ -53,18 +62,24 @@ public class MainGridFragment extends Fragment implements android.app.LoaderMana
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         //  mAdapter = new GardenAdapter(getActivity());
 
-
+        onAttachFragment(getParentFragment());
         // mRecyclerView.setAdapter(mAdapter);
 
         return view;
     }
 
+    public void onAttachFragment(android.support.v4.app.Fragment fragment) {
+
+        mGardenListener = (GardenSelectedListener) fragment;
+
+
+    }
 
     @Override
-    public android.content.Loader<Cursor> onCreateLoader(int id, Bundle args) {
+    public Loader onCreateLoader(int id, Bundle args) {
         switch (id) {
             case CURSOR_LOADER:
-                return new android.content.CursorLoader(getActivity(), GardenContract.URI_GARDENS, GardenContract.GardenTable.PROJECTION_ALL,
+                return new CursorLoader(getActivity(), GardenContract.URI_GARDENS, GardenContract.GardenTable.PROJECTION_ALL,
                         null, null, null);
             default:
                 return null;
@@ -73,21 +88,19 @@ public class MainGridFragment extends Fragment implements android.app.LoaderMana
     }
 
     @Override
-    public void onLoadFinished(android.content.Loader<Cursor> loader, Cursor data) {
+    public void onLoadFinished(Loader loader, Object data) {
         int columnCount = getResources().getInteger(R.integer.list_column_count);
         GridLayoutManager glm = new GridLayoutManager(getActivity(), columnCount, GridLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(glm);
-        mAdapter = new GardenAdapter(getActivity(), data);
+        mAdapter = new GardenAdapter(getActivity(), (Cursor) data, mGardenListener);
         mRecyclerView.setAdapter(mAdapter);
 
     }
 
     @Override
-    public void onLoaderReset(android.content.Loader<Cursor> loader) {
-          mRecyclerView.setAdapter(null);
-
+    public void onLoaderReset(Loader loader) {
+        mRecyclerView.setAdapter(null);
     }
-
 
 }
 
@@ -96,21 +109,22 @@ class GardenAdapter extends RecyclerView.Adapter<GardenAdapter.GardenViewHolder>
     private Cursor mCursor;
     int mCurrentPosition;
     View view;
+    MainGridFragment.GardenSelectedListener mGardenSelectedListener;
 
     public GardenAdapter(Context mContext) {
         this.mContext = mContext;
     }
 
-    public GardenAdapter(Context context, Cursor cursor) {
+    public GardenAdapter(Context context, Cursor cursor, MainGridFragment.GardenSelectedListener listener) {
         mContext = context;
         mCursor = cursor;
-
+        mGardenSelectedListener = listener;
     }
 
     @Override
     public long getItemId(int position) {
         mCursor.moveToPosition(position);
-      return 0;
+        return 0;
     }
 
 
@@ -122,9 +136,8 @@ class GardenAdapter extends RecyclerView.Adapter<GardenAdapter.GardenViewHolder>
             @Override
             public void onClick(View view) {
 
-                Intent intentToGardenDetailActivity = new Intent(Intent.ACTION_VIEW,
-                        GardenContract.GardenTable.buildGardensIdUri(getItemId(vh.getAdapterPosition())));
-                mContext.startActivity(intentToGardenDetailActivity);
+                mGardenSelectedListener.onGardenSelected(getItemId(vh.getAdapterPosition()));
+
             }
         });
 

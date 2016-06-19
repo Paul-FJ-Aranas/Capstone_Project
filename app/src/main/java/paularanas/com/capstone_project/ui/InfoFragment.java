@@ -12,7 +12,7 @@ import paularanas.com.capstone_project.R;
 /**
  * Created by Paul on 6/18/2016.
  */
-public class InfoFragment extends Fragment {
+public class InfoFragment extends android.support.v4.app.Fragment {
 
     @Nullable
     @Override

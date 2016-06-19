@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -20,30 +21,35 @@ import paularanas.com.capstone_project.R;
 import paularanas.com.capstone_project.data.GardenContract;
 
 public class MainActivity extends AppCompatActivity {
-    Toolbar toolbar;
-
-    private MainPagerAdapter mPagerAdapter;
-    private ViewPager mPager;
+    private final static int TAB_COUNT = 4;
+    private TabLayout tabLayout;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_garden_details);
+        setContentView(R.layout.activity_main);
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        tabLayout = (TabLayout) findViewById(R.id.tabs);
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+        }
 
         initializePagerAdapter();
 
     }
 
     private void initializePagerAdapter() {
-        mPagerAdapter = new MainPagerAdapter(getSupportFragmentManager());
-        mPager = (ViewPager) findViewById(R.id.main_pager);
-        mPager.setAdapter(mPagerAdapter);
-        mPager.setClipToPadding(false);
-        mPager.setPageMargin(12);
+        MainPagerAdapter mPagerAdapter = new MainPagerAdapter(getSupportFragmentManager());
+        ViewPager mPager = (ViewPager) findViewById(R.id.main_pager);
+        if (mPager != null) {
+            mPager.setAdapter(mPagerAdapter);
+            mPager.setClipToPadding(false);
+            mPager.setPageMargin(12);
+            tabLayout.setupWithViewPager(mPager);
+            mPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        }
     }
 
     private class MainPagerAdapter extends FragmentStatePagerAdapter {
@@ -54,18 +60,46 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-           return null;
+
+
+            Fragment fragment = null;
+
+            switch (position) {
+
+                case 0:
+                    fragment = new MasterGridFragment();
+                    break;
+
+                case 1:
+                    fragment = new InfoFragment();
+
+                    break;
+
+                case 2:
+                    fragment = new GPSMapFragment();
+
+                    break;
+
+                case 3:
+                    fragment = new SpaceViewFragment();
+
+                    break;
+            }
+
+            return fragment;
+
         }
 
+
         @Override
-        public void setPrimaryItem(ViewGroup container, int position, Object object) {
-
-
+        public CharSequence getPageTitle(int position) {
+            String[] tabTitles = getResources().getStringArray(R.array.tabTitles);
+            return tabTitles[position];
         }
 
         @Override
         public int getCount() {
-            return  0;
+            return TAB_COUNT;
         }
     }
 }
