@@ -38,6 +38,7 @@ public class GardenContract {
         public static final String THUMBNAIL_PATH = "thumbnail";
         public static final String BODY = "body";
 
+
         public static Uri buildGardensIdUri(long id) {
             return URI_GARDENS.buildUpon().appendPath(Long.toString(id)).build();
         }

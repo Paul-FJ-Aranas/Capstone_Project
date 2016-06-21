@@ -69,10 +69,10 @@ public class OregonGardenLibrary {
 
 
         //garden thumbnails
-        gardenPhotosArray[0] = "https://storage.googleapis.com/capstoneproject_images/axisfountain_thumb.png";
-        gardenPhotosArray[1] = "https://storage.googleapis.com/capstoneproject_images/axisfountain185.png";
-        gardenPhotosArray[2] = "https://storage.googleapis.com/capstoneproject_images/axisfountain449.png";
-        gardenPhotosArray[3] = "https://storage.googleapis.com/capstoneproject_images/test.jpg";
+        gardenPhotosArray[0] = "";
+        gardenPhotosArray[1] = "";
+        gardenPhotosArray[2] = "";
+        gardenPhotosArray[3] = "";
         //garden creators
         gardenCreatorsArray[0] = "Sample Garden Creator1";
         gardenCreatorsArray[1] = "Sample Garden Creator2";

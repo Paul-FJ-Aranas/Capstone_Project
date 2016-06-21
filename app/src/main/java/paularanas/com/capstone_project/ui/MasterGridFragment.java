@@ -5,12 +5,14 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import paularanas.com.capstone_project.R;
+import paularanas.com.capstone_project.data.GardenContract;
 
 /**
  * Created by Paul on 6/19/2016.
@@ -28,7 +30,7 @@ public class MasterGridFragment extends Fragment implements MainGridFragment.Gar
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         transaction.replace(R.id.garden_grid_container, gridFragment, "grid_fragment");
         transaction.commit();
-
+        establishPaneLayout();
 
         return view;
     }
@@ -40,6 +42,7 @@ public class MasterGridFragment extends Fragment implements MainGridFragment.Gar
             sTwoPane = true;
             MainGridFragment gridFragment =
                     (MainGridFragment) getFragmentManager().findFragmentByTag("grid_fragment");
+
         }
     }
 
@@ -48,16 +51,19 @@ public class MasterGridFragment extends Fragment implements MainGridFragment.Gar
     public void onGardenSelected(Long id) {
 
         if (sTwoPane) { // one activity, replace framelayout with new details fragment
-            GardenDetailsFragment fragmentDetails = GardenDetailsFragment.newInstance(id, 0);
-            android.support.v4.app.FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+            Bundle bundle = new Bundle();
+
+           GardenDetailsFragment fragmentDetails = GardenDetailsFragment.newInstance( id,0);
+
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
             transaction.replace(R.id.garden_grid_container, fragmentDetails);
             transaction.commit();
 
         } else {
             // go to separate activity
             // launch detail activity using intent
-            Intent intent = new Intent(getActivity(), GardenDetailsActivity.class);
-                intent.putExtra("garden_id", id);
+            Log.d("TAG2","position: "+ toString().valueOf(id));
+            Intent intent = new Intent(Intent.ACTION_VIEW, GardenContract.GardenTable.buildGardensIdUri(id));
             startActivity(intent);
         }
 

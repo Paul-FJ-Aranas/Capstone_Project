@@ -1,16 +1,13 @@
 package paularanas.com.capstone_project.ui;
 
-import android.app.Fragment;
+import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
+import android.support.v4.app.ShareCompat;
+import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
-import android.text.Html;
-import android.text.format.DateUtils;
-import android.text.method.LinkMovementMethod;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,22 +18,34 @@ import com.squareup.picasso.Picasso;
 
 import paularanas.com.capstone_project.R;
 import paularanas.com.capstone_project.data.GardenContract;
+import paularanas.com.capstone_project.data.GardenUtility;
 
 /**
  * Created by Paul Aranas on 5/31/2016.
  */
-public class GardenDetailsFragment extends android.support.v4.app.Fragment implements android.app.LoaderManager.LoaderCallbacks<Cursor> {
+public class GardenDetailsFragment extends Fragment implements
+        LoaderManager.LoaderCallbacks<Cursor> {
 
-    public static final String ARG_GARDEN_ID = "item_id";
-    private int mStartPosition;
-    private long mGardenId;
-    private static final int CURSOR_LOADER = 0;
-    private View mRootView;
+    public static final String ARG_ITEM_ID = "item_id";
     private Cursor mCursor;
+    private long mItemId;
+    private View mRootView;
+
+    private ImageView mPhotoView;
+
+    private int mStartPosition;
+
+    /**
+     * Mandatory empty constructor for the fragment manager to instantiate the
+     * fragment (e.g. upon screen orientation changes).
+     */
+
+    public GardenDetailsFragment() {
+    }
 
     public static GardenDetailsFragment newInstance(long itemId, int startPosition) {
         Bundle arguments = new Bundle();
-        arguments.putLong(ARG_GARDEN_ID, itemId);
+        arguments.putLong(ARG_ITEM_ID, itemId);
         arguments.putInt("StartPosition", startPosition);
         GardenDetailsFragment fragment = new GardenDetailsFragment();
         fragment.setArguments(arguments);
@@ -46,60 +55,45 @@ public class GardenDetailsFragment extends android.support.v4.app.Fragment imple
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments().containsKey(ARG_GARDEN_ID)) {
-            mGardenId = getArguments().getLong(ARG_GARDEN_ID);
+
+        if (getArguments().containsKey(ARG_ITEM_ID)) {
+            mItemId = getArguments().getLong(ARG_ITEM_ID);
             mStartPosition = getArguments().getInt("StartPosition");
 
         }
+
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        getActivity().getLoaderManager().initLoader(CURSOR_LOADER, null, this);
+
+        // In support library r8, calling initLoader for a fragment in a FragmentPagerAdapter in
+        // the fragment's onCreate may cause the same LoaderManager to be dealt to multiple
+        // fragments because their mIndex is -1 (haven't been added to the activity yet). Thus,
+        // we do this in onActivityCreated.
+        getLoaderManager().initLoader(0, null, this);
     }
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
         mRootView = inflater.inflate(R.layout.fragment_garden_details, container, false);
-        return mRootView;
-    }
+        mPhotoView = (ImageView) mRootView.findViewById(R.id.garden_image);
 
-    @Override
-    public android.content.Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        switch (id) {
-            case CURSOR_LOADER:
-                return new android.content.CursorLoader(getActivity(), GardenContract.GardenTable.buildGardensIdUri(mGardenId), GardenContract.GardenTable.PROJECTION_ALL, null, null, null);
-            default:
-                return null;
-        }
-    }
-
-    @Override
-    public void onLoadFinished(android.content.Loader<Cursor> loader, Cursor data) {
-        if (!isAdded()) {
-            if (data != null) {
-                data.close();
+        mRootView.findViewById(R.id.share_fab).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(Intent.createChooser(ShareCompat.IntentBuilder.from(getActivity())
+                        .setType("text/plain")
+                        .setText("Some sample text")
+                        .getIntent(), getString(R.string.action_share)));
             }
-            return;
-        }
-
-        mCursor = data;
-        if (mCursor != null && !mCursor.moveToFirst()) {
-            mCursor.close();
-            mCursor = null;
-        }
-
+        });
 
         bindViews();
-    }
 
-    @Override
-    public void onLoaderReset(android.content.Loader loader) {
-        mCursor = null;
-        bindViews();
-
+        return mRootView;
     }
 
     private void bindViews() {
@@ -116,10 +110,11 @@ public class GardenDetailsFragment extends android.support.v4.app.Fragment imple
             mRootView.setAlpha(0);
             mRootView.setVisibility(View.VISIBLE);
             mRootView.animate().alpha(1);
-            gardenNameView.setText(mCursor.getString(mCursor.getColumnIndex(GardenContract.GardenTable.TITLE)));
-            createdByView.setText(mCursor.getString(mCursor.getColumnIndex(GardenContract.GardenTable.CREATOR)));
-            gardenInfoBodyView.setText(mCursor.getString(mCursor.getColumnIndex(GardenContract.GardenTable.BODY)));
-            Picasso.with(getActivity()).load(mCursor.getString(mCursor.getColumnIndex(GardenContract.GardenTable.PHOTO))).placeholder(R.color.theme_primary).into(gardenImage);
+
+            gardenNameView.setText(mCursor.getString(GardenUtility.GardenQuery.TITLE));
+            createdByView.setText(mCursor.getString(GardenUtility.GardenQuery.CREATOR));
+            gardenInfoBodyView.setText(mCursor.getString(GardenUtility.GardenQuery.BODY));
+            Picasso.with(getActivity()).load(mCursor.getString(GardenUtility.GardenQuery.PHOTO)).placeholder(R.color.theme_primary).into(gardenImage);
 
         } else {
             mRootView.setVisibility(View.GONE);
@@ -129,4 +124,113 @@ public class GardenDetailsFragment extends android.support.v4.app.Fragment imple
         }
 
     }
+
+
+
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
+        return new CursorLoader(getActivity(), GardenContract.GardenTable.buildGardensIdUri(mItemId), GardenContract.GardenTable.PROJECTION_ALL, null, null, null);
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        if (!isAdded()) {
+            if (data != null) {
+                data.close();
+            }
+            return;
+        }
+
+        mCursor = data;
+        if (mCursor != null && !mCursor.moveToFirst()) {
+
+            mCursor.close();
+            mCursor = null;
+        }
+
+
+        bindViews();
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+
+        mCursor = null;
+        bindViews();
+
+    }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
