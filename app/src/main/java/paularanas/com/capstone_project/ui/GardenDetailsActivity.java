@@ -46,10 +46,13 @@ public class GardenDetailsActivity extends AppCompatActivity implements LoaderMa
             mCurrentPosition = savedInstanceState.getInt(CURRENT_PAGE_POSITION);
         }
 
-
         setContentView(R.layout.activity_garden_details);
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
+        if(getSupportActionBar()!= null) {
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
         getSupportLoaderManager().initLoader(0, null, this);
 
         initializePager();

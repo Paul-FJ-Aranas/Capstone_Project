@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.support.v4.app.LoaderManager;
@@ -20,6 +21,8 @@ import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
 
+import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import paularanas.com.capstone_project.R;
@@ -33,9 +36,10 @@ import paularanas.com.capstone_project.data.GardenUtility;
 public class MainGridFragment extends android.support.v4.app.Fragment implements LoaderManager.LoaderCallbacks {
     private RecyclerView mRecyclerView;
     private final static String ACTION_GARDEN_DATA = "paularanas.com.capstone_project.data.ACTION_GARDEN_DATA";
-   // private final static int CURSOR_LOADER = 1;
+    // private final static int CURSOR_LOADER = 1;
     GardenAdapter mAdapter;
     private GardenSelectedListener mGardenListener;
+    private int mActivatedPos = 0;
 
     public interface GardenSelectedListener {
 
@@ -69,6 +73,7 @@ public class MainGridFragment extends android.support.v4.app.Fragment implements
         return view;
     }
 
+
     public void onAttachFragment(android.support.v4.app.Fragment fragment) {
 
         mGardenListener = (GardenSelectedListener) fragment;
@@ -77,24 +82,58 @@ public class MainGridFragment extends android.support.v4.app.Fragment implements
     }
 
     @Override
-    public Loader onCreateLoader(int id, Bundle args) {
-      //  switch (id) {
-        //    case CURSOR_LOADER:
-                return new CursorLoader(getActivity(), GardenContract.URI_GARDENS, GardenContract.GardenTable.PROJECTION_ALL,
-                        null, null, null);
-          //  default:
-          //      return null;
-//
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
+        // Restore previously activated item position.
+        if (savedInstanceState != null && MasterGridFragment.sTwoPane && savedInstanceState.containsKey("ACTIVATED_POS")) {
+            setActivatedPosition(savedInstanceState.getInt("ACTIVATED_POS", mActivatedPos));
+        }
     }
 
     @Override
+    public void onSaveInstanceState(Bundle outState) {
+        if (MasterGridFragment.sTwoPane) {
+            outState.putInt("ACTIVATED_POS", mActivatedPos);
+        }
+        super.onSaveInstanceState(outState);
+    }
+
+
+    private void setActivatedPosition(int position) {
+        mActivatedPos = position;
+    }
+
+
+    @Override
+    public Loader onCreateLoader(int id, Bundle args) {
+        //  switch (id) {
+        //    case CURSOR_LOADER:
+        return new CursorLoader(getActivity(), GardenContract.URI_GARDENS, GardenContract.GardenTable.PROJECTION_ALL,
+                null, null, null);
+        //  default:
+        //      return null;
+//
+    }
+
+
+    @Override
     public void onLoadFinished(Loader loader, Object data) {
-        int columnCount = getResources().getInteger(R.integer.list_column_count);
+        int columnCount = getResources().getInteger(R.integer.grid_columns);
         GridLayoutManager glm = new GridLayoutManager(getActivity(), columnCount, GridLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(glm);
         mAdapter = new GardenAdapter(getActivity(), (Cursor) data, mGardenListener);
         mRecyclerView.setAdapter(mAdapter);
+        if (MasterGridFragment.sTwoPane) {
+            mRecyclerView.post(new Runnable() {
+
+                @Override
+                public void run() {
+                    mRecyclerView.findViewHolderForAdapterPosition(0).itemView.performClick();
+                }
+            });
+        }
+
 
     }
 
@@ -133,6 +172,8 @@ class GardenAdapter extends RecyclerView.Adapter<GardenAdapter.GardenViewHolder>
     public GardenViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         view = LayoutInflater.from(parent.getContext()).inflate(R.layout.grid_item_garden, parent, false);
         final GardenViewHolder vh = new GardenViewHolder(view);
+
+
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -151,9 +192,55 @@ class GardenAdapter extends RecyclerView.Adapter<GardenAdapter.GardenViewHolder>
         mCurrentPosition = position;
 
         holder.titleView.setText(mCursor.getString(mCursor.getColumnIndex(GardenContract.GardenTable.TITLE)));
-        Picasso.with(mContext)
-                .load(mCursor.getString(mCursor.getColumnIndex(GardenContract.GardenTable.THUMBNAIL_PATH))).placeholder(R.color.theme_primary)
-                .into(holder.thumbnailView);
+
+
+        double density = mContext.getResources().getDisplayMetrics().density;
+        Log.d("Density", toString().valueOf(density));
+        if (density >= 4.0) {
+            //"xxxhdpi";
+
+            Picasso.with(mContext)
+                    .load(mCursor.getString(mCursor.getColumnIndex(GardenContract.GardenTable.THUMBNAIL_PATH))).placeholder(R.color.theme_primary).resize(1000, 1000)
+                    .into(holder.thumbnailView);
+
+
+        }
+        else if (density >= 3.0 && density < 4.0) {
+            //xxhdpi
+
+            Picasso.with(mContext)
+                    .load(mCursor.getString(mCursor.getColumnIndex(GardenContract.GardenTable.THUMBNAIL_PATH))).placeholder(R.color.theme_primary).resize(1000,1000)
+                    .into(holder.thumbnailView);
+
+        }
+        else if (density >= 2.0) {
+            //xhdpi
+
+            Picasso.with(mContext)
+                    .load(mCursor.getString(mCursor.getColumnIndex(GardenContract.GardenTable.THUMBNAIL_PATH))).placeholder(R.color.theme_primary).resize(500,700)
+                    .into(holder.thumbnailView);
+
+        }
+        else if (density >= 1.5 && density < 2.0) {
+            //hdpi
+            Picasso.with(mContext)
+                    .load(mCursor.getString(mCursor.getColumnIndex(GardenContract.GardenTable.THUMBNAIL_PATH))).placeholder(R.color.theme_primary)
+                    .into(holder.thumbnailView);
+
+
+        }
+        else if (density >= 1.0 && density < 1.5) {
+            //mdpi
+
+            Picasso.with(mContext)
+                    .load(mCursor.getString(mCursor.getColumnIndex(GardenContract.GardenTable.THUMBNAIL_PATH))).placeholder(R.color.theme_primary)
+                    .into(holder.thumbnailView);
+
+
+        }
+
+
+
 
     }
 

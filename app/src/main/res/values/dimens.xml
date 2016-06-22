@@ -7,7 +7,6 @@
     <dimen name="list_side_margin">16dp</dimen>
 
     <dimen name="list_toolbar_side_margin">0dp</dimen>
-    <integer name="list_column_count">2</integer>
 
     <!-- detail -->
     <bool name="detail_is_card">false</bool>
@@ -37,5 +36,7 @@
     <dimen name="list_item_rel_layout_height">48dp</dimen>
     <dimen name="list_item_rel_layout_padding">12dp</dimen>
     <dimen name="list_item_subtitle_text_size">12sp</dimen>
+
+    <integer name="grid_columns">2</integer>
 
 </resources>

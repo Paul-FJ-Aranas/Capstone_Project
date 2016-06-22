@@ -21,16 +21,21 @@ public class MasterGridFragment extends Fragment implements MainGridFragment.Gar
     public static Boolean sTwoPane = false;
     private View view;
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_master_grid, container, false);
-
+        establishPaneLayout();
         MainGridFragment gridFragment = new MainGridFragment();
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         transaction.replace(R.id.garden_grid_container, gridFragment, "grid_fragment");
         transaction.commit();
-        establishPaneLayout();
 
         return view;
     }
@@ -46,17 +51,15 @@ public class MasterGridFragment extends Fragment implements MainGridFragment.Gar
         }
     }
 
-
     @Override
     public void onGardenSelected(Long id) {
 
         if (sTwoPane) { // one activity, replace framelayout with new details fragment
-            Bundle bundle = new Bundle();
 
            GardenDetailsFragment fragmentDetails = GardenDetailsFragment.newInstance( id,0);
 
-            FragmentTransaction transaction = getFragmentManager().beginTransaction();
-            transaction.replace(R.id.garden_grid_container, fragmentDetails);
+            FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+            transaction.replace(R.id.garden_details_tablet_container, fragmentDetails);
             transaction.commit();
 
         } else {

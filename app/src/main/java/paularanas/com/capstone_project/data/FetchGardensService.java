@@ -38,8 +38,8 @@ public class FetchGardensService extends IntentService {
 
 
 
-        GardensApi.Builder builder = new GardensApi.Builder(AndroidHttp.newCompatibleTransport(),
-                new AndroidJsonFactory(), null).setRootUrl("http://10.0.2.2:8080/_ah/api")
+        GardensApi.Builder builder = new GardensApi.Builder(AndroidHttp.newCompatibleTransport(), new AndroidJsonFactory(), null)
+                .setRootUrl("https://capstoneproject-1339.appspot.com/_ah/api/")
                 .setGoogleClientRequestInitializer(new GoogleClientRequestInitializer() {
                     @Override
                     public void initialize(AbstractGoogleClientRequest<?> abstractGoogleClientRequest) throws IOException {

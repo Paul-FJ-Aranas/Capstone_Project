@@ -4,11 +4,9 @@
 <android.support.v7.widget.RecyclerView android:id="@+id/recycler_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/theme_primary"
     android:clipToPadding="false"
     android:paddingBottom="@dimen/recycler_padding_bottom"
-    android:paddingLeft="@dimen/list_side_margin"
-    android:paddingRight="@dimen/list_side_margin"
+android:background="@color/theme_primary"
     android:paddingTop="@dimen/recycler_padding_top"
     android:numColumns="auto_fit"
     xmlns:android="http://schemas.android.com/apk/res/android" />
