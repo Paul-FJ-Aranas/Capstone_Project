@@ -36,7 +36,9 @@
     <dimen name="list_item_rel_layout_height">48dp</dimen>
     <dimen name="list_item_rel_layout_padding">12dp</dimen>
     <dimen name="list_item_subtitle_text_size">12sp</dimen>
+    <dimen name="hours_text_size">14sp</dimen>
 
     <integer name="grid_columns">2</integer>
+
 
 </resources>

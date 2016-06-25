@@ -10,14 +10,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <include layout="@layout/toolbar" />
+            <include layout="@layout/toolbar"  />
 
             <android.support.design.widget.TabLayout
                 android:id="@+id/tabs"
+                app:tabBackground = "@android:color/transparent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/custom_tab_layout"
-                app:tabMode="scrollable">
+                app:tabGravity="fill"
+                style="@style/custom_tab_layout">
 
                 <android.support.design.widget.TabItem
                     android:layout_width="wrap_content"
@@ -36,6 +37,8 @@
                     android:layout_height="wrap_content" />
 
             </android.support.design.widget.TabLayout>
+
+
 
         </android.support.design.widget.AppBarLayout>
 

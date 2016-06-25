@@ -1,8 +1,6 @@
 package paularanas.com.capstone_project.ui;
 
-import android.app.LoaderManager;
-import android.content.BroadcastReceiver;
-import android.database.Cursor;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -11,17 +9,13 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.ViewGroup;
-
-import java.util.ArrayList;
+import android.view.View;
 
 import paularanas.com.capstone_project.R;
-import paularanas.com.capstone_project.data.GardenContract;
 
 public class MainActivity extends AppCompatActivity {
-    private final static int TAB_COUNT = 4;
+    private final static int TAB_COUNT = 3;
     private TabLayout tabLayout;
 
     @Override
@@ -50,6 +44,11 @@ public class MainActivity extends AppCompatActivity {
             mPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         }
     }
+    public void goToMapClick(View view){
+
+       Intent intent = new Intent(this, GardenMapActivity.class);
+        startActivity(intent);
+    }
 
     private class MainPagerAdapter extends FragmentStatePagerAdapter {
         public MainPagerAdapter(FragmentManager fm) {
@@ -75,11 +74,6 @@ public class MainActivity extends AppCompatActivity {
                     break;
 
                 case 2:
-                    fragment = new GPSMapFragment();
-
-                    break;
-
-                case 3:
                     fragment = new SpaceViewFragment();
 
                     break;
