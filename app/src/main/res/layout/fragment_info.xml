@@ -24,62 +24,106 @@
                 <!--suppress AndroidLintContentDescription -->
 
                 <ImageView
-                    android:id="@+id/garden_image"
+                    android:id="@+id/about_garden_image"
                     android:layout_width="match_parent"
-                    android:background="@color/theme_primary"
                     android:layout_height="275dp"
-                    android:scaleType="centerCrop" />
+                    android:background="@color/theme_primary"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/about_image" />
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_gravity="bottom"
+                    android:background="@color/translucent"
+                   >
+
+                    <TextView
+                        android:id="@+id/_365days_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="2dp"
+                        android:layout_marginLeft="@dimen/text_margin_side"
+                        android:layout_marginRight="@dimen/text_margin_side"
+                        android:alpha="0.87"
+                        android:gravity="center"
+                        android:textColor="#FFFFFF"
+                        android:textSize="@dimen/hours_text_size" />
+                </RelativeLayout>
+
             </FrameLayout>
 
             <LinearLayout
                 android:id="@+id/meta_bar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/theme_primary"
-                android:layout_gravity="bottom"
-                android:orientation="vertical"
+                android:layout_gravity="center"
                 android:layout_marginBottom="@dimen/detail_metabar_vert_padding"
+                android:background="@color/theme_primaryDark"
+                android:orientation="vertical"
                 android:paddingBottom="@dimen/detail_metabar_vert_padding"
                 android:paddingLeft="@dimen/detail_inner_horiz_margin"
                 android:paddingRight="@dimen/detail_inner_horiz_margin"
                 android:paddingTop="@dimen/detail_metabar_vert_padding">
 
-                <TextView
-                    android:id="@+id/garden_name"
-                    style="?android:attr/textAppearanceLarge"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:alpha="0.87"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
-                    android:lineSpacingMultiplier="0.9"
-                    android:textColor="#FFFFFF"
-                    android:paddingBottom="@dimen/detail_metabar_title_bottom_padding"
-                    android:textSize="@dimen/detail_garden_title_text_size" />
 
-                <TextView
-                    android:id="@+id/garden_created_by"
-                    style="?android:attr/textAppearanceSmall"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center">
+
+                    <TextView
+                        android:id="@+id/summer_hours"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_weight="1"
+                        android:alpha="0.87"
+                        android:lineSpacingMultiplier="0.9"
+                        android:paddingBottom="@dimen/detail_metabar_title_bottom_padding"
+                        android:textColor="#FFFFFF"
+                        android:textSize="@dimen/hours_text_size" />
+
+                    <TextView
+                        android:id="@+id/offseason_hours"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/text_margin_side"
+                        android:layout_marginRight="@dimen/text_margin_side"
+                        android:layout_weight="1"
+                        android:alpha="0.87"
+                        android:textColor="#FFFFFF"
+                        android:textSize="@dimen/hours_text_size" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/phone_numbers"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
                     android:alpha="0.87"
-                    android:textColor="#FFFFFF"
-                    android:layout_marginLeft="@dimen/text_margin_side"
-                    android:layout_marginRight="@dimen/text_margin_side"
-                    />
+                    android:gravity="center"
+                    android:lineSpacingMultiplier="0.9"
+                    android:paddingBottom="@dimen/detail_metabar_title_bottom_padding"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/hours_text_size" />
+
+
             </LinearLayout>
 
 
             <TextView
-                android:id="@+id/garden_info_body"
+                android:id="@+id/garden_about_text"
                 style="?android:attr/textAppearanceMedium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="10dp"
                 android:layout_marginLeft="@dimen/detail_inner_horiz_margin"
                 android:layout_marginRight="@dimen/detail_inner_horiz_margin"
                 android:lineSpacingMultiplier="@fraction/detail_body_line_spacing_multiplier"
                 android:paddingBottom="@dimen/detail_body_bottom_margin"
+                android:paddingTop="10dp"
                 android:textSize="@dimen/detail_item_text_size" />
 
         </LinearLayout>
@@ -87,17 +131,17 @@
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/share_fab"
-        app:fabSize="normal"
-        android:layout_height="wrap_content"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        app:borderWidth="0dp"
-        app:backgroundTint="@color/theme_accent"
-        android:translationZ="@dimen/fab_pressed_elevation"
         android:layout_marginBottom="@dimen/fab_margin"
         android:layout_marginRight="@dimen/fab_margin"
         android:contentDescription="@string/action_share"
         android:elevation="@dimen/fab_elevation"
-        android:src="@drawable/ic_share_black_24dp" />
+        android:src="@drawable/ic_share_black_24dp"
+        android:translationZ="@dimen/fab_pressed_elevation"
+        app:backgroundTint="@color/theme_accent"
+        app:borderWidth="0dp"
+        app:fabSize="normal" />
 
 </android.support.design.widget.CoordinatorLayout>

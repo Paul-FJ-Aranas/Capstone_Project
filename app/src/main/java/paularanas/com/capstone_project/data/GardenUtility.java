@@ -7,12 +7,12 @@ public class GardenUtility {
 
     public interface GardenQuery {
 
-        public int _ID = 0;
-        public int PHOTO = 1;
-        public int TITLE = 2;
-        public int CREATOR = 3;
-        public int THUMBNAIL_PATH = 4;
-        public int BODY = 5;
+        int _ID = 0;
+        int PHOTO = 1;
+        int TITLE = 2;
+        int CREATOR = 3;
+        int THUMBNAIL_PATH = 4;
+        int BODY = 5;
 
     }
 }

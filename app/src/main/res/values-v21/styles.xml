@@ -7,7 +7,10 @@
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 
-    <style name = "custom_tab_layout" parent="Widget.Design.TabLayout">
-        <item name ="tabIndicatorColor">@color/theme_primaryDark</item>
+
+    <style name="custom_tabs" parent="Widget.Design.TabLayout">
+        <item name="tabIndicatorColor">@color/theme_primaryDark</item>
     </style>
+
+
 </resources>

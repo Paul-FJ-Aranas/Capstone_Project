@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="custom_tab_layout" parent="TextAppearance.Design.Tab">
+    <style name="custom_tab_layout" parent="TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse">
         <item name="android:textSize">22sp</item>
     </style>
 

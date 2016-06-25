@@ -1,0 +1,10 @@
+<resources>
+
+    <!-- Base application theme. -->
+
+    <style name = "custom_tab_layout" parent="TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse">
+        <item name ="tabIndicatorColor">@color/theme_primaryDark</item>
+        <item name ="android:textSize">30sp</item>
+    </style>
+
+</resources>

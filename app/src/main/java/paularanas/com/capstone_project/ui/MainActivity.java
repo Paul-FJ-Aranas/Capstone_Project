@@ -1,28 +1,27 @@
 package paularanas.com.capstone_project.ui;
 
-import android.app.LoaderManager;
-import android.content.BroadcastReceiver;
-import android.database.Cursor;
+import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.ViewGroup;
-
-import java.util.ArrayList;
+import android.view.View;
+import android.widget.Button;
 
 import paularanas.com.capstone_project.R;
-import paularanas.com.capstone_project.data.GardenContract;
 
 public class MainActivity extends AppCompatActivity {
     private final static int TAB_COUNT = 4;
     private TabLayout tabLayout;
+
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
         initializePagerAdapter();
 
+
     }
 
     private void initializePagerAdapter() {
@@ -46,12 +46,14 @@ public class MainActivity extends AppCompatActivity {
             mPager.setAdapter(mPagerAdapter);
             mPager.setClipToPadding(false);
             mPager.setPageMargin(12);
+            mPager.setOffscreenPageLimit(TAB_COUNT-1);
             tabLayout.setupWithViewPager(mPager);
             mPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         }
     }
 
-    private class MainPagerAdapter extends FragmentStatePagerAdapter {
+
+    private class MainPagerAdapter extends FragmentPagerAdapter {
         public MainPagerAdapter(FragmentManager fm) {
             super(fm);
         }
@@ -73,9 +75,8 @@ public class MainActivity extends AppCompatActivity {
                     fragment = new InfoFragment();
 
                     break;
-
                 case 2:
-                    fragment = new GPSMapFragment();
+                    fragment = new GardenMapFragment();
 
                     break;
 

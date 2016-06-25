@@ -1,10 +1,8 @@
 package paularanas.com.capstone_project.ui;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
@@ -13,16 +11,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
-import android.support.v4.widget.CursorAdapter;
 
-import com.squareup.picasso.MemoryPolicy;
-import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import paularanas.com.capstone_project.R;
@@ -40,6 +34,8 @@ public class MainGridFragment extends android.support.v4.app.Fragment implements
     GardenAdapter mAdapter;
     private GardenSelectedListener mGardenListener;
     private int mActivatedPos = 0;
+
+
 
     public interface GardenSelectedListener {
 
@@ -192,6 +188,7 @@ class GardenAdapter extends RecyclerView.Adapter<GardenAdapter.GardenViewHolder>
         mCurrentPosition = position;
 
         holder.titleView.setText(mCursor.getString(mCursor.getColumnIndex(GardenContract.GardenTable.TITLE)));
+        holder.titleView.setTextSize(mContext.getResources().getDimension(R.dimen.grid_item_text_size));
 
 
         double density = mContext.getResources().getDisplayMetrics().density;

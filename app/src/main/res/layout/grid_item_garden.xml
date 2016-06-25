@@ -18,7 +18,6 @@
         android:background="@color/translucent"
         android:padding="@dimen/list_item_rel_layout_padding">
 
-
         <TextView
             android:id="@+id/garden_title"
             android:layout_width="match_parent"
@@ -28,7 +27,6 @@
             android:gravity="center"
             android:maxLines="1"
             android:textColor="#FFFFFF"
-            android:textSize="@dimen/grid_item_text_size"
              />
 </RelativeLayout>
 
