@@ -1,7 +1,10 @@
 package paularanas.com.capstone_project.ui;
 
 import android.content.Intent;
+<<<<<<< HEAD
 import android.graphics.Typeface;
+=======
+>>>>>>> bab024aac91d14e0308359db51e3f9a278c4d5c5
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -13,12 +16,15 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+<<<<<<< HEAD
 import android.widget.Button;
+=======
+>>>>>>> bab024aac91d14e0308359db51e3f9a278c4d5c5
 
 import paularanas.com.capstone_project.R;
 
 public class MainActivity extends AppCompatActivity {
-    private final static int TAB_COUNT = 4;
+    private final static int TAB_COUNT = 3;
     private TabLayout tabLayout;
 
 
@@ -51,6 +57,11 @@ public class MainActivity extends AppCompatActivity {
             mPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         }
     }
+    public void goToMapClick(View view){
+
+       Intent intent = new Intent(this, GardenMapActivity.class);
+        startActivity(intent);
+    }
 
 
     private class MainPagerAdapter extends FragmentPagerAdapter {
@@ -76,11 +87,14 @@ public class MainActivity extends AppCompatActivity {
 
                     break;
                 case 2:
+<<<<<<< HEAD
                     fragment = new GardenMapFragment();
 
                     break;
 
                 case 3:
+=======
+>>>>>>> bab024aac91d14e0308359db51e3f9a278c4d5c5
                     fragment = new SpaceViewFragment();
 
                     break;

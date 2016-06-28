@@ -3,7 +3,10 @@
     <string-array name="tabTitles">
         <item>Gardens</item>
          <item>Info</item>
+<<<<<<< HEAD
         <item>GPS Map</item>
+=======
+>>>>>>> bab024aac91d14e0308359db51e3f9a278c4d5c5
          <item>Space View</item>
     </string-array>
 

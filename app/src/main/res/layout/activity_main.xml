@@ -19,9 +19,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:tabGravity="fill"
+<<<<<<< HEAD
                 app:tabMode="scrollable"
                 style="@style/custom_tabs"
                 app:tabTextAppearance="@style/custom_tab_layout" >
+=======
+                style="@style/custom_tab_layout">
+>>>>>>> bab024aac91d14e0308359db51e3f9a278c4d5c5
 
                 <android.support.design.widget.TabItem
                     android:layout_width="wrap_content"

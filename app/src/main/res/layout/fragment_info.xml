@@ -36,7 +36,8 @@
                     android:layout_height="48dp"
                     android:layout_gravity="bottom"
                     android:background="@color/translucent"
-                   >
+                    android:padding="@dimen/list_item_rel_layout_padding">
+
 
                     <TextView
                         android:id="@+id/_365days_text"
