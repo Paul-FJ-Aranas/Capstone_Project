@@ -36,14 +36,11 @@
     <dimen name="list_item_rel_layout_padding">12dp</dimen>
     <dimen name="list_item_subtitle_text_size">12sp</dimen>
     <dimen name="hours_text_size">14sp</dimen>
-<<<<<<< HEAD
     <dimen name ="full_view_button_text_size">20sp</dimen>
     <dimen name="text_size_details_body">14sp</dimen>
     <dimen name ="text_size_created_by">14sp</dimen>
 <!--  GridView Columns                    -->
-=======
 
->>>>>>> bab024aac91d14e0308359db51e3f9a278c4d5c5
     <integer name="grid_columns">2</integer>
 
 
