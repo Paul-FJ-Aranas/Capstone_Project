@@ -6,14 +6,11 @@
     android:elevation="4dp"
     android:background="@color/theme_primary"
    >
-<!-- TODO ADD LOGO
+
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/app_name"
-        android:src="@drawable/logo" />
-        -->
-
-
+        android:src="@drawable/oregon_garden_logo" />
 
 </android.support.v7.widget.Toolbar>

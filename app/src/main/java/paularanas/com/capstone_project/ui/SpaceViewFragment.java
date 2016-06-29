@@ -12,6 +12,11 @@ import paularanas.com.capstone_project.R;
  * Created by Paul on 6/18/2016.
  */
 public class SpaceViewFragment extends android.support.v4.app.Fragment {
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
+    }
 
     @Nullable
     @Override

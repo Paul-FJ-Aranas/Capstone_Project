@@ -42,11 +42,12 @@
     <dimen name="text_margin_side">16dp</dimen>
     <dimen name="fab_pressed_elevation">12dp</dimen>
     <dimen name="list_image_height">250dp</dimen>
-    <dimen name="list_item_rel_layout_height">48dp</dimen>
-    <dimen name="list_item_rel_layout_padding">12dp</dimen>
-    <dimen name="list_item_subtitle_text_size">12sp</dimen>
+    <dimen name="grid_item_rel_layout_height">48dp</dimen>
+    <dimen name="grid_item_rel_layout_padding">12dp</dimen>
+    <dimen name="grid_item_subtitle_text_size">12sp</dimen>
+    <dimen name="text_size_details_body">14sp</dimen>
     <dimen name="hours_text_size">14sp</dimen>
-
+    <dimen name="info_image_text_rel_layout_padding">3dp</dimen>
 
 
 </resources>

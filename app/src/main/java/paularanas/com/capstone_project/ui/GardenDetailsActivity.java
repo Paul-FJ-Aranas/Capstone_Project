@@ -46,6 +46,7 @@ public class GardenDetailsActivity extends AppCompatActivity implements LoaderMa
         }
 
         setContentView(R.layout.activity_garden_details);
+
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         if(getSupportActionBar()!= null) {

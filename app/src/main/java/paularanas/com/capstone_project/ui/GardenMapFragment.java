@@ -1,19 +1,29 @@
 package paularanas.com.capstone_project.ui;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.Typeface;
+import android.location.GnssStatus;
+import android.location.GpsSatellite;
+import android.location.GpsStatus;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -33,7 +43,9 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.Iterator;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import paularanas.com.capstone_project.R;
 
@@ -48,9 +60,11 @@ public class GardenMapFragment extends Fragment implements OnMapReadyCallback, G
     private static final LatLngBounds MAPBOUNDARY = new LatLngBounds(SWBOUND, NEBOUND);
     Marker locMark;
 
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRetainInstance(true);
         MapsInitializer.initialize(getContext());
 
 
@@ -63,6 +77,8 @@ public class GardenMapFragment extends Fragment implements OnMapReadyCallback, G
 
         Button startButton = (Button) view.findViewById(R.id.start_button);
         startButton.setOnClickListener(this);
+        Typeface candaraFont = Typeface.createFromAsset(getContext().getAssets(), "fonts/Candara.ttf");
+        startButton.setTypeface(candaraFont);
 
 
         mMapView = (MapView) view.findViewById(R.id.map);
@@ -373,12 +389,16 @@ public class GardenMapFragment extends Fragment implements OnMapReadyCallback, G
         LatLng latLng = new LatLng(lat, lng);
 
         MarkerOptions locationMarkOptions = new MarkerOptions()
-                .position(latLng).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+                .position(latLng).title("You are here").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW));
 
         locMark = mGoogleMap.addMarker(locationMarkOptions);
         locMark.setPosition(latLng);
 
     }
+
+
+
 }
+
 
 

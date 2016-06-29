@@ -3,8 +3,12 @@ package paularanas.com.capstone_project.ui;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -13,9 +17,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.CursorLoader;
-import android.support.v4.content.Loader;
 
 import com.squareup.picasso.Picasso;
 
@@ -62,7 +63,6 @@ public class MainGridFragment extends android.support.v4.app.Fragment implements
         //on the RecyclerView
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         //  mAdapter = new GardenAdapter(getActivity());
-
         onAttachFragment(getParentFragment());
         // mRecyclerView.setAdapter(mAdapter);
 
@@ -147,9 +147,6 @@ class GardenAdapter extends RecyclerView.Adapter<GardenAdapter.GardenViewHolder>
     View view;
     MainGridFragment.GardenSelectedListener mGardenSelectedListener;
 
-    public GardenAdapter(Context mContext) {
-        this.mContext = mContext;
-    }
 
     public GardenAdapter(Context context, Cursor cursor, MainGridFragment.GardenSelectedListener listener) {
         mContext = context;
@@ -186,9 +183,10 @@ class GardenAdapter extends RecyclerView.Adapter<GardenAdapter.GardenViewHolder>
     public void onBindViewHolder(GardenViewHolder holder, int position) {
         mCursor.moveToPosition(position);
         mCurrentPosition = position;
-
+        Typeface candaraFont = Typeface.createFromAsset(mContext.getAssets(), "fonts/Candara.ttf");
         holder.titleView.setText(mCursor.getString(mCursor.getColumnIndex(GardenContract.GardenTable.TITLE)));
         holder.titleView.setTextSize(mContext.getResources().getDimension(R.dimen.grid_item_text_size));
+        holder.titleView.setTypeface(candaraFont);
 
 
         double density = mContext.getResources().getDisplayMetrics().density;
@@ -198,7 +196,7 @@ class GardenAdapter extends RecyclerView.Adapter<GardenAdapter.GardenViewHolder>
 
             Picasso.with(mContext)
                     .load(mCursor.getString(mCursor.getColumnIndex(GardenContract.GardenTable.THUMBNAIL_PATH))).placeholder(R.color.theme_primary).resize(1000, 1000)
-                    .into(holder.thumbnailView);
+                   .into(holder.thumbnailView);
 
 
         }

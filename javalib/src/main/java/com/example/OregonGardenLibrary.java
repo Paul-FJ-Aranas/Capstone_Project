@@ -43,55 +43,56 @@ public class OregonGardenLibrary {
 
 
         //garden photos
-        gardenThumbnailsArray[0] = "https://storage.googleapis.com/capstoneproject_images/amazing-water-garden488.png";
-        gardenThumbnailsArray[1] = "https://storage.googleapis.com/capstoneproject_images/axisfountain449.png";
-        gardenThumbnailsArray[2] = "https://storage.googleapis.com/capstoneproject_images/Axis-Garden488.png";
-        gardenThumbnailsArray[3] = "https://storage.googleapis.com/capstoneproject_images/ball-trial-garden488.png";
-        gardenThumbnailsArray[4] = "https://storage.googleapis.com/capstoneproject_images/bosque488.png";
-        gardenThumbnailsArray[5] = "https://storage.googleapis.com/capstoneproject_images/children-garden488.png";
-        gardenThumbnailsArray[6] = "https://storage.googleapis.com/capstoneproject_images/conifer-garden488.png";
-        gardenThumbnailsArray[7] = "https://storage.googleapis.com/capstoneproject_images/home-demo-garden488.png";
-        gardenThumbnailsArray[8] = "https://storage.googleapis.com/capstoneproject_images/honor-garden488.png";
-        gardenThumbnailsArray[9] = "https://storage.googleapis.com/capstoneproject_images/lewis-clark-garden488.png";
-        gardenThumbnailsArray[10] = "https://storage.googleapis.com/capstoneproject_images/medicinal-garden488.png";
-        gardenThumbnailsArray[11] = "https://storage.googleapis.com/capstoneproject_images/northwest-garden488.png";
-        gardenThumbnailsArray[12] = "https://storage.googleapis.com/capstoneproject_images/oak-grove488.png";
-        gardenThumbnailsArray[13] = "https://storage.googleapis.com/capstoneproject_images/pet-friendly-garden488.png";
-        gardenThumbnailsArray[14] = "https://storage.googleapis.com/capstoneproject_images/proven-winners-garden487.png";
-        gardenThumbnailsArray[15] = "https://storage.googleapis.com/capstoneproject_images/rediscovery-forest488.png";
-        gardenThumbnailsArray[16] = "https://storage.googleapis.com/capstoneproject_images/rose-garden.png";
-        gardenThumbnailsArray[17] = "https://storage.googleapis.com/capstoneproject_images/rose-petal-fountain488.png";
-        gardenThumbnailsArray[18] = "https://storage.googleapis.com/capstoneproject_images/sensory-garden488.png";
-        gardenThumbnailsArray[19] = "https://storage.googleapis.com/capstoneproject_images/silverton-market-garden488.png";
-        gardenThumbnailsArray[20] = "https://storage.googleapis.com/capstoneproject_images/train-garden488.png";
-        gardenThumbnailsArray[21] = "https://storage.googleapis.com/capstoneproject_images/tropical-house488.png";
-        gardenThumbnailsArray[22] = "https://storage.googleapis.com/capstoneproject_images/wetlands488.png";
+        gardenThumbnailsArray[0] = "https://storage.googleapis.com/capstoneproject_images/thumbnails/amazing_water_garden.jpg";
+        gardenThumbnailsArray[1] = "https://storage.googleapis.com/capstoneproject_images/thumbnails/axis_fountain.jpg";
+        gardenThumbnailsArray[2] = "https://storage.googleapis.com/capstoneproject_images/thumbnails/axis_garden.jpg";
+        gardenThumbnailsArray[3] = "https://storage.googleapis.com/capstoneproject_images/thumbnails/ball-garden.jpg";
+        gardenThumbnailsArray[4] = "https://storage.googleapis.com/capstoneproject_images/thumbnails/bosque.jpg";
+        gardenThumbnailsArray[5] = "https://storage.googleapis.com/capstoneproject_images/thumbnails/children-garden.jpg";
+        gardenThumbnailsArray[6] = "https://storage.googleapis.com/capstoneproject_images/thumbnails/conifer-garden.jpg";
+        gardenThumbnailsArray[7] = "https://storage.googleapis.com/capstoneproject_images/thumbnails/home_demo_garden.jpg";
+        gardenThumbnailsArray[8] = "https://storage.googleapis.com/capstoneproject_images/thumbnails/honor_garden.jpg";
+        gardenThumbnailsArray[9] = "https://storage.googleapis.com/capstoneproject_images/thumbnails/lewis_clark_garden.jpg";
+        gardenThumbnailsArray[10] = "https://storage.googleapis.com/capstoneproject_images/thumbnails/medicinal_garden.jpg";
+        gardenThumbnailsArray[11] = "https://storage.googleapis.com/capstoneproject_images/thumbnails/northwest_garden.jpg";
+        gardenThumbnailsArray[12] = "https://storage.googleapis.com/capstoneproject_images/thumbnails/oak_grove.jpg";
+        gardenThumbnailsArray[13] = "https://storage.googleapis.com/capstoneproject_images/thumbnails/pet_friendly.jpg";
+        gardenThumbnailsArray[14] = "https://storage.googleapis.com/capstoneproject_images/thumbnails/proven_winners.jpg";
+        gardenThumbnailsArray[15] = "https://storage.googleapis.com/capstoneproject_images/thumbnails/rediscovery_forest.jpg";
+        gardenThumbnailsArray[16] = "https://storage.googleapis.com/capstoneproject_images/thumbnails/rose_garden.jpg";
+        gardenThumbnailsArray[17] = "https://storage.googleapis.com/capstoneproject_images/thumbnails/rose_petal_fountain.jpg";
+        gardenThumbnailsArray[18] = "https://storage.googleapis.com/capstoneproject_images/thumbnails/sensory_garden.jpg";
+        gardenThumbnailsArray[19] = "https://storage.googleapis.com/capstoneproject_images/thumbnails/silverton_market_garden.jpg";
+        gardenThumbnailsArray[20] = "https://storage.googleapis.com/capstoneproject_images/thumbnails/train_garden.jpg";
+        gardenThumbnailsArray[21] = "https://storage.googleapis.com/capstoneproject_images/thumbnails/tropical_house.jpg";
+        gardenThumbnailsArray[22] = "https://storage.googleapis.com/capstoneproject_images/thumbnails/wetlands.jpg";
 
 
-        //garden thumbnails
-        gardenPhotosArray[0] = "https://storage.googleapis.com/capstoneproject_images/details/amazing-water-garden960.png";
-        gardenPhotosArray[1] = "https://storage.googleapis.com/capstoneproject_images/details/axis_fountain960.png";
-        gardenPhotosArray[2] = "https://storage.googleapis.com/capstoneproject_images/details/axis_garden960.png";
-        gardenPhotosArray[3] = "https://storage.googleapis.com/capstoneproject_images/details/ball_horticulture_garden960.png";
-        gardenPhotosArray[4] = "https://storage.googleapis.com/capstoneproject_images/details/bosque960.png";
-        gardenPhotosArray[5] = "https://storage.googleapis.com/capstoneproject_images/details/childrens_garden960.png";
-        gardenPhotosArray[6] = "https://storage.googleapis.com/capstoneproject_images/details/conifer_garden960.png";
-        gardenPhotosArray[7] = "https://storage.googleapis.com/capstoneproject_images/details/home_demo_garden960.png";
-        gardenPhotosArray[8] = "https://storage.googleapis.com/capstoneproject_images/details/honor_garden960.png";
-        gardenPhotosArray[9] = "https://storage.googleapis.com/capstoneproject_images/details/lewis_clark960.png";
-        gardenPhotosArray[10] = "https://storage.googleapis.com/capstoneproject_images/details/medicinal_garden960.png";
-        gardenPhotosArray[11] = "https://storage.googleapis.com/capstoneproject_images/details/northwest_garden960.png";
-        gardenPhotosArray[12] = "https://storage.googleapis.com/capstoneproject_images/details/oak_grove960.png";
-        gardenPhotosArray[13] = "https://storage.googleapis.com/capstoneproject_images/details/pet_friendly960.png";
-        gardenPhotosArray[14] = "https://storage.googleapis.com/capstoneproject_images/details/proven_winners_garden960.png";
-        gardenPhotosArray[15] = "https://storage.googleapis.com/capstoneproject_images/details/rediscovery_forest960.png";
-        gardenPhotosArray[16] = "https://storage.googleapis.com/capstoneproject_images/details/rose_garden960.png";
-        gardenPhotosArray[17] = "https://storage.googleapis.com/capstoneproject_images/details/rose_petal_fountain960.png";
-        gardenPhotosArray[18] = "https://storage.googleapis.com/capstoneproject_images/details/sensory_garden960.jpg";
-        gardenPhotosArray[19] = "https://storage.googleapis.com/capstoneproject_images/details/silverton_market_garden.png";
-        gardenPhotosArray[20] = "https://storage.googleapis.com/capstoneproject_images/details/train_garden960.png";
-        gardenPhotosArray[21] = "https://storage.googleapis.com/capstoneproject_images/details/tropical_house960.png";
-        gardenPhotosArray[22] = "https://storage.googleapis.com/capstoneproject_images/details/wetlands960.png";
+
+        gardenPhotosArray[0] = "https://storage.googleapis.com/capstoneproject_images/amazing_water_garden.jpg";
+        gardenPhotosArray[1] = "https://storage.googleapis.com/capstoneproject_images/axis_fountain.jpg";
+        gardenPhotosArray[2] = "https://storage.googleapis.com/capstoneproject_images/axis_garden.jpg";
+        gardenPhotosArray[3] = "https://storage.googleapis.com/capstoneproject_images/ball_horticulture.jpg";
+        gardenPhotosArray[4] = "https://storage.googleapis.com/capstoneproject_images/bosque.jpg";
+        gardenPhotosArray[5] = "https://storage.googleapis.com/capstoneproject_images/childrens_garden.jpg";
+        gardenPhotosArray[6] = "https://storage.googleapis.com/capstoneproject_images/conifer_garden.jpg";
+        gardenPhotosArray[7] = "https://storage.googleapis.com/capstoneproject_images/home_demo_garden.jpg";
+        gardenPhotosArray[8] = "https://storage.googleapis.com/capstoneproject_images/honor_garden.jpg";
+        gardenPhotosArray[9] = "https://storage.googleapis.com/capstoneproject_images/lewis_clark.jpg";
+        gardenPhotosArray[10] = "https://storage.googleapis.com/capstoneproject_images/medicinal_garden.jpg";
+        gardenPhotosArray[11] = "https://storage.googleapis.com/capstoneproject_images/northwest_garden.jpg";
+        gardenPhotosArray[12] = "https://storage.googleapis.com/capstoneproject_images/oak_grove.jpg";
+        gardenPhotosArray[13] = "https://storage.googleapis.com/capstoneproject_images/pet_friendly_garden.jpg";
+        gardenPhotosArray[14] = "https://storage.googleapis.com/capstoneproject_images/proven_winners_garden.jpg";
+        gardenPhotosArray[15] = "https://storage.googleapis.com/capstoneproject_images/rediscovery_forest.jpg";
+        gardenPhotosArray[16] = "https://storage.googleapis.com/capstoneproject_images/rose_garden.jpg";
+        gardenPhotosArray[17] = "https://storage.googleapis.com/capstoneproject_images/rose_petal.jpg";
+        gardenPhotosArray[18] = "https://storage.googleapis.com/capstoneproject_images/sensory_garden.jpg";
+        gardenPhotosArray[19] = "https://storage.googleapis.com/capstoneproject_images/silverton_market_garden.jpg";
+        gardenPhotosArray[20] = "https://storage.googleapis.com/capstoneproject_images/train_garden.jpg";
+        gardenPhotosArray[21] = "https://storage.googleapis.com/capstoneproject_images/tropical_house.jpg";
+        gardenPhotosArray[22] = "https://storage.googleapis.com/capstoneproject_images/wetlands.jpg";
+
 
         //garden creators
         gardenCreatorsArray[0] = "Designer: Carol Mayer-Reed";

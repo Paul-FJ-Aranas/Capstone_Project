@@ -17,6 +17,12 @@ import paularanas.com.capstone_project.R;
  */
 public class InfoFragment extends android.support.v4.app.Fragment {
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

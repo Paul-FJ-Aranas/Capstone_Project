@@ -1,6 +1,7 @@
 package paularanas.com.capstone_project.ui;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -11,11 +12,13 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
 import paularanas.com.capstone_project.R;
 
 public class MainActivity extends AppCompatActivity {
-    private final static int TAB_COUNT = 3;
+    private final static int TAB_COUNT = 4;
     private TabLayout tabLayout;
 
 
@@ -48,13 +51,24 @@ public class MainActivity extends AppCompatActivity {
             mPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         }
     }
-    public void goToMapClick(View view){
 
-       Intent intent = new Intent(this, GardenMapActivity.class);
-        startActivity(intent);
+    private void changeTabsFont() {
+
+        Typeface candaraFont = Typeface.createFromAsset(getAssets(), "fonts/Candara.ttf");
+
+        ViewGroup viewGroup = (ViewGroup) tabLayout.getChildAt(0);
+        int tabsCount = viewGroup.getChildCount();
+        for (int j = 0; j < tabsCount; j++) {
+            ViewGroup tab = (ViewGroup) viewGroup.getChildAt(j);
+            int tabCount = tab.getChildCount();
+            for (int i = 0; i < tabCount; i++) {
+                View tabChild = tab.getChildAt(i);
+                if (tabChild instanceof TextView) {
+                    ((TextView) tabChild).setTypeface(candaraFont);
+                }
+            }
+        }
     }
-
-
     private class MainPagerAdapter extends FragmentPagerAdapter {
         public MainPagerAdapter(FragmentManager fm) {
             super(fm);

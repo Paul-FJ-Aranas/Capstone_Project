@@ -22,24 +22,25 @@
     <dimen name="detail_title_text_size">32sp</dimen>
     <dimen name="detail_body_text_size">22sp</dimen>
     <item name="detail_body_line_spacing_multiplier" format="float" type="fraction">1.25</item>
-   <dimen name= "height_grid_image">275dp</dimen>
+    <dimen name="height_grid_image">275dp</dimen>
     <dimen name="fab_elevation">6dp</dimen>
     <dimen name="fab_press_translation_z">12dp</dimen>
     <dimen name="fab_margin">24dp</dimen>
     <dimen name="grid_item_text_size">12sp</dimen>
-    <dimen name="detail_item_text_size">14sp</dimen>
+    <dimen name="info_body_text_size">14dp</dimen>
     <dimen name="detail_garden_title_text_size">24sp</dimen>
     <dimen name="text_margin_side">16dp</dimen>
     <dimen name="fab_pressed_elevation">12dp</dimen>
     <dimen name="list_image_height">250dp</dimen>
-    <dimen name="list_item_rel_layout_height">48dp</dimen>
-    <dimen name="list_item_rel_layout_padding">12dp</dimen>
-    <dimen name="list_item_subtitle_text_size">12sp</dimen>
-    <dimen name="hours_text_size">14sp</dimen>
-    <dimen name ="full_view_button_text_size">20sp</dimen>
-    <dimen name="text_size_details_body">14sp</dimen>
-    <dimen name ="text_size_created_by">14sp</dimen>
-<!--  GridView Columns                    -->
+    <dimen name="grid_item_rel_layout_height">48dp</dimen>
+    <dimen name="grid_item_rel_layout_padding">12dp</dimen>
+    <dimen name="grid_item_subtitle_text_size">12sp</dimen>
+    <dimen name="hours_text_size">12sp</dimen>
+    <dimen name="full_view_button_text_size">20sp</dimen>
+    <dimen name="text_size_details_body">12sp</dimen>
+    <dimen name="text_size_created_by">12sp</dimen>
+    <dimen name="info_image_text_rel_layout_padding">3dp</dimen>
+    <!--  GridView Columns                    -->
 
     <integer name="grid_columns">2</integer>
 

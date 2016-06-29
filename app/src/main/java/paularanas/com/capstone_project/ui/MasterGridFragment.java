@@ -24,7 +24,7 @@ public class MasterGridFragment extends Fragment implements MainGridFragment.Gar
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setRetainInstance(true);
     }
 
     @Nullable

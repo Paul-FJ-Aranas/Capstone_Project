@@ -2,6 +2,7 @@ package paularanas.com.capstone_project.ui;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
@@ -79,8 +80,7 @@ public class GardenDetailsFragment extends Fragment implements
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mRootView = inflater.inflate(R.layout.fragment_garden_details, container, false);
-        mPhotoView = (ImageView) mRootView.findViewById(R.id.garden_image);
-
+        bindViews();
         mRootView.findViewById(R.id.share_fab).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -91,7 +91,6 @@ public class GardenDetailsFragment extends Fragment implements
             }
         });
 
-        bindViews();
 
         return mRootView;
     }
@@ -101,31 +100,28 @@ public class GardenDetailsFragment extends Fragment implements
             return;
         }
 
+
+        Typeface corbelFont = Typeface.createFromAsset(getContext().getAssets(), "fonts/Corbel.ttf");
+        Typeface candaraFont = Typeface.createFromAsset(getContext().getAssets(), "fonts/Candara.ttf");
+
         TextView gardenNameView = (TextView) mRootView.findViewById(R.id.garden_name);
         TextView createdByView = (TextView) mRootView.findViewById(R.id.garden_created_by);
         TextView gardenInfoBodyView = (TextView) mRootView.findViewById(R.id.garden_info_body);
         ImageView gardenImage = (ImageView) mRootView.findViewById(R.id.garden_image);
 
+        gardenNameView.setTypeface(candaraFont);
+        createdByView.setTypeface(candaraFont);
+        gardenInfoBodyView.setTypeface(corbelFont);
         if (mCursor != null) {
-            mRootView.setAlpha(0);
-            mRootView.setVisibility(View.VISIBLE);
-            mRootView.animate().alpha(1);
 
             gardenNameView.setText(mCursor.getString(GardenUtility.GardenQuery.TITLE));
             createdByView.setText(mCursor.getString(GardenUtility.GardenQuery.CREATOR));
             gardenInfoBodyView.setText(mCursor.getString(GardenUtility.GardenQuery.BODY));
             Picasso.with(getActivity()).load(mCursor.getString(GardenUtility.GardenQuery.PHOTO)).placeholder(R.color.theme_primary).into(gardenImage);
 
-        } else {
-            mRootView.setVisibility(View.GONE);
-            gardenNameView.setText("N/A");
-            createdByView.setText("N/A");
-            gardenInfoBodyView.setText("N/A");
         }
 
     }
-
-
 
 
     @Override
