@@ -1,17 +1,24 @@
 package paularanas.com.capstone_project.ui;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Rect;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.app.ShareCompat;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -32,7 +39,7 @@ public class GardenDetailsFragment extends Fragment implements
     private long mItemId;
     private View mRootView;
 
-    private ImageView mPhotoView;
+    private ImageView mGardenImage;
 
     private int mStartPosition;
 
@@ -56,7 +63,6 @@ public class GardenDetailsFragment extends Fragment implements
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         if (getArguments().containsKey(ARG_ITEM_ID)) {
             mItemId = getArguments().getLong(ARG_ITEM_ID);
             mStartPosition = getArguments().getInt("StartPosition");
@@ -79,8 +85,15 @@ public class GardenDetailsFragment extends Fragment implements
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+
         mRootView = inflater.inflate(R.layout.fragment_garden_details, container, false);
-        bindViews();
+        mGardenImage = (ImageView) mRootView.findViewById(R.id.garden_image);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            mGardenImage.setTransitionName(toString().valueOf(mItemId) + mStartPosition);
+        }
+
+
         mRootView.findViewById(R.id.share_fab).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -91,7 +104,7 @@ public class GardenDetailsFragment extends Fragment implements
             }
         });
 
-
+        bindViews();
         return mRootView;
     }
 
@@ -107,22 +120,52 @@ public class GardenDetailsFragment extends Fragment implements
         TextView gardenNameView = (TextView) mRootView.findViewById(R.id.garden_name);
         TextView createdByView = (TextView) mRootView.findViewById(R.id.garden_created_by);
         TextView gardenInfoBodyView = (TextView) mRootView.findViewById(R.id.garden_info_body);
-        ImageView gardenImage = (ImageView) mRootView.findViewById(R.id.garden_image);
 
         gardenNameView.setTypeface(candaraFont);
         createdByView.setTypeface(candaraFont);
         gardenInfoBodyView.setTypeface(corbelFont);
         if (mCursor != null) {
-
             gardenNameView.setText(mCursor.getString(GardenUtility.GardenQuery.TITLE));
             createdByView.setText(mCursor.getString(GardenUtility.GardenQuery.CREATOR));
             gardenInfoBodyView.setText(mCursor.getString(GardenUtility.GardenQuery.BODY));
-            Picasso.with(getActivity()).load(mCursor.getString(GardenUtility.GardenQuery.PHOTO)).placeholder(R.color.theme_primary).into(gardenImage);
+            Picasso.with(getActivity()).load(mCursor.getString(GardenUtility.GardenQuery.PHOTO)).placeholder(R.color.theme_primary).into(mGardenImage);
 
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                scheduleStartPostponedTransition(mGardenImage);
+            }
         }
 
     }
 
+    private void scheduleStartPostponedTransition(final View sharedElement) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            sharedElement.getViewTreeObserver().addOnPreDrawListener(
+                    new ViewTreeObserver.OnPreDrawListener() {
+                        @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+                        @Override
+                        public boolean onPreDraw() {
+                            sharedElement.getViewTreeObserver().removeOnPreDrawListener(this);
+                            getActivity().startPostponedEnterTransition();
+                            return true;
+                        }
+                    });
+        }
+    }
+
+    @Nullable
+    ImageView getImageView() {
+        if (isViewInBounds(getActivity().getWindow().getDecorView(), mGardenImage)) {
+            return mGardenImage;
+        }
+        return null;
+    }
+
+    private static boolean isViewInBounds(@NonNull View container, @NonNull View view) {
+        Rect containerBounds = new Rect();
+        container.getHitRect(containerBounds);
+        return view.getLocalVisibleRect(containerBounds);
+    }
 
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
