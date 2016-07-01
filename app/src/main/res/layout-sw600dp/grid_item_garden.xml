@@ -28,8 +28,7 @@
             android:gravity="center"
             android:maxLines="1"
             android:textColor="#FFFFFF"
-            android:textSize="@dimen/tablet_text_size"
-             />
-</RelativeLayout>
+            android:textSize="@dimen/tablet_text_size" />
+    </RelativeLayout>
 
 </FrameLayout>

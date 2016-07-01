@@ -45,6 +45,7 @@ public class MainGridFragment extends android.support.v4.app.Fragment implements
     private View view;
     public static RecyclerView theRecyclerView;
     GridLayoutManager glm;
+    private Bundle state;
 
     public interface GardenSelectedListener {
 
@@ -60,7 +61,7 @@ public class MainGridFragment extends android.support.v4.app.Fragment implements
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        state = savedInstanceState;
         getLoaderManager().initLoader(0, null, this);
 
         if (savedInstanceState == null) {
@@ -76,19 +77,21 @@ public class MainGridFragment extends android.support.v4.app.Fragment implements
         view = inflater.inflate(R.layout.fragment_main, container, false);
         //connect the RecyclerView and instantiate the GardenAdapter, set the LayoutManager
         //on the RecyclerView
+
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
+
         int columnCount = getResources().getInteger(R.integer.grid_columns);
         glm = new GridLayoutManager(getActivity(), columnCount, GridLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(glm);
         mRecyclerView.setHasFixedSize(true);
+
         theRecyclerView = mRecyclerView;
-        if (savedInstanceState != null){
-            currentPosition = savedInstanceState.getInt("currentScrollPos",0);
+        if (savedInstanceState != null) {
+            currentPosition = savedInstanceState.getInt("currentScrollPos", 0);
             mRecyclerView.scrollToPosition(currentPosition);
         }
 
         onAttachFragment(getParentFragment());
-
 
 
         return view;
@@ -153,13 +156,18 @@ public class MainGridFragment extends android.support.v4.app.Fragment implements
         mRecyclerView.setAdapter(mAdapter);
 
         if (MasterGridFragment.sTwoPane) {
-            mRecyclerView.post(new Runnable() {
 
-                @Override
-                public void run() {
-                    mRecyclerView.findViewHolderForAdapterPosition(0).itemView.performClick();
-                }
-            });
+            if (state == null) {
+                mRecyclerView.post(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        if (mRecyclerView != null) {
+                            mRecyclerView.findViewHolderForAdapterPosition(0).itemView.performClick();
+                        }
+                    }
+                });
+            }
         }
 
     }
@@ -221,12 +229,14 @@ public class MainGridFragment extends android.support.v4.app.Fragment implements
         }
 
         @Override
-        public void onBindViewHolder(MainGridFragment.GardenViewHolder holder, int position) {
+        public void onBindViewHolder(final MainGridFragment.GardenViewHolder holder, final int position) {
 
 
             mCursor.moveToPosition(position);
             mCurrentPosition = position;
             Typeface candaraFont = Typeface.createFromAsset(mContext.getAssets(), "fonts/Candara.ttf");
+
+
             holder.titleView.setText(mCursor.getString(mCursor.getColumnIndex(GardenContract.GardenTable.TITLE)));
             holder.titleView.setTextSize(mContext.getResources().getDimension(R.dimen.grid_item_text_size));
             holder.titleView.setTypeface(candaraFont);
@@ -249,12 +259,14 @@ public class MainGridFragment extends android.support.v4.app.Fragment implements
                         .load(mCursor.getString(mCursor.getColumnIndex(GardenContract.GardenTable.THUMBNAIL_PATH))).placeholder(R.color.theme_primary).resize(1000, 1000)
                         .into(holder.thumbnailView);
 
+
             } else if (density >= 2.0) {
                 //xhdpi
 
                 Picasso.with(mContext)
                         .load(mCursor.getString(mCursor.getColumnIndex(GardenContract.GardenTable.THUMBNAIL_PATH))).placeholder(R.color.theme_primary).resize(500, 700)
                         .into(holder.thumbnailView);
+
 
             } else if (density >= 1.5 && density < 2.0) {
                 //hdpi
@@ -269,7 +281,6 @@ public class MainGridFragment extends android.support.v4.app.Fragment implements
                 Picasso.with(mContext)
                         .load(mCursor.getString(mCursor.getColumnIndex(GardenContract.GardenTable.THUMBNAIL_PATH))).placeholder(R.color.theme_primary)
                         .into(holder.thumbnailView);
-
 
             }
 

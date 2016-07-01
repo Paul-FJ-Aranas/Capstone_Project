@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<android.support.v7.widget.RecyclerView android:id="@+id/recycler_view"
+<android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/recycler_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/theme_primary"
     android:clipToPadding="false"
-    android:paddingBottom="@dimen/recycler_padding_bottom"
-android:background="@color/theme_primary"
-    android:paddingTop="@dimen/recycler_padding_top"
     android:numColumns="auto_fit"
-    xmlns:android="http://schemas.android.com/apk/res/android" />
+    android:paddingBottom="@dimen/recycler_padding_bottom"
+    android:paddingTop="@dimen/recycler_padding_top" />
 

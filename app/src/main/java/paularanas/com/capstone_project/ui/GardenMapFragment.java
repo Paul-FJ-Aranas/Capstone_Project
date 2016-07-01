@@ -148,140 +148,267 @@ public class GardenMapFragment extends Fragment implements OnMapReadyCallback, G
 
         LatLng mainEntrance = new LatLng(44.9948,
                 -122.78903);
-        final Marker mainEntranceMarker = googleMap.addMarker(new MarkerOptions()
+         googleMap.addMarker(new MarkerOptions()
                 .position(mainEntrance).flat(true)
                 .title("Main Entrance"));
 
 
         LatLng naturalResourceEducationCenter = new LatLng(44.99511,
                 -122.7888);
-        final Marker naturalResourceEdCenterMarker = googleMap.addMarker(new MarkerOptions()
+         googleMap.addMarker(new MarkerOptions()
                 .position(naturalResourceEducationCenter).flat(true)
                 .title("Natural Resource Education Center"));
 
 
         LatLng conifer = new LatLng(44.99377,
                 -122.7895);
-        final Marker coniferMarker = googleMap.addMarker(new MarkerOptions()
+       googleMap.addMarker(new MarkerOptions()
                 .position(conifer).flat(true)
                 .title("Conifer Garden"));
 
 
         LatLng aestheticPruningDemonstration = new LatLng(44.99359,
                 -122.78984);
-        final Marker aestheticPruningMarker = googleMap.addMarker(new MarkerOptions()
+         googleMap.addMarker(new MarkerOptions()
                 .position(aestheticPruningDemonstration).flat(true)
                 .title("Aesthetic Pruning Demonstration Garden"));
 
-        LatLng axis = new LatLng(44.99298,
+        LatLng axisGarden = new LatLng(44.99298,
                 -122.78983);
-        final Marker axisMarker = googleMap.addMarker(new MarkerOptions()
-                .position(axis).flat(true)
+        googleMap.addMarker(new MarkerOptions()
+                .position(axisGarden).flat(true)
                 .title("Axis Garden"));
 
 
-        LatLng silvertonMarket = new LatLng(44.99302,
-                -122.7902);
-        final Marker silvertonMarketMarker = googleMap.addMarker(new MarkerOptions()
+        LatLng silvertonMarket = new LatLng(44.99277,
+                -122.79021);
+        googleMap.addMarker(new MarkerOptions()
                 .position(silvertonMarket).flat(true)
                 .title("Silverton Market Garden"));
 
 
         LatLng craftedVegetableDemonstration = new LatLng(44.99287,
                 -122.79048);
-        final Marker craftedVegetableMarker = googleMap.addMarker(new MarkerOptions()
+       googleMap.addMarker(new MarkerOptions()
                 .position(craftedVegetableDemonstration).flat(true)
                 .title("Crafted Vegetable Demonstration Garden"));
 
 
         LatLng foundersSquare = new LatLng(44.99267,
                 -122.79073);
-        final Marker foundersSquareMarker = googleMap.addMarker(new MarkerOptions()
+        googleMap.addMarker(new MarkerOptions()
                 .position(foundersSquare).flat(true)
                 .title("Founder's Square"));
 
         LatLng rediscoveryForest = new LatLng(44.99221,
                 -122.79077);
-        final Marker rediscoveryForestMarker = googleMap.addMarker(new MarkerOptions()
+        googleMap.addMarker(new MarkerOptions()
                 .position(rediscoveryForest).flat(true)
                 .title("Rediscovery Forest"));
 
 
         LatLng lewisAndClark = new LatLng(44.99238,
                 -122.79177);
-        final Marker lewisAndClarkMarker = googleMap.addMarker(new MarkerOptions()
+         googleMap.addMarker(new MarkerOptions()
                 .position(lewisAndClark).flat(true)
                 .title("Lewis and Clark Garden"));
 
 
         LatLng oakGrove = new LatLng(44.99303,
                 -122.792);
-        final Marker oakGroveMarker = googleMap.addMarker(new MarkerOptions()
+        googleMap.addMarker(new MarkerOptions()
                 .position(oakGrove).flat(true)
                 .title("Oak Grove"));
 
 
         LatLng northwestGarden = new LatLng(44.99333,
                 -122.79191);
-        final Marker northwestGardenMarker = googleMap.addMarker(new MarkerOptions()
+       googleMap.addMarker(new MarkerOptions()
                 .position(northwestGarden).flat(true)
                 .title("Northwest Garden"));
 
 
         LatLng childrensGarden = new LatLng(44.99317,
                 -122.79076);
-        final Marker childrensGardenMarker = googleMap.addMarker(new MarkerOptions()
+        googleMap.addMarker(new MarkerOptions()
                 .position(childrensGarden).flat(true)
                 .title("Children's Garden"));
 
         LatLng trainGarden = new LatLng(44.99339,
                 -122.79095);
-        final Marker trainGardenMarker = googleMap.addMarker(new MarkerOptions()
+      googleMap.addMarker(new MarkerOptions()
                 .position(trainGarden).flat(true)
                 .title("Train Garden"));
 
         LatLng bosque = new LatLng(44.99401,
                 -122.79067);
-        final Marker bosqueMarker = googleMap.addMarker(new MarkerOptions()
+         googleMap.addMarker(new MarkerOptions()
                 .position(bosque).flat(true)
                 .title("Bosque"));
 
 
         LatLng homeCompostingCenter = new LatLng(44.99549,
                 -122.78965);
-        final Marker homeCompostingMarker = googleMap.addMarker(new MarkerOptions()
+     googleMap.addMarker(new MarkerOptions()
                 .position(homeCompostingCenter).flat(true)
                 .title("Home Composting Center"));
 
 
-        LatLng provenWinners = new LatLng(44.99557,
-                -122.78953);
-        final Marker provenWinnersMarker = googleMap.addMarker(new MarkerOptions()
+        LatLng provenWinners = new LatLng(44.99563,
+                -122.78948);
+        googleMap.addMarker(new MarkerOptions()
                 .position(provenWinners).flat(true)
                 .title("Proven Winners Trial Garden"));
 
 
         LatLng edible = new LatLng(44.99528,
                 -122.78944);
-        final Marker edibleMarker = googleMap.addMarker(new MarkerOptions()
+      googleMap.addMarker(new MarkerOptions()
                 .position(edible).flat(true)
                 .title("Edible Garden"));
 
         LatLng amazingWater = new LatLng(44.99424,
                 -122.78979);
-        final Marker amazingWaterMarker = googleMap.addMarker(new MarkerOptions()
+       googleMap.addMarker(new MarkerOptions()
                 .position(amazingWater).flat(true)
                 .title("Amazing Water Garden"));
 
-//recheck exit coordinates
-       /* LatLng exit = new LatLng(44.99493,
-                -122.789918);
+
+        LatLng exit = new LatLng(44.99497,
+                -122.78906);
         googleMap.addMarker(new MarkerOptions()
-                .position(exit)
-                .title("Exit")
-                .snippet("Garden fun for the whole family"));
-        googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-*/
+                .position(exit).flat(true)
+                .title("Exit"));
+//
+        LatLng handicappedParking = new LatLng(44.99487, -122.78804);
+        googleMap.addMarker(new MarkerOptions()
+                .position(handicappedParking).flat(true)
+                .title("Handicapped Parking"));
+
+        LatLng parking = new LatLng(44.99507, -122.78808);
+        googleMap.addMarker(new MarkerOptions()
+                .position(parking).flat(true)
+                .title("Parking Lot"));
+
+        LatLng resortEntrance = new LatLng(44.99176,
+                -122.7881);
+        googleMap.addMarker(new MarkerOptions()
+                .position(resortEntrance).flat(true)
+                .title("Resort Entrance / Lobby"));
+
+        LatLng resortParkingLot = new LatLng(44.99171, -122.78804);
+        googleMap.addMarker(new MarkerOptions()
+                .position(resortParkingLot).flat(true)
+                .title("Resort Parking Lot"));
+
+        LatLng gordonHouse = new LatLng(44.99631, -122.79168);
+        googleMap.addMarker(new MarkerOptions()
+                .position(gordonHouse).flat(true)
+                .title("Gordon House"));
+
+
+        LatLng gordonHouseParking = new LatLng(44.99575, -122.79262);
+        googleMap.addMarker(new MarkerOptions()
+                .position(gordonHouseParking).flat(true)
+                .title("Gordon House Parking"));
+
+        LatLng gordonHouseAndEventParking = new LatLng(44.99555, -122.79109);
+        googleMap.addMarker(new MarkerOptions()
+                .position(gordonHouseAndEventParking).flat(true)
+                .title("Event and Gordon House Parking"));
+
+        LatLng  wetlands = new LatLng(44.99378, -122.78926 );
+        googleMap.addMarker(new MarkerOptions()
+                .position(wetlands).flat(true)
+                .title("Wetlands"));
+
+
+        LatLng  rosePetalFountain= new LatLng(44.99439, -122.79099);
+        googleMap.addMarker(new MarkerOptions()
+                .position(exit).flat(true)
+                .title("Rose Petal Fountain"));
+
+
+        LatLng  honorGarden   = new LatLng(44.99453, -122.7905);
+        googleMap.addMarker(new MarkerOptions()
+                .position(honorGarden).flat(true)
+                .title("Honor Garden"));
+
+        LatLng  homeDemoGardens = new LatLng(44.99506, -122.78954);
+        googleMap.addMarker(new MarkerOptions()
+                .position(homeDemoGardens).flat(true)
+                .title("Home Demo Gardens"));
+        LatLng fuchsiaDisplayGarden = new LatLng(44.99494, -122.78959);
+        googleMap.addMarker(new MarkerOptions()
+                .position(fuchsiaDisplayGarden).flat(true)
+                .title("Fuchsia Display Garden"));
+
+        LatLng medicinalGarden  = new LatLng(44.99558, -122.78925);
+        googleMap.addMarker(new MarkerOptions()
+                .position(medicinalGarden).flat(true)
+                .title("Medicinal Garden"));
+
+        LatLng schmidtPavilion = new LatLng(44.99516, -122.79047);
+        googleMap.addMarker(new MarkerOptions()
+                .position(schmidtPavilion).flat(true)
+                .title("Frank Schmidt Jr. Pavilion"));
+
+        LatLng  tropicalHouse = new LatLng(44.99532, -122.79083);
+        googleMap.addMarker(new MarkerOptions()
+                .position(trainGarden).flat(true)
+                .title("Tropical House"));
+        LatLng roseGarden = new LatLng(44.99482, -122.79166);
+        googleMap.addMarker(new MarkerOptions()
+                .position(roseGarden).flat(true)
+                .title("Rose Garden"));
+
+        LatLng petFriendlyGarden = new LatLng(44.99484, -122.79164);
+        googleMap.addMarker(new MarkerOptions()
+                .position(petFriendlyGarden).flat(true)
+                .title("Pet Friendly Garden"));
+
+        LatLng fireSafetyHouse = new LatLng(44.99442, -122.79133);
+        googleMap.addMarker(new MarkerOptions()
+                .position(fireSafetyHouse).flat(true)
+                .title("Fire Safety House"));
+
+        LatLng droughtTolerantGarden = new LatLng(44.99429, -122.79116);
+
+        googleMap.addMarker(new MarkerOptions()
+                .position(droughtTolerantGarden).flat(true)
+                .title("Drought Tolerant Garden"));
+
+        LatLng axisFountain  = new LatLng(44.99320, -122.78981);
+        googleMap.addMarker(new MarkerOptions()
+                .position(axisFountain).flat(true)
+                .title("Axis Fountain"));
+
+        LatLng sensoryGarden = new LatLng(44.99474, -122.79025);
+        googleMap.addMarker(new MarkerOptions()
+                .position(sensoryGarden).flat(true)
+                .title("Sensory Garden"));
+
+
+        LatLng ballHorticultureTrialGarden = new LatLng(44.99297, -122.79813);
+        googleMap.addMarker(new MarkerOptions()
+                .position(ballHorticultureTrialGarden).flat(true)
+                .title("Ball Horticulture Trial Garden"));
+
+        LatLng ecoRoof = new LatLng(44.99468, -122.78985);
+        googleMap.addMarker(new MarkerOptions()
+                .position(ecoRoof).flat(true)
+                .title("Eco-Roof"));
+
+        LatLng teufelAmphitheater  = new LatLng(44.99320, -122.78981);
+        googleMap.addMarker(new MarkerOptions()
+                .position(teufelAmphitheater).flat(true)
+                .title("Teufel Amphitheater"));
+
+
+
+
+
+
 
 
     }

@@ -32,8 +32,7 @@ public class MasterGridFragment extends Fragment implements MainGridFragment.Gar
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-       if ( savedInstanceState == null){
+        if (savedInstanceState == null) {
             try {
                 MainGridFragment gridFragment = new MainGridFragment();
                 FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
