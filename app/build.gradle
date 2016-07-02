@@ -15,10 +15,10 @@ android {
     }
         signingConfigs {
             release {
-                storeFile file(System.getProperty("user.home")+"/KEY_STORE/signing.jks")
-                storePassword '[Redacted]'
-                keyAlias '[Redacted'
-                keyPassword '[Redacted]'
+                storeFile file("keystore/release.keystore")
+                storePassword ''
+                keyAlias ''
+                keyPassword ''
             }
         }
 
@@ -56,18 +56,23 @@ android {
 gradle.taskGraph.whenReady { taskGraph ->
     if (taskGraph.hasTask(':app:assembleRelease')) {
         def storePass = ''
+        def aliasPass = ''
         def keyPass = ''
+
         if (System.console() == null) {
             new SwingBuilder().edt {
                 dialog(modal: true, title: 'Enter password', alwaysOnTop: true, resizable: false, locationRelativeTo: null, pack: true, show: true) {
                     vbox {
                         label(text: "Please enter store passphrase:")
                         def input1 = passwordField()
-                        label(text: "Please enter key passphrase:")
+                        label(text: "Please enter key Alias:")
                         def input2 = passwordField()
+                        label(text: "Please enter key passphrase:")
+                        def input3 = passwordField()
                         button(defaultButton: true, text: 'OK', actionPerformed: {
                             storePass = input1.password;
-                            keyPass = input2.password;
+                            aliasPass = input2.password;
+                            keyPass = input3.password;
                             dispose();
                         })
                     }
@@ -75,17 +80,20 @@ gradle.taskGraph.whenReady { taskGraph ->
             }
         } else {
             storePass = System.console().readPassword("\nPlease enter store passphrase: ")
+            aliasPass = System.console().readPassword("\nPlease enter alias: ")
             keyPass = System.console().readPassword("\nPlease enter key passphrase: ")
         }
 
-        if (storePass.size() <= 0 || keyPass.size() <= 0) {
+        if (storePass.size() <= 0 || keyPass.size() <= 0 || aliasPass.size() <= 0) {
             throw new InvalidUserDataException("You must enter the passwords to proceed.")
         }
 
         storePass = new String(storePass)
+        aliasPass = new String (aliasPass)
         keyPass = new String(keyPass)
 
         android.signingConfigs.release.storePassword = storePass
+        android.signingConfigs.release.keyAlias = aliasPass
         android.signingConfigs.release.keyPassword = keyPass
     }
 }
