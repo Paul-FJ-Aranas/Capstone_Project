@@ -4,12 +4,15 @@
     <string name="title_activity_gpsmap">GPSMapActivity</string>
     <string name="title_activity_garden_map">GardenMap</string>
 
-    <string name="about_body_text">Welcome to The Oregon Garden! Our mission is to welcome and inspire all visitors with an appreciation for the extraordinary ecology of the Pacific Northwest, and to provide a meaningful educational experience for gardeners of all skill levels and ages.\n\nWe are an 80-acre botanical garden, featuring more than 20 specialty gardens showcasing the diverse botanical beauty that can be found in the Willamette Valley and throughout the Pacific Northwest. We have educational specialty gardens for everyone, from the Sensory Garden and Rose Garden to the Children’s Garden and Pet-Friendly Garden, or the Silverton Market Garden and Amazing Water Garden. We also offer a complimentary narrated tram tour April – October, and we are pet-friendly.
+    <string name="about_body_text">Welcome to The Oregon Garden!\n\n Our mission is to welcome and inspire all visitors with an appreciation for the extraordinary ecology of the Pacific Northwest, and to provide a meaningful educational experience for gardeners of all skill levels and ages.\n\nWe are an 80-acre botanical garden, featuring more than 20 specialty gardens showcasing the diverse botanical beauty that can be found in the Willamette Valley and throughout the Pacific Northwest. We have educational specialty gardens for everyone, from the Sensory Garden and Rose Garden to the Children’s Garden and Pet-Friendly Garden, or the Silverton Market Garden and Amazing Water Garden. We also offer a complimentary narrated tram tour April – October, and we are pet-friendly.
 
  </string>
-    <string name="summer_hours">May-September\n9:00 AM-6:00</string>
+    <string name="summer_hours">\n<b>Hours</b>\nMay-September\n9:00 AM-6:00</string>
      <string name="restofyear_hours">October-April\n10:00 AM-4:00</string>
     <string name="about_365days_text">Open 365 days a year and pet-friendly</string>
-    <string name="phone_numbers">phone (503) 874&#8211;8100\ntoll&#8211;free (877) 674-2733</string>
+    <string name="phone_numbers">\n<b>Contact us</b>\nphone (503) 874–8100\ntoll–free (877) 674–2733\ninfo@oregongarden.org\n\n\ 879 W. Main Street\nSilverton, Oregon 97381</string>
+    <string name="garden_view">GARDEN VIEW</string>
+    <string name="admission_prices"><b>Admission</b><![CDATA[\nAdults $14 \nSeniors (60+) $12 \nStudents (12–17 $11\nChildren (5–11) $8\nChildren(4 & under) Free\n Garden Members Free \nMilitary with ID $11\nWeekdays Save $2]]></string>
+    <string name="admission_contact_information">admission and contact information</string>
 
 </resources>

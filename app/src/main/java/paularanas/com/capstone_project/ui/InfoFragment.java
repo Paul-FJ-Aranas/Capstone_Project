@@ -3,6 +3,7 @@ package paularanas.com.capstone_project.ui;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,7 +32,6 @@ public class InfoFragment extends android.support.v4.app.Fragment {
         Typeface corbelFont = Typeface.createFromAsset(getContext().getAssets(), "fonts/Corbel.ttf");
         Typeface candaraFont = Typeface.createFromAsset(getContext().getAssets(), "fonts/Candara.ttf");
 
-
         ImageView aboutGardenImage = (ImageView) view.findViewById(R.id.about_garden_image);
         aboutGardenImage.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.about_image));
 
@@ -40,27 +40,21 @@ public class InfoFragment extends android.support.v4.app.Fragment {
 
         aboutText.setTypeface(corbelFont);
 
-
-        TextView summerHoursTextView = (TextView) view.findViewById(R.id.summer_hours);
-        TextView offseasonHoursTextView = (TextView) view.findViewById(R.id.offseason_hours);
-
-        summerHoursTextView.setText(getActivity().getResources().getString(R.string.summer_hours));
-        offseasonHoursTextView.setText(getActivity().getResources().getString(R.string.restofyear_hours));
-
-        summerHoursTextView.setTypeface(candaraFont);
-        offseasonHoursTextView.setTypeface(candaraFont);
-
-
         TextView _365DaysTextView = (TextView) view.findViewById(R.id._365days_text);
-        //TextView phoneNumbersTextView = (TextView) view.findViewById(R.id.phone_numbers);
 
         _365DaysTextView.setText(getActivity().getResources().getString(R.string.about_365days_text));
 
         _365DaysTextView.setTypeface(candaraFont);
 
-
-       // phoneNumbersTextView.setText(getActivity().getResources().getString(R.string.phone_numbers));
-
+        FloatingActionButton infoFab = (FloatingActionButton) view.findViewById(R.id.info_fab);
+        infoFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                android.app.FragmentManager manager = getActivity().getFragmentManager();
+                ContactAdmissionDialogFragment dialogFragment = new ContactAdmissionDialogFragment();
+                dialogFragment.show(manager, "contactAdmissionDialog");
+            }
+        });
 
         return view;
 

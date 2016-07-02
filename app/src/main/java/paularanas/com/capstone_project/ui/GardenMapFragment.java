@@ -1,33 +1,21 @@
 package paularanas.com.capstone_project.ui;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
-import android.location.GnssStatus;
-import android.location.GpsSatellite;
-import android.location.GpsStatus;
 import android.location.Location;
-import android.location.LocationManager;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.NotificationCompat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -35,17 +23,12 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-
-import java.util.Iterator;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 import paularanas.com.capstone_project.R;
 
@@ -148,33 +131,33 @@ public class GardenMapFragment extends Fragment implements OnMapReadyCallback, G
 
         LatLng mainEntrance = new LatLng(44.9948,
                 -122.78903);
-         googleMap.addMarker(new MarkerOptions()
+        googleMap.addMarker(new MarkerOptions()
                 .position(mainEntrance).flat(true)
                 .title("Main Entrance"));
 
 
         LatLng naturalResourceEducationCenter = new LatLng(44.99511,
                 -122.7888);
-         googleMap.addMarker(new MarkerOptions()
+        googleMap.addMarker(new MarkerOptions()
                 .position(naturalResourceEducationCenter).flat(true)
                 .title("Natural Resource Education Center"));
 
 
         LatLng conifer = new LatLng(44.99377,
                 -122.7895);
-       googleMap.addMarker(new MarkerOptions()
+        googleMap.addMarker(new MarkerOptions()
                 .position(conifer).flat(true)
                 .title("Conifer Garden"));
 
 
         LatLng aestheticPruningDemonstration = new LatLng(44.99359,
                 -122.78984);
-         googleMap.addMarker(new MarkerOptions()
+        googleMap.addMarker(new MarkerOptions()
                 .position(aestheticPruningDemonstration).flat(true)
                 .title("Aesthetic Pruning Demonstration Garden"));
 
-        LatLng axisGarden = new LatLng(44.99298,
-                -122.78983);
+        LatLng axisGarden = new LatLng(44.9932138,
+                -122.7899972);
         googleMap.addMarker(new MarkerOptions()
                 .position(axisGarden).flat(true)
                 .title("Axis Garden"));
@@ -189,7 +172,7 @@ public class GardenMapFragment extends Fragment implements OnMapReadyCallback, G
 
         LatLng craftedVegetableDemonstration = new LatLng(44.99287,
                 -122.79048);
-       googleMap.addMarker(new MarkerOptions()
+        googleMap.addMarker(new MarkerOptions()
                 .position(craftedVegetableDemonstration).flat(true)
                 .title("Crafted Vegetable Demonstration Garden"));
 
@@ -209,7 +192,7 @@ public class GardenMapFragment extends Fragment implements OnMapReadyCallback, G
 
         LatLng lewisAndClark = new LatLng(44.99238,
                 -122.79177);
-         googleMap.addMarker(new MarkerOptions()
+        googleMap.addMarker(new MarkerOptions()
                 .position(lewisAndClark).flat(true)
                 .title("Lewis and Clark Garden"));
 
@@ -223,7 +206,7 @@ public class GardenMapFragment extends Fragment implements OnMapReadyCallback, G
 
         LatLng northwestGarden = new LatLng(44.99333,
                 -122.79191);
-       googleMap.addMarker(new MarkerOptions()
+        googleMap.addMarker(new MarkerOptions()
                 .position(northwestGarden).flat(true)
                 .title("Northwest Garden"));
 
@@ -236,20 +219,20 @@ public class GardenMapFragment extends Fragment implements OnMapReadyCallback, G
 
         LatLng trainGarden = new LatLng(44.99339,
                 -122.79095);
-      googleMap.addMarker(new MarkerOptions()
+        googleMap.addMarker(new MarkerOptions()
                 .position(trainGarden).flat(true)
                 .title("Train Garden"));
 
         LatLng bosque = new LatLng(44.99401,
                 -122.79067);
-         googleMap.addMarker(new MarkerOptions()
+        googleMap.addMarker(new MarkerOptions()
                 .position(bosque).flat(true)
                 .title("Bosque"));
 
 
         LatLng homeCompostingCenter = new LatLng(44.99549,
                 -122.78965);
-     googleMap.addMarker(new MarkerOptions()
+        googleMap.addMarker(new MarkerOptions()
                 .position(homeCompostingCenter).flat(true)
                 .title("Home Composting Center"));
 
@@ -263,13 +246,13 @@ public class GardenMapFragment extends Fragment implements OnMapReadyCallback, G
 
         LatLng edible = new LatLng(44.99528,
                 -122.78944);
-      googleMap.addMarker(new MarkerOptions()
+        googleMap.addMarker(new MarkerOptions()
                 .position(edible).flat(true)
                 .title("Edible Garden"));
 
         LatLng amazingWater = new LatLng(44.99424,
                 -122.78979);
-       googleMap.addMarker(new MarkerOptions()
+        googleMap.addMarker(new MarkerOptions()
                 .position(amazingWater).flat(true)
                 .title("Amazing Water Garden"));
 
@@ -317,24 +300,24 @@ public class GardenMapFragment extends Fragment implements OnMapReadyCallback, G
                 .position(gordonHouseAndEventParking).flat(true)
                 .title("Event and Gordon House Parking"));
 
-        LatLng  wetlands = new LatLng(44.99378, -122.78926 );
+        LatLng wetlands = new LatLng(44.99378, -122.78926);
         googleMap.addMarker(new MarkerOptions()
                 .position(wetlands).flat(true)
                 .title("Wetlands"));
 
 
-        LatLng  rosePetalFountain= new LatLng(44.99439, -122.79099);
+        LatLng rosePetalFountain = new LatLng(44.99439, -122.79099);
         googleMap.addMarker(new MarkerOptions()
-                .position(exit).flat(true)
+                .position(rosePetalFountain).flat(true)
                 .title("Rose Petal Fountain"));
 
 
-        LatLng  honorGarden   = new LatLng(44.99453, -122.7905);
+        LatLng honorGarden = new LatLng(44.99453, -122.7905);
         googleMap.addMarker(new MarkerOptions()
                 .position(honorGarden).flat(true)
                 .title("Honor Garden"));
 
-        LatLng  homeDemoGardens = new LatLng(44.99506, -122.78954);
+        LatLng homeDemoGardens = new LatLng(44.99506, -122.78954);
         googleMap.addMarker(new MarkerOptions()
                 .position(homeDemoGardens).flat(true)
                 .title("Home Demo Gardens"));
@@ -343,7 +326,7 @@ public class GardenMapFragment extends Fragment implements OnMapReadyCallback, G
                 .position(fuchsiaDisplayGarden).flat(true)
                 .title("Fuchsia Display Garden"));
 
-        LatLng medicinalGarden  = new LatLng(44.99558, -122.78925);
+        LatLng medicinalGarden = new LatLng(44.99558, -122.78925);
         googleMap.addMarker(new MarkerOptions()
                 .position(medicinalGarden).flat(true)
                 .title("Medicinal Garden"));
@@ -353,11 +336,12 @@ public class GardenMapFragment extends Fragment implements OnMapReadyCallback, G
                 .position(schmidtPavilion).flat(true)
                 .title("Frank Schmidt Jr. Pavilion"));
 
-        LatLng  tropicalHouse = new LatLng(44.99532, -122.79083);
+        LatLng tropicalHouse = new LatLng(44.99532, -122.79083);
         googleMap.addMarker(new MarkerOptions()
-                .position(trainGarden).flat(true)
+                .position(tropicalHouse).flat(true)
                 .title("Tropical House"));
-        LatLng roseGarden = new LatLng(44.99482, -122.79166);
+
+        LatLng roseGarden = new LatLng(44.99516, -122.79145);
         googleMap.addMarker(new MarkerOptions()
                 .position(roseGarden).flat(true)
                 .title("Rose Garden"));
@@ -378,7 +362,7 @@ public class GardenMapFragment extends Fragment implements OnMapReadyCallback, G
                 .position(droughtTolerantGarden).flat(true)
                 .title("Drought Tolerant Garden"));
 
-        LatLng axisFountain  = new LatLng(44.99320, -122.78981);
+        LatLng axisFountain = new LatLng(44.99320, -122.78981);
         googleMap.addMarker(new MarkerOptions()
                 .position(axisFountain).flat(true)
                 .title("Axis Fountain"));
@@ -389,7 +373,7 @@ public class GardenMapFragment extends Fragment implements OnMapReadyCallback, G
                 .title("Sensory Garden"));
 
 
-        LatLng ballHorticultureTrialGarden = new LatLng(44.99297, -122.79813);
+        LatLng ballHorticultureTrialGarden = new LatLng(44.99297, -122.79013);
         googleMap.addMarker(new MarkerOptions()
                 .position(ballHorticultureTrialGarden).flat(true)
                 .title("Ball Horticulture Trial Garden"));
@@ -399,16 +383,10 @@ public class GardenMapFragment extends Fragment implements OnMapReadyCallback, G
                 .position(ecoRoof).flat(true)
                 .title("Eco-Roof"));
 
-        LatLng teufelAmphitheater  = new LatLng(44.99320, -122.78981);
+        LatLng teufelAmphitheater = new LatLng(44.99462, -122.79207);
         googleMap.addMarker(new MarkerOptions()
                 .position(teufelAmphitheater).flat(true)
                 .title("Teufel Amphitheater"));
-
-
-
-
-
-
 
 
     }

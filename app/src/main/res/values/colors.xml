@@ -2,8 +2,11 @@
 <resources>
     <color name="photo_placeholder">#009688</color>
     <color name="translucent">#80000000</color>
+    <color name="info_translucent">#64000000</color>
     <color name="button_translucent">#44000000</color>
     <color name="theme_primary">#9DBF79</color>
     <color name="theme_primaryDark">#218C61</color>
     <color name="theme_accent">#B0D290</color>
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
 </resources>

@@ -13,7 +13,7 @@
     <View
         android:layout_width="1dp"
         android:layout_height="wrap_content"
-        android:background="#000000" />
+        android:background="@color/black" />
 
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/garden_details_tablet_container"

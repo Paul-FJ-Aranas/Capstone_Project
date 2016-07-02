@@ -104,7 +104,7 @@ public class SelectionBuilder {
 
     private void ensureProjectionMap() {
         if (mProjectionMap == null) {
-            mProjectionMap = new HashMap<String, String>();
+            mProjectionMap = new HashMap<>();
         }
     }
 
@@ -116,7 +116,7 @@ public class SelectionBuilder {
 
     private void ensureSelectionArgs() {
         if (mSelectionArgs == null) {
-            mSelectionArgs = new ArrayList<String>();
+            mSelectionArgs = new ArrayList<>();
         }
     }
 

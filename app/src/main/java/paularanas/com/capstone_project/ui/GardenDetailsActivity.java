@@ -18,7 +18,6 @@ import android.support.v7.widget.Toolbar;
 import android.transition.Fade;
 import android.transition.Transition;
 import android.transition.TransitionInflater;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -74,7 +73,6 @@ public class GardenDetailsActivity extends AppCompatActivity implements LoaderMa
         super.onCreate(savedInstanceState);
 
         mStartPosition = getIntent().getIntExtra(START_POSITION, 0);
-        Log.d("TAGSSSTART", "mStartPosition: " + mStartPosition);
         if (savedInstanceState == null) {
             mCurrentPosition = mStartPosition;
         } else {

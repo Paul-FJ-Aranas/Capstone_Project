@@ -10,6 +10,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.google.common.collect.Tables;
@@ -44,19 +45,19 @@ public class GardenProvider extends ContentProvider {
     }
 
     @Override
-    public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+    public Cursor query(@NonNull Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
 
         final SQLiteDatabase db = helper.getReadableDatabase();
         final SelectionBuilder builder = buildSelection(uri);
         Cursor cursor = builder.where(selection, selectionArgs).query(db, projection, sortOrder);
-        if (cursor != null) {
+        if (cursor != null & getContext() != null) {
             cursor.setNotificationUri(getContext().getContentResolver(), uri);
         }
         return cursor;
     }
 
     @Override
-    public String getType(Uri uri) {
+    public String getType(@NonNull Uri uri) {
         switch (sUriMatcher.match(uri)) {
             case GARDENS:
                 return GardenContract.TYPE_GARDENS;
@@ -68,7 +69,7 @@ public class GardenProvider extends ContentProvider {
     }
 
     @Override
-    public Uri insert(Uri uri, ContentValues values) {
+    public Uri insert(@NonNull Uri uri, ContentValues values) {
         SQLiteDatabase database = helper.getWritableDatabase();
         final long id;
         switch (sUriMatcher.match(uri)) {
@@ -86,18 +87,22 @@ public class GardenProvider extends ContentProvider {
 
     }
     @Override
-    public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
+    public int update(@NonNull Uri uri, ContentValues values, String selection, String[] selectionArgs) {
         final SQLiteDatabase db = helper.getWritableDatabase();
         final SelectionBuilder builder = buildSelection(uri);
-        getContext().getContentResolver().notifyChange(uri, null);
+        if(getContext() != null) {
+            getContext().getContentResolver().notifyChange(uri, null);
+        }
         return builder.where(selection, selectionArgs).update(db, values);
     }
 
     @Override
-    public int delete(Uri uri, String selection, String[] selectionArgs) {
+    public int delete(@NonNull Uri uri, String selection, String[] selectionArgs) {
         final SQLiteDatabase db = helper.getWritableDatabase();
         final SelectionBuilder builder = buildSelection(uri);
-        getContext().getContentResolver().notifyChange(uri, null);
+        if (getContext() != null) {
+            getContext().getContentResolver().notifyChange(uri, null);
+        }
         return builder.where(selection, selectionArgs).delete(db);
     }
     private SelectionBuilder buildSelection(Uri uri) {
@@ -122,6 +127,7 @@ public class GardenProvider extends ContentProvider {
         }
     }
 
+    @NonNull
     public ContentProviderResult[] applyBatch(ArrayList<ContentProviderOperation> operations)
             throws OperationApplicationException {
         final SQLiteDatabase db = helper.getWritableDatabase();

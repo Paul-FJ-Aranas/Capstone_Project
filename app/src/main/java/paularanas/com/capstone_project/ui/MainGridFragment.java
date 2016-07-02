@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Typeface;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -47,6 +49,9 @@ public class MainGridFragment extends android.support.v4.app.Fragment implements
     GridLayoutManager glm;
     private Bundle state;
 
+
+
+
     public interface GardenSelectedListener {
 
         public void onGardenSelected(Long id, int position, Bundle bundle);
@@ -64,7 +69,7 @@ public class MainGridFragment extends android.support.v4.app.Fragment implements
         state = savedInstanceState;
         getLoaderManager().initLoader(0, null, this);
 
-        if (savedInstanceState == null) {
+        if (savedInstanceState == null && isNetworkAvailable()) {
             getActivity().startService(new Intent(getActivity(), FetchGardensService.class));
         }
 
@@ -79,7 +84,6 @@ public class MainGridFragment extends android.support.v4.app.Fragment implements
         //on the RecyclerView
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
-
         int columnCount = getResources().getInteger(R.integer.grid_columns);
         glm = new GridLayoutManager(getActivity(), columnCount, GridLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(glm);
@@ -130,9 +134,15 @@ public class MainGridFragment extends android.support.v4.app.Fragment implements
         mActivatedPos = position;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
+
+
+    // check if network is available
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connMgr = (ConnectivityManager)
+                getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = connMgr.getActiveNetworkInfo();
+        return netInfo != null && netInfo.isConnected();
+
     }
 
     @Override
@@ -240,7 +250,7 @@ public class MainGridFragment extends android.support.v4.app.Fragment implements
             holder.titleView.setText(mCursor.getString(mCursor.getColumnIndex(GardenContract.GardenTable.TITLE)));
             holder.titleView.setTextSize(mContext.getResources().getDimension(R.dimen.grid_item_text_size));
             holder.titleView.setTypeface(candaraFont);
-
+            holder.itemView.setFocusable(true);
 
             double density = mContext.getResources().getDisplayMetrics().density;
             Log.d("Density", toString().valueOf(density));

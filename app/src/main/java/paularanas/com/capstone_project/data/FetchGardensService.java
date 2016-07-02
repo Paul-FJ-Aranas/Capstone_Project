@@ -33,11 +33,8 @@ public class FetchGardensService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        Log.d("TAG", "In onHandleIntent");
+
         //set up app engine
-
-
-
         GardensApi.Builder builder = new GardensApi.Builder(AndroidHttp.newCompatibleTransport(), new AndroidJsonFactory(), null)
                 .setRootUrl("https://capstoneproject-1339.appspot.com/_ah/api/")
                 .setGoogleClientRequestInitializer(new GoogleClientRequestInitializer() {
@@ -47,15 +44,14 @@ public class FetchGardensService extends IntentService {
                     }
                 });
 
-
         GardensApi myApiService = builder.build();
 
         try {
             List<Gardens> gardenDataResult = myApiService.getGardens().execute().getItems();
 
-               ArrayList<ContentProviderOperation> gardencpbo = new ArrayList<ContentProviderOperation>();
-             Uri dirUri = GardenContract.URI_GARDENS;
-             gardencpbo.add(ContentProviderOperation.newDelete(dirUri).build());
+            ArrayList<ContentProviderOperation> gardencpbo = new ArrayList<>();
+            Uri dirUri = GardenContract.URI_GARDENS;
+            gardencpbo.add(ContentProviderOperation.newDelete(dirUri).build());
 
             if (gardenDataResult != null) {
                 ContentValues contentValues = new ContentValues();
@@ -79,17 +75,18 @@ public class FetchGardensService extends IntentService {
                     getContentResolver().applyBatch(GardenContract.AUTHORITY, gardencpbo);
                 } catch (RemoteException e) {
                     e.printStackTrace();
+                    Log.e ("Error", "Error with remote call. Refer to stacktrace");
                 } catch (OperationApplicationException e) {
                     e.printStackTrace();
+                    Log.e ("Error", "Application exception while fetching data");
                 }
 
             }
 
 
-
-
         } catch (IOException e) {
             e.printStackTrace();
+            Log.e("Error","Unable to fetch data from server");
         }
     }
 }

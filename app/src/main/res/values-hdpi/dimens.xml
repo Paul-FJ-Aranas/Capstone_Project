@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="grid_item_text_size">10sp</dimen>
+    <dimen name="hours_text_size">16sp</dimen>
+    <dimen name="info_body_text_size">12dp</dimen>
+    <dimen name ="days_text_size">16sp</dimen>
+</resources>

@@ -20,7 +20,6 @@
 
 
     <dimen name="detail_title_text_size">32sp</dimen>
-    <dimen name="detail_body_text_size">22sp</dimen>
     <item name="detail_body_line_spacing_multiplier" format="float" type="fraction">1.25</item>
     <dimen name="height_grid_image">275dp</dimen>
     <dimen name="fab_elevation">6dp</dimen>
@@ -36,10 +35,21 @@
     <dimen name="grid_item_rel_layout_padding">12dp</dimen>
     <dimen name="grid_item_subtitle_text_size">12sp</dimen>
     <dimen name="hours_text_size">12sp</dimen>
+    <dimen name ="days_text_size">12sp</dimen>
     <dimen name="full_view_button_text_size">20sp</dimen>
     <dimen name="text_size_details_body">12sp</dimen>
     <dimen name="text_size_created_by">12sp</dimen>
+    <dimen name="contact_admission_text_size">12sp</dimen>
     <dimen name="info_image_text_rel_layout_padding">3dp</dimen>
+    <dimen name="garden_view_button_layout_width">72dp</dimen>
+    <dimen name="garden_button_layout_height">48dp</dimen>
+    <dimen name="garden_button_layout_margin">2dp</dimen>
+    <dimen name="info_image_layout_height">275dp</dimen>
+    <dimen name="info_image_text_container_height">48dp</dimen>
+    <dimen name="about_text_top_padding">10dp</dimen>
+    <dimen name="details_body_padding_top">10dp</dimen>
+    <dimen name="details_name_margin_left">16dp</dimen>
+    <dimen name="details_name_margin_right">16dp</dimen>
     <!--  GridView Columns                    -->
 
     <integer name="grid_columns">2</integer>
