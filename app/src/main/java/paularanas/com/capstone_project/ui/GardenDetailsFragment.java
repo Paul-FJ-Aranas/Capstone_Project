@@ -21,6 +21,8 @@ import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import paularanas.com.capstone_project.R;
@@ -127,7 +129,8 @@ public class GardenDetailsFragment extends Fragment implements
             gardenNameView.setText(mCursor.getString(GardenUtility.GardenQuery.TITLE));
             createdByView.setText(mCursor.getString(GardenUtility.GardenQuery.CREATOR));
             gardenInfoBodyView.setText(mCursor.getString(GardenUtility.GardenQuery.BODY));
-            Picasso.with(getActivity()).load(mCursor.getString(GardenUtility.GardenQuery.PHOTO)).placeholder(R.color.theme_primary).into(mGardenImage);
+            Picasso.with(getActivity()).load(mCursor.getString(GardenUtility.GardenQuery.PHOTO)).placeholder(R.color.theme_primary)
+                    .into(mGardenImage);
 
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

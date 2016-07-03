@@ -2,7 +2,7 @@
 
 <resources>
 
-    <dimen name="grid_item_text_size">18sp</dimen>
+    <dimen name="grid_item_text_size">15sp</dimen>
     <dimen name="hours_text_size">22sp</dimen>
     <dimen name ="days_text_size">22sp</dimen>
     <dimen name="text_size_details_body">18sp</dimen>

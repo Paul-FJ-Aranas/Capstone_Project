@@ -24,6 +24,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import paularanas.com.capstone_project.R;
@@ -48,8 +50,6 @@ public class MainGridFragment extends android.support.v4.app.Fragment implements
     public static RecyclerView theRecyclerView;
     GridLayoutManager glm;
     private Bundle state;
-
-
 
 
     public interface GardenSelectedListener {
@@ -135,7 +135,6 @@ public class MainGridFragment extends android.support.v4.app.Fragment implements
     }
 
 
-
     // check if network is available
     private boolean isNetworkAvailable() {
         ConnectivityManager connMgr = (ConnectivityManager)
@@ -163,22 +162,8 @@ public class MainGridFragment extends android.support.v4.app.Fragment implements
         mCursor = (Cursor) data;
 
         mAdapter = new GardenAdapter(getActivity(), (Cursor) data, mGardenListener);
+
         mRecyclerView.setAdapter(mAdapter);
-
-        if (MasterGridFragment.sTwoPane) {
-
-            if (state == null) {
-                mRecyclerView.post(new Runnable() {
-
-                    @Override
-                    public void run() {
-                        if (mRecyclerView != null) {
-                            mRecyclerView.findViewHolderForAdapterPosition(0).itemView.performClick();
-                        }
-                    }
-                });
-            }
-        }
 
     }
 
@@ -215,6 +200,23 @@ public class MainGridFragment extends android.support.v4.app.Fragment implements
         public MainGridFragment.GardenViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.grid_item_garden, parent, false);
             final GardenViewHolder vh = new GardenViewHolder(view);
+            if (MasterGridFragment.sTwoPane)
+
+            {
+
+                if (state == null) {
+                    mRecyclerView.post(new Runnable() {
+
+                        @Override
+                        public void run() {
+                            if (mRecyclerView != null) {
+                                mRecyclerView.findViewHolderForAdapterPosition(0).itemView.performClick();
+                            }
+                        }
+                    });
+                }
+            }
+
 
 
             view.setOnClickListener(new View.OnClickListener() {
@@ -262,6 +264,7 @@ public class MainGridFragment extends android.support.v4.app.Fragment implements
                         .into(holder.thumbnailView);
 
 
+
             } else if (density >= 3.0 && density < 4.0) {
                 //xxhdpi
 
@@ -274,8 +277,7 @@ public class MainGridFragment extends android.support.v4.app.Fragment implements
                 //xhdpi
 
                 Picasso.with(mContext)
-                        .load(mCursor.getString(mCursor.getColumnIndex(GardenContract.GardenTable.THUMBNAIL_PATH))).placeholder(R.color.theme_primary).resize(500, 700)
-                        .into(holder.thumbnailView);
+                        .load(mCursor.getString(mCursor.getColumnIndex(GardenContract.GardenTable.THUMBNAIL_PATH))).placeholder(R.color.theme_primary).resize(500, 700).into(holder.thumbnailView);
 
 
             } else if (density >= 1.5 && density < 2.0) {

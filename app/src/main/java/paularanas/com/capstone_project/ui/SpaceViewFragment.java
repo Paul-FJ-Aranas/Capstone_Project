@@ -27,14 +27,14 @@ public class SpaceViewFragment extends android.support.v4.app.Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_space_view, container, false);
-
         mVideoView = (VideoView) view.findViewById(R.id.space_to_garden);
         String videoUriPath = "android.resource://" + getActivity().getPackageName() + "/" + R.raw.space_to_oregon_garden;
+        mVideoView.setVideoURI(Uri.parse(videoUriPath));
         MediaController mediaController = new MediaController(getActivity());
         mediaController.setAnchorView(mVideoView);
         mVideoView.setMediaController(mediaController);
         mediaController.setAnchorView(mVideoView);
-        mVideoView.setVideoURI(Uri.parse(videoUriPath));
+
         mVideoView.start();
 
         return view;
