@@ -24,7 +24,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import paularanas.com.capstone_project.R;
@@ -152,13 +151,10 @@ public class MainGridFragment extends android.support.v4.app.Fragment implements
 
     @Override
     public Loader onCreateLoader(int id, Bundle args) {
-        //  switch (id) {
-        //    case CURSOR_LOADER:
+
         return new CursorLoader(getActivity(), GardenContract.URI_GARDENS, GardenContract.GardenTable.PROJECTION_ALL,
                 null, null, null);
-        //  default:
-        //      return null;
-//
+
     }
 
 
@@ -184,7 +180,7 @@ public class MainGridFragment extends android.support.v4.app.Fragment implements
         View view;
 
         Bundle instanceState;
-        int[] gridImages = {R.drawable.atestamazing_water_garden_thumbnail, R.drawable.axis_fountain_thumbnail, R.drawable.axis_garden_thumbnail, R.drawable.ball_garden_thumbnail,
+        int[] gridImages = {R.drawable.amazing_water_garden_thumbnail, R.drawable.axis_fountain_thumbnail, R.drawable.axis_garden_thumbnail, R.drawable.ball_garden_thumbnail,
                 R.drawable.bosque_thumbnail, R.drawable.children_garden_thumbnail, R.drawable.conifer_garden_thumbnail, R.drawable.home_demo_garden_thumbnail, R.drawable.honor_garden_thumbnail,
                 R.drawable.lewis_clark_garden_thumbnail, R.drawable.medicinal_garden_thumbnail, R.drawable.northwest_garden_thumbnail, R.drawable.oak_grove_thumbnail, R.drawable.pet_friendly_thumbnail,
                 R.drawable.proven_winners_thumbnail, R.drawable.rediscovery_forest_thumbnail, R.drawable.rose_garden_thumbnail, R.drawable.rose_petal_fountain_thumbnail, R.drawable.sensory_garden_thumbnail,
@@ -259,41 +255,52 @@ public class MainGridFragment extends android.support.v4.app.Fragment implements
 
 
             double density = mContext.getResources().getDisplayMetrics().density;
+
             Log.d("Density", toString().valueOf(density));
             if (density >= 4.0) {
                 //"xxxhdpi";
 
-                // holder.thumbnailView.setImageBitmap(paularanas.com.capstone_project.ui.Util.decodeSampledBitmapFromResource(getResources(), gridImages[position], 150, 185));
-                
-
-                Picasso.with(mContext).load(gridImages[position]).placeholder(R.color.theme_primary).resize(1000, 1000).networkPolicy(NetworkPolicy.OFFLINE).into(holder.thumbnailView);
-
+                if (isNetworkAvailable()) {
+                    Picasso.with(mContext).load(mCursor.getString(mCursor.getColumnIndex(GardenContract.GardenTable.THUMBNAIL_PATH))).placeholder(R.color.theme_primary).resize(1000, 1000).into(holder.thumbnailView);
+                } else {
+                    Picasso.with(mContext).load(gridImages[position]).placeholder(R.color.theme_primary).resize(1000, 1000).into(holder.thumbnailView);
+                }
 
             } else if (density >= 3.0 && density < 4.0) {
                 //xxhdpi
-                // holder.thumbnailView.setImageBitmap(paularanas.com.capstone_project.ui.Util.decodeSampledBitmapFromResource(getResources(), gridImages[position], 150, 185));
-                // holder.thumbnailView.setImageResource(gridImages[position]);
-                Picasso.with(mContext).load(gridImages[position]).resize(1000, 1000).placeholder(R.color.theme_primary).networkPolicy(NetworkPolicy.OFFLINE).into(holder.thumbnailView);
-
+                if (isNetworkAvailable()) {
+                    Picasso.with(mContext).load(mCursor.getString(mCursor.getColumnIndex(GardenContract.GardenTable.THUMBNAIL_PATH))).placeholder(R.color.theme_primary).resize(1000, 1000).into(holder.thumbnailView);
+                } else {
+                    Picasso.with(mContext).load(gridImages[position]).placeholder(R.color.theme_primary).resize(1000, 1000).into(holder.thumbnailView);
+                }
             } else if (density >= 2.0) {
                 //xhdpi
 
-                Picasso.with(mContext).load(gridImages[position]).resize(500, 700).placeholder(R.color.theme_primary).into(holder.thumbnailView);
+                if (isNetworkAvailable()) {
+                    Picasso.with(mContext).load(mCursor.getString(mCursor.getColumnIndex(GardenContract.GardenTable.THUMBNAIL_PATH))).placeholder(R.color.theme_primary).resize(500, 700).into(holder.thumbnailView);
+                } else {
+                    Picasso.with(mContext).load(gridImages[position]).placeholder(R.color.theme_primary).resize(500, 700).into(holder.thumbnailView);
+                }
 
 
             } else if (density >= 1.5 && density < 2.0) {
-                //hdpi
-                // holder.thumbnailView.setImageBitmap(paularanas.com.capstone_project.ui.Util.decodeSampledBitmapFromResource(getResources(), gridImages[position], 150, 185));
 
-                //  holder.thumbnailView.setImageResource(gridImages[position]);
-                Picasso.with(mContext).load(gridImages[position]).placeholder(R.color.theme_primary).networkPolicy(NetworkPolicy.OFFLINE).into(holder.thumbnailView);
+                if (isNetworkAvailable()) {
+                    Picasso.with(mContext).load(mCursor.getString(mCursor.getColumnIndex(GardenContract.GardenTable.THUMBNAIL_PATH))).placeholder(R.color.theme_primary).into(holder.thumbnailView);
+                } else {
+                    Picasso.with(mContext).load(gridImages[position]).placeholder(R.color.theme_primary).
+                    into(holder.thumbnailView);
+                }
+
             } else if (density >= 1.0 && density < 1.5) {
                 //mdpi
-                // holder.thumbnailView.setImageBitmap(paularanas.com.capstone_project.ui.Util.decodeSampledBitmapFromResource(getResources(), gridImages[position], 150, 185));
-                //  holder.thumbnailView.setImageResource(gridImages[position]);
-                Picasso.with(mContext).load(gridImages[position]).placeholder(R.color.theme_primary).networkPolicy(NetworkPolicy.OFFLINE).into(holder.thumbnailView);
-            }
 
+                if (isNetworkAvailable()) {
+                    Picasso.with(mContext).load(mCursor.getString(mCursor.getColumnIndex(GardenContract.GardenTable.THUMBNAIL_PATH))).placeholder(R.color.theme_primary).into(holder.thumbnailView);
+                } else {
+                    Picasso.with(mContext).load(gridImages[position]).placeholder(R.color.theme_primary).into(holder.thumbnailView);
+                }
+            }
 
         }
 

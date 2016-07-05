@@ -1,10 +1,13 @@
 package paularanas.com.capstone_project.ui;
 
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Rect;
 import android.graphics.Typeface;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -21,9 +24,6 @@ import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
-import com.squareup.picasso.MemoryPolicy;
-import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import paularanas.com.capstone_project.R;
@@ -133,7 +133,11 @@ public class GardenDetailsFragment extends Fragment implements
             gardenNameView.setText(mCursor.getString(GardenUtility.GardenQuery.TITLE));
             createdByView.setText(mCursor.getString(GardenUtility.GardenQuery.CREATOR));
             gardenInfoBodyView.setText(mCursor.getString(GardenUtility.GardenQuery.BODY));
-            Picasso.with(getActivity()).load(detailsImages[mStartPosition]).placeholder(R.color.theme_primary).networkPolicy(NetworkPolicy.OFFLINE).into(mGardenImage);
+            if (isNetworkAvailable()){
+                Picasso.with(getActivity()).load(mCursor.getString(mCursor.getColumnIndex(GardenContract.GardenTable.THUMBNAIL_PATH))).placeholder(R.color.theme_primary).into(mGardenImage);
+            }else {
+                Picasso.with(getActivity()).load(detailsImages[mStartPosition]).placeholder(R.color.theme_primary).into(mGardenImage);
+            }
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 scheduleStartPostponedTransition(mGardenImage);
@@ -141,7 +145,14 @@ public class GardenDetailsFragment extends Fragment implements
         }
 
     }
+    // check if network is available
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connMgr = (ConnectivityManager)
+                getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = connMgr.getActiveNetworkInfo();
+        return netInfo != null && netInfo.isConnected();
 
+    }
     private void scheduleStartPostponedTransition(final View sharedElement) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             sharedElement.getViewTreeObserver().addOnPreDrawListener(
