@@ -21,7 +21,8 @@ import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Callback;
+
+import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
@@ -39,10 +40,13 @@ public class GardenDetailsFragment extends Fragment implements
     private Cursor mCursor;
     private long mItemId;
     private View mRootView;
-
     private ImageView mGardenImage;
-
     private int mStartPosition;
+    private int[] detailsImages = {R.drawable.amazing_water_garden_details, R.drawable.axis_fountain_details, R.drawable.axis_garden_details, R.drawable.ball_horticulture_details, R.drawable.bosque_details,
+            R.drawable.childrens_garden_details, R.drawable.conifer_garden_details, R.drawable.home_demo_garden_details, R.drawable.honor_garden_details, R.drawable.lewis_clark_details,
+            R.drawable.medicinal_garden_details, R.drawable.northwest_garden_detals, R.drawable.oak_grove_detals, R.drawable.pet_friendly_garden_details, R.drawable.proven_winners_garden_details,
+            R.drawable.rediscovery_forest_details, R.drawable.rose_garden_details, R.drawable.rose_petal_details, R.drawable.sensory_garden_details, R.drawable.silverton_market_garden_details,
+            R.drawable.train_garden_details, R.drawable.tropical_house_details, R.drawable.wetlands_details};
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -129,9 +133,7 @@ public class GardenDetailsFragment extends Fragment implements
             gardenNameView.setText(mCursor.getString(GardenUtility.GardenQuery.TITLE));
             createdByView.setText(mCursor.getString(GardenUtility.GardenQuery.CREATOR));
             gardenInfoBodyView.setText(mCursor.getString(GardenUtility.GardenQuery.BODY));
-            Picasso.with(getActivity()).load(mCursor.getString(GardenUtility.GardenQuery.PHOTO)).placeholder(R.color.theme_primary)
-                    .into(mGardenImage);
-
+            Picasso.with(getActivity()).load(detailsImages[mStartPosition]).placeholder(R.color.theme_primary).networkPolicy(NetworkPolicy.OFFLINE).into(mGardenImage);
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 scheduleStartPostponedTransition(mGardenImage);

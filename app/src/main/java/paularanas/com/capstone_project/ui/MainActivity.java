@@ -20,10 +20,6 @@ import android.transition.TransitionInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import com.squareup.picasso.NetworkPolicy;
-import com.squareup.picasso.Picasso;
-
 import java.util.List;
 import java.util.Map;
 
@@ -87,12 +83,20 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    if (Build.VERSION.SDK_INT >= 21) {
+                        Transition transition = TransitionInflater.from(MainActivity.this).inflateTransition(R.transition.shared_element_photo);
+                        getWindow().setSharedElementEnterTransition(transition);
+                        setExitSharedElementCallback(mCallbackExit);
+                    }
 
-        if (Build.VERSION.SDK_INT >= 21) {
-            Transition transition = TransitionInflater.from(this).inflateTransition(R.transition.shared_element_photo);
-            getWindow().setSharedElementEnterTransition(transition);
-            setExitSharedElementCallback(mCallbackExit);
-        }
+                }
+            }).start();
+
+
+
         setContentView(R.layout.activity_main);
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         tabLayout = (TabLayout) findViewById(R.id.tabs);

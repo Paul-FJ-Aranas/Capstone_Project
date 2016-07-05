@@ -24,7 +24,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
@@ -41,6 +40,7 @@ public class MainGridFragment extends android.support.v4.app.Fragment implements
     private final static String ACTION_GARDEN_DATA = "paularanas.com.capstone_project.data.ACTION_GARDEN_DATA";
     GardenAdapter mAdapter;
     private GardenSelectedListener mGardenListener;
+    private SecondPaneFragmentCreated mTwoPaneListener;
     private int mActivatedPos = 0;
     private int currentPosition;
     static final String START_POSITION = "extra_start_position";
@@ -57,6 +57,10 @@ public class MainGridFragment extends android.support.v4.app.Fragment implements
         public void onGardenSelected(Long id, int position, Bundle bundle);
     }
 
+    public interface SecondPaneFragmentCreated {
+        public void onTwoPaneCreated(Long id, int position);
+    }
+
     public static RecyclerView transitionDataPasser() {
 
         return theRecyclerView;
@@ -67,6 +71,7 @@ public class MainGridFragment extends android.support.v4.app.Fragment implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         state = savedInstanceState;
+
         getLoaderManager().initLoader(0, null, this);
 
         if (savedInstanceState == null && isNetworkAvailable()) {
@@ -82,13 +87,10 @@ public class MainGridFragment extends android.support.v4.app.Fragment implements
         view = inflater.inflate(R.layout.fragment_main, container, false);
         //connect the RecyclerView and instantiate the GardenAdapter, set the LayoutManager
         //on the RecyclerView
-
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         int columnCount = getResources().getInteger(R.integer.grid_columns);
         glm = new GridLayoutManager(getActivity(), columnCount, GridLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(glm);
-        mRecyclerView.setHasFixedSize(true);
-
         theRecyclerView = mRecyclerView;
         if (savedInstanceState != null) {
             currentPosition = savedInstanceState.getInt("currentScrollPos", 0);
@@ -97,7 +99,6 @@ public class MainGridFragment extends android.support.v4.app.Fragment implements
 
         onAttachFragment(getParentFragment());
 
-
         return view;
     }
 
@@ -105,6 +106,7 @@ public class MainGridFragment extends android.support.v4.app.Fragment implements
     public void onAttachFragment(android.support.v4.app.Fragment fragment) {
 
         mGardenListener = (GardenSelectedListener) fragment;
+        mTwoPaneListener = (SecondPaneFragmentCreated) fragment;
 
 
     }
@@ -118,6 +120,7 @@ public class MainGridFragment extends android.support.v4.app.Fragment implements
         if (savedInstanceState != null && MasterGridFragment.sTwoPane && savedInstanceState.containsKey("ACTIVATED_POS")) {
             setActivatedPosition(savedInstanceState.getInt("ACTIVATED_POS", mActivatedPos));
         }
+
     }
 
 
@@ -126,6 +129,9 @@ public class MainGridFragment extends android.support.v4.app.Fragment implements
         if (MasterGridFragment.sTwoPane) {
             outState.putInt("ACTIVATED_POS", mActivatedPos);
             outState.putInt("currentScrollPos", currentPosition);
+            if (MasterGridFragment.sTwoPane) {
+                outState.putInt("ACTIVATED_POS", mActivatedPos);
+            }
         }
     }
 
@@ -160,12 +166,11 @@ public class MainGridFragment extends android.support.v4.app.Fragment implements
     @Override
     public void onLoadFinished(Loader loader, Object data) {
         mCursor = (Cursor) data;
-
-        mAdapter = new GardenAdapter(getActivity(), (Cursor) data, mGardenListener);
-
+        mAdapter = new GardenAdapter(getActivity(), (Cursor) data, state, mGardenListener);
         mRecyclerView.setAdapter(mAdapter);
 
     }
+
 
     @Override
     public void onLoaderReset(Loader loader) {
@@ -173,21 +178,32 @@ public class MainGridFragment extends android.support.v4.app.Fragment implements
 
     }
 
-
     private class GardenAdapter extends RecyclerView.Adapter<MainGridFragment.GardenViewHolder> {
         private Context mContext;
-        private Cursor mCursor;
         int mCurrentPosition;
         View view;
+
+        Bundle instanceState;
+        int[] gridImages = {R.drawable.atestamazing_water_garden_thumbnail, R.drawable.axis_fountain_thumbnail, R.drawable.axis_garden_thumbnail, R.drawable.ball_garden_thumbnail,
+                R.drawable.bosque_thumbnail, R.drawable.children_garden_thumbnail, R.drawable.conifer_garden_thumbnail, R.drawable.home_demo_garden_thumbnail, R.drawable.honor_garden_thumbnail,
+                R.drawable.lewis_clark_garden_thumbnail, R.drawable.medicinal_garden_thumbnail, R.drawable.northwest_garden_thumbnail, R.drawable.oak_grove_thumbnail, R.drawable.pet_friendly_thumbnail,
+                R.drawable.proven_winners_thumbnail, R.drawable.rediscovery_forest_thumbnail, R.drawable.rose_garden_thumbnail, R.drawable.rose_petal_fountain_thumbnail, R.drawable.sensory_garden_thumbnail,
+                R.drawable.silverton_market_garden_thumbnail, R.drawable.train_garden_thumbnail, R.drawable.tropical_house_thumbnail, R.drawable.wetlands_thumbnail};
+
+
+        Cursor mCursor;
         MainGridFragment.GardenSelectedListener mGardenSelectedListener;
 
 
-        public GardenAdapter(Context context, Cursor cursor, MainGridFragment.GardenSelectedListener listener) {
+        public GardenAdapter(Context context, Cursor cursor, Bundle state, GardenSelectedListener listener) {
             mContext = context;
+
             mCursor = cursor;
+            instanceState = state;
             mGardenSelectedListener = listener;
 
         }
+
 
         @Override
         public long getItemId(int position) {
@@ -199,24 +215,12 @@ public class MainGridFragment extends android.support.v4.app.Fragment implements
         @Override
         public MainGridFragment.GardenViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.grid_item_garden, parent, false);
+
             final GardenViewHolder vh = new GardenViewHolder(view);
-            if (MasterGridFragment.sTwoPane)
-
-            {
-
-                if (state == null) {
-                    mRecyclerView.post(new Runnable() {
-
-                        @Override
-                        public void run() {
-                            if (mRecyclerView != null) {
-                                mRecyclerView.findViewHolderForAdapterPosition(0).itemView.performClick();
-                            }
-                        }
-                    });
-                }
+            if (instanceState == null && MasterGridFragment.sTwoPane && mCurrentPosition == 0) {
+                mTwoPaneListener.onTwoPaneCreated(getItemId(0), 0);
             }
-
+            currentPosition = vh.getAdapterPosition();
 
 
             view.setOnClickListener(new View.OnClickListener() {
@@ -241,60 +245,55 @@ public class MainGridFragment extends android.support.v4.app.Fragment implements
         }
 
         @Override
-        public void onBindViewHolder(final MainGridFragment.GardenViewHolder holder, final int position) {
+        public void onBindViewHolder(final GardenViewHolder holder, final int position) {
 
 
             mCursor.moveToPosition(position);
             mCurrentPosition = position;
             Typeface candaraFont = Typeface.createFromAsset(mContext.getAssets(), "fonts/Candara.ttf");
 
-
             holder.titleView.setText(mCursor.getString(mCursor.getColumnIndex(GardenContract.GardenTable.TITLE)));
             holder.titleView.setTextSize(mContext.getResources().getDimension(R.dimen.grid_item_text_size));
             holder.titleView.setTypeface(candaraFont);
             holder.itemView.setFocusable(true);
+
 
             double density = mContext.getResources().getDisplayMetrics().density;
             Log.d("Density", toString().valueOf(density));
             if (density >= 4.0) {
                 //"xxxhdpi";
 
-                Picasso.with(mContext)
-                        .load(mCursor.getString(mCursor.getColumnIndex(GardenContract.GardenTable.THUMBNAIL_PATH))).placeholder(R.color.theme_primary).resize(1000, 1000)
-                        .into(holder.thumbnailView);
+                // holder.thumbnailView.setImageBitmap(paularanas.com.capstone_project.ui.Util.decodeSampledBitmapFromResource(getResources(), gridImages[position], 150, 185));
+                
 
+                Picasso.with(mContext).load(gridImages[position]).placeholder(R.color.theme_primary).resize(1000, 1000).networkPolicy(NetworkPolicy.OFFLINE).into(holder.thumbnailView);
 
 
             } else if (density >= 3.0 && density < 4.0) {
                 //xxhdpi
-
-                Picasso.with(mContext)
-                        .load(mCursor.getString(mCursor.getColumnIndex(GardenContract.GardenTable.THUMBNAIL_PATH))).placeholder(R.color.theme_primary).resize(1000, 1000)
-                        .into(holder.thumbnailView);
-
+                // holder.thumbnailView.setImageBitmap(paularanas.com.capstone_project.ui.Util.decodeSampledBitmapFromResource(getResources(), gridImages[position], 150, 185));
+                // holder.thumbnailView.setImageResource(gridImages[position]);
+                Picasso.with(mContext).load(gridImages[position]).resize(1000, 1000).placeholder(R.color.theme_primary).networkPolicy(NetworkPolicy.OFFLINE).into(holder.thumbnailView);
 
             } else if (density >= 2.0) {
                 //xhdpi
 
-                Picasso.with(mContext)
-                        .load(mCursor.getString(mCursor.getColumnIndex(GardenContract.GardenTable.THUMBNAIL_PATH))).placeholder(R.color.theme_primary).resize(500, 700).into(holder.thumbnailView);
+                Picasso.with(mContext).load(gridImages[position]).resize(500, 700).placeholder(R.color.theme_primary).into(holder.thumbnailView);
 
 
             } else if (density >= 1.5 && density < 2.0) {
                 //hdpi
-                Picasso.with(mContext)
-                        .load(mCursor.getString(mCursor.getColumnIndex(GardenContract.GardenTable.THUMBNAIL_PATH))).placeholder(R.color.theme_primary)
-                        .into(holder.thumbnailView);
+                // holder.thumbnailView.setImageBitmap(paularanas.com.capstone_project.ui.Util.decodeSampledBitmapFromResource(getResources(), gridImages[position], 150, 185));
 
-
+                //  holder.thumbnailView.setImageResource(gridImages[position]);
+                Picasso.with(mContext).load(gridImages[position]).placeholder(R.color.theme_primary).networkPolicy(NetworkPolicy.OFFLINE).into(holder.thumbnailView);
             } else if (density >= 1.0 && density < 1.5) {
                 //mdpi
-
-                Picasso.with(mContext)
-                        .load(mCursor.getString(mCursor.getColumnIndex(GardenContract.GardenTable.THUMBNAIL_PATH))).placeholder(R.color.theme_primary)
-                        .into(holder.thumbnailView);
-
+                // holder.thumbnailView.setImageBitmap(paularanas.com.capstone_project.ui.Util.decodeSampledBitmapFromResource(getResources(), gridImages[position], 150, 185));
+                //  holder.thumbnailView.setImageResource(gridImages[position]);
+                Picasso.with(mContext).load(gridImages[position]).placeholder(R.color.theme_primary).networkPolicy(NetworkPolicy.OFFLINE).into(holder.thumbnailView);
             }
+
 
         }
 
@@ -310,6 +309,7 @@ public class MainGridFragment extends android.support.v4.app.Fragment implements
             return mCursor.getCount();
         }
 
+
     }
 
     public static class GardenViewHolder extends RecyclerView.ViewHolder {
@@ -320,6 +320,7 @@ public class MainGridFragment extends android.support.v4.app.Fragment implements
             super(view);
             thumbnailView = (ImageView) view.findViewById(R.id.thumbnail);
             titleView = (TextView) view.findViewById(R.id.garden_title);
+
 
         }
 

@@ -1,5 +1,6 @@
 package paularanas.com.capstone_project.ui;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -20,7 +21,7 @@ import static paularanas.com.capstone_project.ui.MainGridFragment.START_POSITION
 /**
  * Created by Paul on 6/19/2016.
  */
-public class MasterGridFragment extends Fragment implements MainGridFragment.GardenSelectedListener {
+public class MasterGridFragment extends Fragment implements MainGridFragment.GardenSelectedListener, MainGridFragment.SecondPaneFragmentCreated {
     public static Boolean sTwoPane = false;
     private View view;
 
@@ -69,10 +70,11 @@ public class MasterGridFragment extends Fragment implements MainGridFragment.Gar
 
         if (sTwoPane) { // one activity, replace framelayout with new details fragment
             GardenDetailsFragment fragmentDetails = GardenDetailsFragment.newInstance(id, position);
-
             FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
             transaction.replace(R.id.garden_details_tablet_container, fragmentDetails);
             transaction.commit();
+
+
 
         } else {
             // go to separate activity
@@ -88,4 +90,14 @@ public class MasterGridFragment extends Fragment implements MainGridFragment.Gar
 
     }
 
+
+    @Override
+    public void onTwoPaneCreated(Long id, int position){
+
+        GardenDetailsFragment fragmentDetails = GardenDetailsFragment.newInstance(id, position);
+        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        transaction.replace(R.id.garden_details_tablet_container, fragmentDetails);
+        transaction.commit();
+
+    }
 }
