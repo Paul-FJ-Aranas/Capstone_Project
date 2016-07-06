@@ -133,7 +133,7 @@ public class GardenMapFragment extends Fragment implements OnMapReadyCallback, G
                 -122.78903);
         googleMap.addMarker(new MarkerOptions()
                 .position(mainEntrance).flat(true)
-                .title("Main Entrance"));
+                .title("Main Entrance / Visitor Center"));
 
 
         LatLng naturalResourceEducationCenter = new LatLng(44.99511,

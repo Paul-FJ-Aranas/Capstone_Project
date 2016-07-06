@@ -6,29 +6,38 @@
 
 <LinearLayout
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/theme_accent">
 
     <TextView
         android:id="@+id/admission_text"
-        android:textColor="@color/theme_primaryDark"
+        android:textColor="@color/black"
+        android:layout_margin="4dp"
+        android:alpha="0.87"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
     <TextView
         android:id="@+id/summer_hours_text"
-        android:textColor="@color/theme_primaryDark"
+        android:textColor="@color/black"
+        android:layout_margin="@dimen/dialog_margin"
+        android:alpha="0.87"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <TextView
         android:id="@+id/rest_of_year_hours_text"
-        android:textColor="@color/theme_primaryDark"
+        android:textColor="@color/black"
+        android:layout_margin="4dp"
+        android:alpha="0.87"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
 
     <TextView
         android:id="@+id/contact_text"
-        android:textColor="@color/theme_primaryDark"
+        android:textColor="@color/black"
+        android:layout_margin="4dp"
+        android:alpha="0.87"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
