@@ -23,9 +23,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+
 import java.util.List;
 import java.util.Map;
 
+import paularanas.com.capstone_project.AnalyticsApplication;
 import paularanas.com.capstone_project.R;
 import paularanas.com.capstone_project.data.GardenContract;
 import paularanas.com.capstone_project.data.GardenUtility;
@@ -47,6 +51,7 @@ public class GardenDetailsActivity extends AppCompatActivity implements LoaderMa
     private GardenPagerAdapter mPagerAdapter;
     private GardenDetailsFragment mGardenDetailsFragment;
     private static final String CURRENT_PAGE_POSITION = "current_page_position";
+    private Tracker mTracker;
 
     //Callback to remap shared element transition
     private final SharedElementCallback mCallback = new SharedElementCallback() {
@@ -71,6 +76,10 @@ public class GardenDetailsActivity extends AppCompatActivity implements LoaderMa
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //Analytics
+        AnalyticsApplication application = (AnalyticsApplication) getApplication();
+        mTracker = application.getDefaultTracker();
 
         mStartPosition = getIntent().getIntExtra(START_POSITION, 0);
         if (savedInstanceState == null) {
@@ -106,7 +115,7 @@ public class GardenDetailsActivity extends AppCompatActivity implements LoaderMa
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         getSupportLoaderManager().initLoader(0, null, this);
 
@@ -162,6 +171,18 @@ public class GardenDetailsActivity extends AppCompatActivity implements LoaderMa
                     mSelectedItemId = mCursor.getLong(GardenUtility.GardenQuery._ID);
                 }
             }
+        });
+
+        mGardenPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+            @Override
+            public void onPageSelected(int position) {
+
+
+                mTracker.setScreenName("garden number: " + position);
+                mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+
+            }
+
         });
 
     }

@@ -50,6 +50,7 @@ android {
                 compile 'com.squareup.picasso:picasso:2.5.2'
                 compile 'com.google.android.gms:play-services-maps:9.0.2'
                 compile 'com.google.android.gms:play-services-location:9.0.2'
+                compile 'com.google.android.gms:play-services-analytics:9.0.2'
 
             }
 // https://www.timroes.de/2014/01/19/using-password-prompts-with-gradle-build-files/

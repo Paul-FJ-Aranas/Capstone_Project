@@ -20,9 +20,14 @@ import android.transition.TransitionInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+
 import java.util.List;
 import java.util.Map;
 
+import paularanas.com.capstone_project.AnalyticsApplication;
 import paularanas.com.capstone_project.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -35,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     Bundle mReenterPositions;
     Long id;
     RecyclerView mRecyclerView;
+    private Tracker mTracker;
 
     @Override
     public void onActivityReenter(int resultCode, Intent data) {
@@ -82,19 +88,21 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //Analytics
+        AnalyticsApplication application = (AnalyticsApplication) getApplication();
+        mTracker = application.getDefaultTracker();
 
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    if (Build.VERSION.SDK_INT >= 21) {
-                        Transition transition = TransitionInflater.from(MainActivity.this).inflateTransition(R.transition.shared_element_photo);
-                        getWindow().setSharedElementEnterTransition(transition);
-                        setExitSharedElementCallback(mCallbackExit);
-                    }
-
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                if (Build.VERSION.SDK_INT >= 21) {
+                    Transition transition = TransitionInflater.from(MainActivity.this).inflateTransition(R.transition.shared_element_photo);
+                    getWindow().setSharedElementEnterTransition(transition);
+                    setExitSharedElementCallback(mCallbackExit);
                 }
-            }).start();
 
+            }
+        }).start();
 
 
         setContentView(R.layout.activity_main);
@@ -105,7 +113,8 @@ public class MainActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
         initializePagerAdapter();
-       changeTabsFont();
+        changeTabsFont();
+
 
     }
 
@@ -120,6 +129,40 @@ public class MainActivity extends AppCompatActivity {
             mPager.setOffscreenPageLimit(TAB_COUNT - 1);
             tabLayout.setupWithViewPager(mPager);
             mPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+
+
+            mPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+                @Override
+                public void onPageSelected(int position) {
+
+                    String name = "";
+                    switch (position) {
+
+
+                        case 0:
+                            name = "garden list";
+                            break;
+
+                        case 1:
+                            name = "info page";
+                            break;
+                        case 2:
+                            name = "map";
+
+                            break;
+                        case 3:
+
+                            name = "space view";
+
+                            break;
+                    }
+
+                    mTracker.setScreenName(name);
+                    mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+
+                }
+
+            });
 
 
         }
