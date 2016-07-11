@@ -9,4 +9,5 @@
     <dimen name="text_size_created_by">18sp</dimen>
     <dimen name="info_body_text_size">20dp</dimen>
     <dimen name="contact_admission_text_size">17sp</dimen>
+    <dimen name="info_dialog_text_size">16sp</dimen>
 </resources>

@@ -292,7 +292,7 @@ public class MainGridFragment extends android.support.v4.app.Fragment implements
                     into(holder.thumbnailView);
                 }
 
-            } else if (density >= 1.0 && density < 1.5) {
+            } else if (density >= 0.0 && density < 1.5) {
                 //mdpi
 
                 if (isNetworkAvailable()) {

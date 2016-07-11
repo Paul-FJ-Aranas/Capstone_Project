@@ -6,4 +6,5 @@
     <dimen name ="days_text_size">23sp</dimen>
     <dimen name="text_size_details_body">19sp</dimen>
     <dimen name="text_size_created_by">19sp</dimen>
+    <dimen name="info_dialog_text_size">16sp</dimen>
 </resources>
