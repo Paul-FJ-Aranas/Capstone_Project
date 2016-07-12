@@ -15,10 +15,10 @@ android {
     }
         signingConfigs {
             release {
-                storeFile file("keystore/release.keystore")
-                storePassword ''
-                keyAlias ''
-                keyPassword ''
+                storeFile file("C:\\Users\\Paul\\keystore.jks")
+                storePassword 'xx!!LV237!RTQ'
+                keyAlias 'r32xRV77!'
+                keyPassword 'r337!!xxQmn!V'
             }
         }
 

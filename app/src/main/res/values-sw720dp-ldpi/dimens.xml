@@ -24,11 +24,11 @@
     <dimen name="fab_press_translation_z">12dp</dimen>
     <dimen name="fab_margin">48dp</dimen>
 
-    <dimen name="grid_item_text_size">22sp</dimen>
-    <dimen name="info_body_text_size">22sp</dimen>
+    <dimen name="grid_item_text_size">25sp</dimen>
+    <dimen name="info_body_text_size">25sp</dimen>
     <dimen name="detail_garden_title_text_size">28sp</dimen>
 
-    <dimen name="text_margin_side">32dp</dimen>
+    <dimen name="text_margin_side">16dp</dimen>
     <dimen name="fab_pressed_elevation">12dp</dimen>
     <dimen name="list_image_height">500dp</dimen>
     <dimen name="grid_item_rel_layout_height">64dp</dimen>
@@ -38,8 +38,8 @@
     <dimen name="hours_text_size">28sp</dimen>
     <dimen name ="days_text_size">28sp</dimen>
     <dimen name ="full_view_button_text_size">32sp</dimen>
-    <dimen name="text_size_details_body">22sp</dimen>
-    <dimen name ="text_size_created_by">22sp</dimen>
+    <dimen name="text_size_details_body">25sp</dimen>
+    <dimen name ="text_size_created_by">25sp</dimen>
     <dimen name ="height_grid_image">450dp</dimen>
     <dimen name="info_image_text_rel_layout_padding">3dp</dimen>
     <dimen name="info_dialog_text_size">22sp</dimen>

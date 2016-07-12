@@ -68,7 +68,9 @@
                     android:alpha="0.87"
                     android:textColor="@color/white"
                     android:layout_marginLeft="@dimen/text_margin_side"
+                    android:layout_marginStart="@dimen/text_margin_side"
                     android:layout_marginRight="@dimen/text_margin_side"
+                    android:layout_marginEnd="@dimen/text_margin_side"
                     />
             </LinearLayout>
 
