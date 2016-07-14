@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="grid_item_text_size">18sp</dimen>
-    <dimen name="hours_text_size">16sp</dimen>
-    <dimen name="info_body_text_size">12dp</dimen>
-    <dimen name ="days_text_size">16sp</dimen>
-    <dimen name="info_dialog_text_size">16sp</dimen>
+    <dimen name="grid_item_text_size">21sp</dimen>
+    <dimen name="hours_text_size">20sp</dimen>
+    <dimen name="info_body_text_size">20dp</dimen>
+    <dimen name ="days_text_size">20sp</dimen>
+    <dimen name="text_size_details_body">20sp</dimen>
+    <dimen name="text_size_created_by">18sp</dimen>
+    <dimen name="info_dialog_text_size">18sp</dimen>
 
 </resources>

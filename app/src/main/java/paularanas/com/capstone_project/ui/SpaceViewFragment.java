@@ -40,25 +40,27 @@ public class SpaceViewFragment extends android.support.v4.app.Fragment {
         mVideoView.setMediaController(mediaController);
         mediaController.setAnchorView(mVideoView);
 
-        mVideoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener()
-        {
-            @Override
-            public void onCompletion(MediaPlayer mediaPlayer)
-            {
-                mVideoView.seekTo(1);
-                mVideoView.start();
-            }
-        });
-        if (position != 1)
-        {
-            mVideoView.seekTo(position);
-            mVideoView.start();
-        }
-        else
-        {
-            mVideoView.seekTo(1);
+                mVideoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener()
+                {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer)
+                    {
+                        mVideoView.seekTo(1);
+                        mVideoView.start();
+                    }
+                });
+                if (position != 1)
+                {
+                    mVideoView.seekTo(position);
+                    mVideoView.start();
+                }
+                else
+                {
+                    mVideoView.seekTo(1);
 
-        }
+                }
+
+
 
         return view;
 
@@ -78,6 +80,7 @@ public class SpaceViewFragment extends android.support.v4.app.Fragment {
     @Override
     public void onResume() {
         super.onResume();
+
     }
 
     @Override

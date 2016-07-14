@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="grid_item_text_size">7sp</dimen>
+    <dimen name="grid_item_text_size">5sp</dimen>
     <dimen name="text_size_details_body">16sp</dimen>
     <dimen name="text_size_created_by">16sp</dimen>
     <dimen name="info_dialog_text_size">18sp</dimen>

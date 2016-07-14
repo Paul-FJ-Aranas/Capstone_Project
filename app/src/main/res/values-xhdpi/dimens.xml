@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <dimen name="grid_item_text_size">8sp</dimen>
+    <dimen name="grid_item_text_size">6sp</dimen>
     <dimen name="hours_text_size">22sp</dimen>
     <dimen name ="days_text_size">22sp</dimen>
     <dimen name="info_dialog_text_size">16sp</dimen>
