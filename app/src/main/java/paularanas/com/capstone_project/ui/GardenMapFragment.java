@@ -362,7 +362,7 @@ public class GardenMapFragment extends Fragment implements OnMapReadyCallback, G
                 .position(droughtTolerantGarden).flat(true)
                 .title("Drought Tolerant Garden"));
 
-        LatLng axisFountain = new LatLng(44.99320, -122.78981);
+        LatLng axisFountain = new LatLng(44.992983, -122.789822);
         googleMap.addMarker(new MarkerOptions()
                 .position(axisFountain).flat(true)
                 .title("Axis Fountain"));

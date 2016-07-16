@@ -10,6 +10,18 @@
     android:background="@color/theme_accent">
 
     <TextView
+        android:id="@+id/title_textview"
+        android:textColor="@color/black"
+        android:textSize="@dimen/info_dialog_text_size"
+        android:gravity="center"
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp"
+        android:alpha="0.87"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
         android:id="@+id/summer_hours_text"
         android:textColor="@color/black"
         android:textSize="@dimen/info_dialog_text_size"

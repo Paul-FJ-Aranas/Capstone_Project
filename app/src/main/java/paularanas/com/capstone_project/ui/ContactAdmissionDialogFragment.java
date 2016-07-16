@@ -1,12 +1,15 @@
 package paularanas.com.capstone_project.ui;
 
+import android.app.Dialog;
 import android.app.DialogFragment;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.TextView;
 
 import paularanas.com.capstone_project.R;
@@ -15,6 +18,13 @@ import paularanas.com.capstone_project.R;
  * Created by Paul Aranas on 7/2/2016.
  */
 public class ContactAdmissionDialogFragment extends DialogFragment {
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        Dialog dialog = super.onCreateDialog(savedInstanceState);
+        dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        return dialog;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +47,8 @@ public class ContactAdmissionDialogFragment extends DialogFragment {
         contactText.setTypeface(candaraFont);
         admissionText.setText(getActivity().getText(R.string.admission_prices));
         contactText.setText(getActivity().getText(R.string.phone_numbers));
-        getDialog().setTitle("Admission and Contact Info");
+        TextView titleTextView = (TextView) view.findViewById(R.id.title_textview);
+        titleTextView.setText(R.string.info_dialog_title_text);
         return view;
     }
 }

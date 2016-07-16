@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Oregon Garden</string>
-    <string name="action_share">Share</string>
+    <string name="action_share">Share Your Garden Photos</string>
     <string name="title_activity_gpsmap">GPSMapActivity</string>
     <string name="title_activity_garden_map">GardenMap</string>
 
@@ -11,7 +11,8 @@
     <string name="about_365days_text">Open 365 days a year and pet-friendly</string>
     <string name="phone_numbers">\n<b>Contact us</b>\nphone (503) 874–8100\ntoll–free (877) 674–2733\ninfo@oregongarden.org\n\n\ 879 W. Main Street\nSilverton, Oregon 97381</string>
     <string name="garden_view">GARDEN VIEW</string>
-    <string name="admission_prices">Please see our website for admission prices</string>
+    <string name="admission_prices">Please see our website for admission prices.</string>
     <string name="admission_contact_information">admission and contact information</string>
+    <string name="info_dialog_title_text"><b>General Information</b></string>
 
 </resources>
