@@ -53,11 +53,11 @@ public class MainGridFragment extends android.support.v4.app.Fragment implements
 
     public interface GardenSelectedListener {
 
-        public void onGardenSelected(Long id, int position, Bundle bundle);
+        void onGardenSelected(Long id, int position, Bundle bundle);
     }
 
     public interface SecondPaneFragmentCreated {
-        public void onTwoPaneCreated(Long id, int position);
+        void onTwoPaneCreated(Long id, int position);
     }
 
     public static RecyclerView transitionDataPasser() {
@@ -70,7 +70,6 @@ public class MainGridFragment extends android.support.v4.app.Fragment implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         state = savedInstanceState;
-
         getLoaderManager().initLoader(0, null, this);
 
         if (savedInstanceState == null && isNetworkAvailable()) {
@@ -224,8 +223,9 @@ public class MainGridFragment extends android.support.v4.app.Fragment implements
                 public void onClick(View view) {
 
                     if (Build.VERSION.SDK_INT >= 21) {
+
                         currentPosition = vh.getAdapterPosition();
-                        mRecyclerView.getLayoutManager().findViewByPosition(currentPosition).setTag("garden_photo" + currentPosition);
+                      //  mRecyclerView.getLayoutManager().findViewByPosition(currentPosition).setTag("garden_photo" + currentPosition);
 
 
                         view.findViewById(R.id.thumbnail).setTransitionName(toString().valueOf(getItemId(vh.getAdapterPosition())) + vh.getAdapterPosition());
@@ -241,7 +241,7 @@ public class MainGridFragment extends android.support.v4.app.Fragment implements
         }
 
         @Override
-        public void onBindViewHolder(final GardenViewHolder holder, final int position) {
+        public void onBindViewHolder(final GardenViewHolder holder, int position) {
 
 
             mCursor.moveToPosition(position);
@@ -284,16 +284,16 @@ public class MainGridFragment extends android.support.v4.app.Fragment implements
 
 
             } else if (density >= 1.5 && density < 2.0) {
-
+                //hdpi
                 if (isNetworkAvailable()) {
                     Picasso.with(mContext).load(mCursor.getString(mCursor.getColumnIndex(GardenContract.GardenTable.THUMBNAIL_PATH))).placeholder(R.color.theme_primary).into(holder.thumbnailView);
                 } else {
                     Picasso.with(mContext).load(gridImages[position]).placeholder(R.color.theme_primary).
-                    into(holder.thumbnailView);
+                            into(holder.thumbnailView);
                 }
 
             } else if (density >= 0.0 && density < 1.5) {
-                //mdpi
+                //ldpi and mdpi
 
                 if (isNetworkAvailable()) {
                     Picasso.with(mContext).load(mCursor.getString(mCursor.getColumnIndex(GardenContract.GardenTable.THUMBNAIL_PATH))).placeholder(R.color.theme_primary).into(holder.thumbnailView);

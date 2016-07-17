@@ -15,10 +15,12 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.transition.Fade;
 import android.transition.Transition;
 import android.transition.TransitionInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.TextView;
 
 import com.google.android.gms.analytics.HitBuilders;
@@ -41,18 +43,41 @@ public class MainActivity extends AppCompatActivity {
     Long id;
     RecyclerView mRecyclerView;
     private Tracker mTracker;
+    boolean returning = false;
 
     @Override
     public void onActivityReenter(int resultCode, Intent data) {
         super.onActivityReenter(resultCode, data);
+        returning = true;
         mRecyclerView = MainGridFragment.transitionDataPasser();
         mReenterPositions = data.getExtras();
         currentPosition = mReenterPositions.getInt(CURRENT_POSITION);
-        int startPosition = mReenterPositions.getInt(START_POSITION);
+        startPosition = mReenterPositions.getInt(START_POSITION);
         id = mReenterPositions.getLong("id");
         if (startPosition != currentPosition) {
             mRecyclerView.scrollToPosition(currentPosition);
         }
+
+        if (startPosition != currentPosition) {
+            mRecyclerView.scrollToPosition(currentPosition);
+            if (Build.VERSION.SDK_INT >= 21) {
+                postponeEnterTransition();
+            }
+        }
+
+        mRecyclerView.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+            @Override
+            public boolean onPreDraw() {
+                mRecyclerView.getViewTreeObserver().removeOnPreDrawListener(this);
+
+                mRecyclerView.requestLayout();
+                if (Build.VERSION.SDK_INT >= 21) {
+                    startPostponedEnterTransition();
+                }
+                return true;
+            }
+        });
+
 
     }
 
@@ -64,30 +89,45 @@ public class MainActivity extends AppCompatActivity {
         @TargetApi(Build.VERSION_CODES.LOLLIPOP)
         @Override
         public void onMapSharedElements(List<String> names, Map<String, View> sharedElements) {
-            if (mReenterPositions != null) {
-                startPosition = mReenterPositions.getInt(START_POSITION);
-                currentPosition = mReenterPositions.getInt(CURRENT_POSITION);
-                if (startPosition != currentPosition) {
-                    String transitionNewName = toString().valueOf(id) + currentPosition;
-                    View newSharedElement = mRecyclerView.getLayoutManager().getChildAt(currentPosition);
 
-                    if (newSharedElement != null) {
-                        names.clear();
-                        names.add(transitionNewName);
-                        sharedElements.clear();
-                        sharedElements.put(transitionNewName, newSharedElement);
-                    }
+            if (startPosition != currentPosition && mRecyclerView != null && returning) {
+                String transitionNewName = (toString().valueOf(id) + currentPosition);
+                View newSharedElement = mRecyclerView.findViewHolderForAdapterPosition(currentPosition).itemView.findViewById(R.id.thumbnail);
 
-                    mReenterPositions = null;
+
+                //  getLayoutManager().getChildAt(currentPosition);
+
+                if (newSharedElement != null) {
+                    names.clear();
+                    names.add(transitionNewName);
+                    sharedElements.clear();
+                    sharedElements.put(transitionNewName, newSharedElement);
+                }
+
+                mReenterPositions = null;
+            } else {
+
+                View navBar = findViewById(android.R.id.navigationBarBackground);
+                View statusBar = findViewById(android.R.id.statusBarBackground);
+                if (navBar != null) {
+                    names.add(navBar.getTransitionName());
+                    sharedElements.put(navBar.getTransitionName(), navBar);
+                }
+                if (statusBar != null) {
+                    names.add(statusBar.getTransitionName());
+                    sharedElements.put(statusBar.getTransitionName(), statusBar);
                 }
             }
+            returning = false;
         }
+
     };
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         //Analytics
         AnalyticsApplication application = (AnalyticsApplication) getApplication();
         mTracker = application.getDefaultTracker();
@@ -96,9 +136,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 if (Build.VERSION.SDK_INT >= 21) {
+                    postponeEnterTransition();
                     Transition transition = TransitionInflater.from(MainActivity.this).inflateTransition(R.transition.shared_element_photo);
                     getWindow().setSharedElementEnterTransition(transition);
                     setExitSharedElementCallback(mCallbackExit);
+
                 }
 
             }

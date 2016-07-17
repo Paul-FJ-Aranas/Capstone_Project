@@ -136,7 +136,9 @@ public class GardenDetailsFragment extends Fragment implements
             if (isNetworkAvailable()){
                 Picasso.with(getActivity()).load(mCursor.getString(mCursor.getColumnIndex(GardenContract.GardenTable.THUMBNAIL_PATH))).placeholder(R.color.theme_primary).into(mGardenImage);
             }else {
-                Picasso.with(getActivity()).load(detailsImages[mStartPosition]).placeholder(R.color.theme_primary).into(mGardenImage);
+              int rowNumber =  mCursor.getInt(mCursor.getColumnIndex(GardenContract.GardenTable._ID));
+                Picasso.with(getActivity()).load(detailsImages[rowNumber - 1]).placeholder(R.color.theme_primary).into(mGardenImage);
+
             }
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

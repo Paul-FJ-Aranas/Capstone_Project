@@ -75,14 +75,13 @@ public class MasterGridFragment extends Fragment implements MainGridFragment.Gar
             transaction.commit();
 
 
-
         } else {
             // go to separate activity
             // launch detail activity using intent
             Intent intent = new Intent(Intent.ACTION_VIEW, GardenContract.GardenTable.buildGardensIdUri(id));
 
             if (Build.VERSION.SDK_INT >= 21) {
-
+                getActivity().startPostponedEnterTransition();
                 intent.putExtra(START_POSITION, position);
             }
             startActivity(intent, bundle);
@@ -92,7 +91,7 @@ public class MasterGridFragment extends Fragment implements MainGridFragment.Gar
 
 
     @Override
-    public void onTwoPaneCreated(Long id, int position){
+    public void onTwoPaneCreated(Long id, int position) {
 
         GardenDetailsFragment fragmentDetails = GardenDetailsFragment.newInstance(id, position);
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
