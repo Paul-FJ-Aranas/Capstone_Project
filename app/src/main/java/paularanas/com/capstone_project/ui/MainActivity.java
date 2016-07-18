@@ -15,7 +15,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.transition.Fade;
 import android.transition.Transition;
 import android.transition.TransitionInflater;
 import android.view.View;
@@ -60,10 +59,11 @@ public class MainActivity extends AppCompatActivity {
 
         if (startPosition != currentPosition) {
             mRecyclerView.scrollToPosition(currentPosition);
-            if (Build.VERSION.SDK_INT >= 21) {
+        }
+          if (Build.VERSION.SDK_INT >= 21) {
                 postponeEnterTransition();
             }
-        }
+
 
         mRecyclerView.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
             @Override

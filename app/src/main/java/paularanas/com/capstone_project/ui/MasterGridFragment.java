@@ -1,6 +1,5 @@
 package paularanas.com.capstone_project.ui;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -79,11 +78,11 @@ public class MasterGridFragment extends Fragment implements MainGridFragment.Gar
             // go to separate activity
             // launch detail activity using intent
             Intent intent = new Intent(Intent.ACTION_VIEW, GardenContract.GardenTable.buildGardensIdUri(id));
-
             if (Build.VERSION.SDK_INT >= 21) {
                 getActivity().startPostponedEnterTransition();
-                intent.putExtra(START_POSITION, position);
             }
+
+                intent.putExtra(START_POSITION, position);
             startActivity(intent, bundle);
         }
 

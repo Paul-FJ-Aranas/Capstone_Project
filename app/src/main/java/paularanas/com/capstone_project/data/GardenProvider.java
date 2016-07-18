@@ -8,12 +8,9 @@ import android.content.OperationApplicationException;
 import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.util.Log;
-
-import com.google.common.collect.Tables;
 
 import java.util.ArrayList;
 import java.util.List;
