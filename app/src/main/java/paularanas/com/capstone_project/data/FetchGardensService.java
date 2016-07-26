@@ -56,19 +56,19 @@ public class FetchGardensService extends IntentService {
             if (gardenDataResult != null) {
                 ContentValues contentValues = new ContentValues();
                 for (Gardens data : gardenDataResult) {
-
                     String title = (String) data.get("title");
                     String photo = (String) data.get("photo");
                     String thumbnail = (String) data.get("thumbnail");
                     String creator = (String) data.get("creator");
                     String textBody = (String) data.get("textBody");
-
+                    int   gardenId = (int) data.get("gardenId");
 
                     contentValues.put(GardenContract.GardenTable.TITLE, title);
                     contentValues.put(GardenContract.GardenTable.PHOTO, photo);
                     contentValues.put(GardenContract.GardenTable.THUMBNAIL_PATH, thumbnail);
                     contentValues.put(GardenContract.GardenTable.CREATOR, creator);
                     contentValues.put(GardenContract.GardenTable.BODY, textBody);
+                    contentValues.put(GardenContract.GardenTable.GARDEN_ID, gardenId);
                     gardencpbo.add(ContentProviderOperation.newInsert(dirUri).withValues(contentValues).build());
                 }
                 try {

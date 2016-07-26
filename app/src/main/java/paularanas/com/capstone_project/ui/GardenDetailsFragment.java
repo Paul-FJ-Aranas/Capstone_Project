@@ -17,6 +17,7 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.app.ShareCompat;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -135,9 +136,11 @@ public class GardenDetailsFragment extends Fragment implements
             gardenInfoBodyView.setText(mCursor.getString(GardenUtility.GardenQuery.BODY));
             if (isNetworkAvailable()){
                 Picasso.with(getActivity()).load(mCursor.getString(mCursor.getColumnIndex(GardenContract.GardenTable.THUMBNAIL_PATH))).placeholder(R.color.theme_primary).into(mGardenImage);
+
             }else {
-              int rowNumber =  mCursor.getInt(mCursor.getColumnIndex(GardenContract.GardenTable._ID));
-                Picasso.with(getActivity()).load(detailsImages[rowNumber - 1]).placeholder(R.color.theme_primary).into(mGardenImage);
+              int rowNumber =  mCursor.getInt(mCursor.getColumnIndex(GardenContract.GardenTable.GARDEN_ID));
+
+                Picasso.with(getActivity()).load(detailsImages[rowNumber]).placeholder(R.color.theme_primary).into(mGardenImage);
 
             }
 

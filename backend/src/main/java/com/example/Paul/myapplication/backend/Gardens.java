@@ -1,17 +1,20 @@
 package com.example.Paul.myapplication.backend;
 
-/** The object model for the data we are sending through endpoints */
+/**
+ * The object model for the data we are sending through endpoints
+ */
 public class Gardens {
-
     private String title;
     private String photo;
     private String thumbnail;
     private String creator;
     private String textBody;
-
+    private int gardenId;
     public Gardens() {
 
     }
+
+
 
     public String getTitle() {
         return title;
@@ -31,6 +34,9 @@ public class Gardens {
 
     public String getTextBody() {
         return textBody;
+    }
+    public int getGardenId() {
+        return gardenId;
     }
 
     public void setTitle(String title) {
@@ -52,4 +58,7 @@ public class Gardens {
     public void setTextBody(String textBody) {
         this.textBody = textBody;
     }
+
+    public void setGardenId (int id) {this.gardenId = id;}
+
 }

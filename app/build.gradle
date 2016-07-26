@@ -10,8 +10,8 @@ android {
         applicationId "paularanas.com.capstone_project"
         minSdkVersion 21
         targetSdkVersion 24
-        versionCode 4
-        versionName "1.1"
+        versionCode 6
+        versionName "1.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
         signingConfigs {

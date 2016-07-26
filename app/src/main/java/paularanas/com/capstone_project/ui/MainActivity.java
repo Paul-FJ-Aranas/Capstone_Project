@@ -53,9 +53,6 @@ public class MainActivity extends AppCompatActivity {
         currentPosition = mReenterPositions.getInt(CURRENT_POSITION);
         startPosition = mReenterPositions.getInt(START_POSITION);
         id = mReenterPositions.getLong("id");
-        if (startPosition != currentPosition) {
-            mRecyclerView.scrollToPosition(currentPosition);
-        }
 
         if (startPosition != currentPosition) {
             mRecyclerView.scrollToPosition(currentPosition);

@@ -13,7 +13,7 @@ public class GardenContract {
     }
 
     public static final String DATABASE_NAME = "garden_database";
-    public static final int DATABASE_VERSION = 1;
+    public static final int DATABASE_VERSION = 3;
     public static final String AUTHORITY = "com.paularanas.capstone_project.gardenprovider";
     public static final Uri URI_BASE = new Uri.Builder()
             .scheme(ContentResolver.SCHEME_CONTENT)
@@ -31,6 +31,7 @@ public class GardenContract {
 
     public static abstract class GardenTable implements BaseColumns {
         public static final String TABLE_NAME = "gardens";
+        public static final String GARDEN_ID = "gardenId";
         public static final String _ID = "_id";
         public static final String PHOTO = "photoPath";
         public static final String TITLE = "title";
@@ -46,17 +47,18 @@ public class GardenContract {
             return Long.parseLong(uri.getPathSegments().get(1));
         }
         public static final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS " +
-                TABLE_NAME + "(" + _ID + INTEGER + " PRIMARY KEY AUTOINCREMENT " + COMMA +
+                TABLE_NAME + "(" + _ID + INTEGER + " PRIMARY KEY AUTOINCREMENT " + COMMA  +
                 PHOTO + TEXT + " UNIQUE " + COMMA +
                 TITLE + TEXT + COMMA +
                 CREATOR + TEXT + COMMA +
                 THUMBNAIL_PATH + TEXT + COMMA +
-                BODY + TEXT + ")";
+                BODY + TEXT + COMMA + GARDEN_ID +
+                INTEGER + "UNIQUE" + ")";
 
         public static final String[] PROJECTION_ALL =
                 {_ID, PHOTO, TITLE,
                         CREATOR, THUMBNAIL_PATH,
-                        BODY
+                        BODY, GARDEN_ID
                 };
 
         public static final String DELETE_TABLE = "DROP TABLE IF EXISTS " + TABLE_NAME;

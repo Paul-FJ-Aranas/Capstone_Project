@@ -44,6 +44,7 @@ public class GardensEndpoint {
             garden.setThumbnail(data.getThumbnail());
             garden.setCreator(data.getCreator());
             garden.setTextBody(data.getTextBody());
+            garden.setGardenId(data.getId());
             gardens.add(garden);
         }
         return gardens;

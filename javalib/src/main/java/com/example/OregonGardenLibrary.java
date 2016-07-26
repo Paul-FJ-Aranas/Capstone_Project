@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class OregonGardenLibrary {
 
     private ArrayList<GardenData> gardenInfo;
+    private int[]  gardenIdsArray = new int[23];
     private String[] gardenTitlesArray = new String[23];
     private String[] gardenPhotosArray = new String[23];
     private String[] gardenThumbnailsArray = new String[23];
@@ -16,6 +17,31 @@ public class OregonGardenLibrary {
 
     //Todo: Add Garden Data
     public OregonGardenLibrary() {
+        //garden ids
+        gardenIdsArray[0] = 0;
+        gardenIdsArray[1] = 1;
+        gardenIdsArray[2] = 2;
+        gardenIdsArray[3] = 3;
+        gardenIdsArray[4] = 4;
+        gardenIdsArray[5] = 5;
+        gardenIdsArray[6] = 6;
+        gardenIdsArray[7] = 7;
+        gardenIdsArray[8] = 8;
+        gardenIdsArray[9] = 9;
+        gardenIdsArray[10] = 10;
+        gardenIdsArray[11] = 11;
+        gardenIdsArray[12] = 12;
+        gardenIdsArray[13] = 13;
+        gardenIdsArray[14] = 14;
+        gardenIdsArray[15] = 15;
+        gardenIdsArray[16] = 16;
+        gardenIdsArray[17] = 17;
+        gardenIdsArray[18] = 18;
+        gardenIdsArray[19] = 19;
+        gardenIdsArray[20] = 20;
+        gardenIdsArray[21] = 21;
+        gardenIdsArray[22] = 22;
+
         //garden titles
         gardenTitlesArray[0] = "Amazing Water Garden";
         gardenTitlesArray[1] = "Axis Fountain";
@@ -96,8 +122,8 @@ public class OregonGardenLibrary {
 
         //garden creators
         gardenCreatorsArray[0] = "Designer: Carol Mayer-Reed";
-        gardenCreatorsArray[1] = "Designer: Cascade Landscape";
-        gardenCreatorsArray[2] = "Fountain Architect: Gil Williams";
+        gardenCreatorsArray[1] = "Fountain Architect: Gil Williams";
+        gardenCreatorsArray[2] = "Designer: Cascade Landscape";
         gardenCreatorsArray[3] = "";
         gardenCreatorsArray[4] = "";
         gardenCreatorsArray[5] = "";
@@ -131,11 +157,9 @@ public class OregonGardenLibrary {
                 "\n";
 
 
-        gardenTextBodiesArray[1] = "\n" +
-                "This garden is nestled next to the Conifer Garden and above the Bosque. The Axis Garden is designed to be a pattern of turf and ornamental plantings that features seasonal color displays. The Axis Garden is the spine of the Garden, leading up to the Oregon Garden Resort. Standing at the Axis Fountain, raised above the Axis Garden, gives you a wonderful view of this design feature. This garden is a great place to view the many different varieties of conifers that line the outside of the Conifer Garden.\n" +
-                "\n" +
-                "Plants of Interest: Plants in the Axis Garden include Cotoneaster, Bluebeards, and Full Moon Maples. A beautiful display of what lightning can do to a tree is best viewed from this garden. Our Sequoiadendron giganteum was struck on September 5, 2013. It's been left in this condition in the Garden for educational purposes.";
-        gardenTextBodiesArray[2] = "The Axis Fountain is located at the top of the Axis Garden and features a beautiful fountain of Montana stone and a cascading wall of water. Upper and lower level seating offers breathtaking vistas of the Garden and the Willamette Valley beyond. The Tokarski Family of Salem provided generous financial support for the Axis Fountain.";
+        gardenTextBodiesArray[1] = "The Axis Fountain is located at the top of the Axis Garden and features a beautiful fountain of Montana stone and a cascading wall of water. Upper and lower level seating offers breathtaking vistas of the Garden and the Willamette Valley beyond. The Tokarski Family of Salem provided generous financial support for the Axis Fountain.";
+        gardenTextBodiesArray[2] = "\n" + "This garden is nestled next to the Conifer Garden and above the Bosque. The Axis Garden is designed to be a pattern of turf and ornamental plantings that features seasonal color displays. The Axis Garden is the spine of the Garden, leading up to the Oregon Garden Resort. Standing at the Axis Fountain, raised above the Axis Garden, gives you a wonderful view of this design feature. This garden is a great place to view the many different varieties of conifers that line the outside of the Conifer Garden.\n" +
+         "\n" + "Plants of Interest: Plants in the Axis Garden include Cotoneaster, Bluebeards, and Full Moon Maples. A beautiful display of what lightning can do to a tree is best viewed from this garden. Our Sequoiadendron giganteum was struck on September 5, 2013. It's been left in this condition in the Garden for educational purposes.";
         gardenTextBodiesArray[3] = "Ball Horticulture is a world leader in plant development and distribution. Working with The Oregon Garden, they are collecting data from this trial garden that will help them produce plants that will ultimately find their way into your gardens. This garden contains plants that have recently been released to the market, as well as plants that are being evaluated for performance to determine if they provide improvements to current availability.\n" +
                 "\n" +
                 "Ball is on a continuous, many-faceted journey to find the healthiest, most sustainable solutions in horticulture. Starting with innovative plants, ending with consumer satisfaction and including every step in between, Ball's goal in everything they do is to make tomorrow better than today. Innovative breeding – dedicated to bringing better plants to market that need less water and energy to flourish; responsible growing practices - give growers options for adopting compostable and biodegradable containers, organically based fertilizers, organic seed and environmentally sound growing methods; community commitments - educational, financial, medical, beautification and workplace-safety programs are in place in Ball's locations around the world. You can help us and Ball Horticulture by completing our guest survey about the Ball Horticulture Display and Test Garden. The information you provide will help Ball create the best possible product. Guest surveys can be obtained from the Visitor Center as you enter the Garden.\n" +
@@ -226,7 +250,7 @@ public class OregonGardenLibrary {
 
         gardenInfo = new ArrayList();
         for (int i = 0; i < gardenTitlesArray.length; i++) {
-            GardenData data = new GardenData(gardenTitlesArray[i], gardenPhotosArray[i], gardenThumbnailsArray[i], gardenCreatorsArray[i], gardenTextBodiesArray[i]);
+            GardenData data = new GardenData( gardenTitlesArray[i], gardenPhotosArray[i], gardenThumbnailsArray[i], gardenCreatorsArray[i], gardenTextBodiesArray[i], gardenIdsArray[i]);
             gardenInfo.add(data);
         }
 
